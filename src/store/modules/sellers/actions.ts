@@ -1,11 +1,18 @@
+import apiService from "@/services/apiService";
 import { Seller } from "./types";
 
 const actions = {
-  handleFetchSellers({ commit }: any) {
-    //const response = await axios.get()
-    const sellers: Seller[] = [{ id: 1, name: "Seller 1", points: 0 }];
+  async handleFetchSellers({ commit }: any) {
+    commit("FETCH_SELLERS_LOADING", true);
 
-    commit("SET_SELLERS", sellers);
+    try {
+      const response = await apiService.getSellers();
+      commit("SET_SELLERS", response);
+    } catch (error: any) {
+      commit("FETCH_SELLERS_FAILURE", error.message);
+    } finally {
+      commit("FETCH_SELLERS_LOADING", false);
+    }
   },
   handleAddSeller({ commit }: any) {
     //Consume Api
