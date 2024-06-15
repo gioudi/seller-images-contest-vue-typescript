@@ -1,11 +1,10 @@
 import toastService from "@/utils/toastService";
 import axios from "axios";
 
-const API_ULR = "https://api.alegra.com/api/v1/";
+const API_URL = "https://api.alegra.com/api/v1/";
 const API_KEY = process.env.VUE_APP_ALEGRA_API_KEY;
-
 const apiClient = axios.create({
-  baseURL: API_ULR,
+  baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
     Authorization: `Basic ${API_KEY}}`,
