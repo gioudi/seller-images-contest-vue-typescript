@@ -1,5 +1,6 @@
 import apiService from "@/services/apiService";
 import toastService from "@/utils/toastService";
+import { Seller } from "./types";
 
 const actions = {
   async handleFetchSellers({ commit }: any) {
@@ -7,7 +8,13 @@ const actions = {
 
     try {
       const response = await apiService.getSellers();
-      commit("SET_SELLERS", response);
+      const sellers = response.map((seller: Seller) => ({
+        ...seller,
+        points: 0,
+        clickable: true,
+        contestEnded: false,
+      }));
+      commit("SET_SELLERS", sellers);
     } catch (error: any) {
       commit("FETCH_SELLERS_FAILURE", error.message);
       const errorMessage =

@@ -11,6 +11,12 @@ const getters = {
     },
   getError: (state: SellersState) => state.error,
   getLoading: (state: SellersState) => state.loading,
+  getContestEnded(state: SellersState) {
+    return state.contestEnded;
+  },
+  getWinner(state: SellersState) {
+    return state.winner;
+  },
 };
 
 export default getters;
