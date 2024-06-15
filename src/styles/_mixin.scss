@@ -5,6 +5,7 @@
 // 2. Button
 // 3. List
 // 4. Card    
+// 5. Modal
 // -----------------------
 
 @mixin alegra-input {
@@ -51,13 +52,34 @@
     }
 }
 
-@mixin alegra-card($padding: 1rem, $background-color: $color-white) {
+@mixin alegra-card($padding: 0.4rem, $background-color: $color-white) {
     padding: $padding;
     border: none;
     border-radius: $border-radius-sm;
     box-shadow: $box-shadow-md;
     background-color: $background-color;
 }
+
+@mixin alegra-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    transition: 0.6s ease-in;
+  }
+  
+  @mixin alegra-modal-content {
+    background: $color-white;
+    padding: 1.25rem;
+    border-radius: $border-radius-sm;
+    text-align: center;
+  }
+  
   
 
 // Calling them
@@ -77,4 +99,11 @@ ul {
 
 .alegra-card {
     @include alegra-card();
+}
+
+.alegra-modal {
+    @include alegra-modal(); 
+}
+.alegra-modal-content {
+    @include alegra-modal-content(); 
 }
