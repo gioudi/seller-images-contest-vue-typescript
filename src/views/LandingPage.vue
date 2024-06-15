@@ -1,7 +1,7 @@
 <template>
   <article class="grid">
     <article class="grid-col-sm-12">
-      <h1 class="alegra-title">Landing Page</h1>
+      <h1 class="alegra-sm-h4 alegra-lg-h1">Alegra Test</h1>
       <div class="grid my-3">
         <div class="grid-col-sm-12">
           <input

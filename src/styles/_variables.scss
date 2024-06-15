@@ -2,16 +2,20 @@
 
 $font-family: "Inter", sans-serif;
 
+body {
+    font-family: 'Inter', sans-serif;
+}
+
 /* Palette */
 
-$primary-5: #ebfafb;
-$primary-10: #d4f2f1;
-$primary-20: #b6ecea;
-$primary-30: #a0e4e2;
-$primary-40: #86dfdc;
-$primary-50: #00b19d;
-$primary-70: #00535e;
-$primary-90: #005452;
+$color-primary-5: #ebfafb;
+$color-primary-10: #d4f2f1;
+$color-primary-20: #b6ecea;
+$color-primary-30: #a0e4e2;
+$color-primary-40: #86dfdc;
+$color-primary-50: #00b19d;
+$color-primary-70: #00535e;
+$color-primary-90: #005452;
 $background-color: #f4f4f4;
 $accent-color: #60c368;
 $color-dark: #333333;

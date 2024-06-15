@@ -4,500 +4,490 @@
 
 /* Font sizes */
 .alegra-title {
-    font-size: $font-size-title;
-  }
-  
-  .alegra-subtitle {
-    font-size: $font-size-subtitle;
-  }
-  
-  h1,
-  .h1,
-  .alegra-h1 {
-    font-size: $font-size-h1;
-  }
-  
-  h2,
-  .h2,
-  .alegra-h2 {
-    font-size: $font-size-h2;
-  }
-  
-  h3,
-  .h3,
-  .alegra-h3 {
-    font-size: $font-size-h3;
-  }
-  
-  h4,
-  .h4,
-  .alegra-h4 {
-    font-size: $font-size-h4;
-  }
-  
-  h5,
-  .h5,
-  .alegra-h5 {
-    font-size: $font-size-h5;
-  }
-  
-  h6,
-  .h6,
-  .alegra-h6 {
-    font-size: $font-size-h6;
-  }
-  
-  .normal {
-    font-size: $font-size-normal;
-  }
-  
-  small,
-  .small,
-  .alegra-small {
+  font-size: $font-size-title;
+}
+
+.alegra-subtitle {
+  font-size: $font-size-subtitle;
+}
+
+h1,
+.h1,
+.alegra-h1 {
+  font-size: $font-size-h1;
+}
+
+h2,
+.h2,
+.alegra-h2 {
+  font-size: $font-size-h2;
+}
+
+h3,
+.h3,
+.alegra-h3 {
+  font-size: $font-size-h3;
+}
+
+h4,
+.h4,
+.alegra-h4 {
+  font-size: $font-size-h4;
+}
+
+h5,
+.h5,
+.alegra-h5 {
+  font-size: $font-size-h5;
+}
+
+h6,
+.h6,
+.alegra-h6 {
+  font-size: $font-size-h6;
+}
+
+.normal {
+  font-size: $font-size-normal;
+}
+
+small,
+.small,
+.alegra-small {
+  font-size: $font-size-small;
+}
+@media (min-width: 0) {
+  .alegra-xs-small {
     font-size: $font-size-small;
   }
-  @media (min-width: 0) {
-    .alegra-xs-small {
-      font-size: $font-size-small;
-    }
-  
-    .alegra-xs-normal {
-      font-size: $font-size-normal;
-    }
-  
-    .alegra-xs-title {
-      font-size: $font-size-title;
-    }
-  
-    .alegra-xs-subtitle {
-      font-size: $font-size-subtitle;
-    }
-  
-    .alegra-xs-h1 {
-      font-size: $font-size-h1;
-    }
-  
-    .alegra-xs-h2 {
-      font-size: $font-size-h2;
-    }
-  
-    .alegra-xs-h3 {
-      font-size: $font-size-h3;
-    }
-  
-    .alegra-xs-h4 {
-      font-size: $font-size-h4;
-    }
-  
-    .alegra-xs-h5 {
-      font-size: $font-size-h5;
-    }
-  
-    .alegra-xs-h6 {
-      font-size: $font-size-h6;
-    }
+
+  .alegra-xs-normal {
+    font-size: $font-size-normal;
   }
-  @media (min-width: 576px) {
-    .alegra-sm-small {
-      font-size: $font-size-small;
-    }
-  
-    .alegra-sm-normal {
-      font-size: $font-size-normal;
-    }
-  
-    .alegra-sm-title {
-      font-size: $font-size-title;
-    }
-  
-    .alegra-sm-subtitle {
-      font-size: $font-size-subtitle;
-    }
-  
-    .alegra-sm-h1 {
-      font-size: $font-size-h1;
-    }
-  
-    .alegra-sm-h2 {
-      font-size: $font-size-h2;
-    }
-  
-    .alegra-sm-h3 {
-      font-size: $font-size-h3;
-    }
-  
-    .alegra-sm-h4 {
-      font-size: $font-size-h4;
-    }
-  
-    .alegra-sm-h5 {
-      font-size: $font-size-h5;
-    }
-  
-    .alegra-sm-h6 {
-      font-size: $font-size-h6;
-    }
+
+  .alegra-xs-title {
+    font-size: $font-size-title;
   }
-  @media (min-width: 768px) {
-    .alegra-md-small {
-      font-size: $font-size-small;
-    }
-  
-    .alegra-md-normal {
-      font-size: $font-size-normal;
-    }
-  
-    .alegra-md-title {
-      font-size: $font-size-title;
-    }
-  
-    .alegra-md-subtitle {
-      font-size: $font-size-subtitle;
-    }
-  
-    .alegra-md-h1 {
-      font-size: $font-size-h1;
-    }
-  
-    .alegra-md-h2 {
-      font-size: $font-size-h2;
-    }
-  
-    .alegra-md-h3 {
-      font-size: $font-size-h3;
-    }
-  
-    .alegra-md-h4 {
-      font-size: $font-size-h4;
-    }
-  
-    .alegra-md-h5 {
-      font-size: $font-size-h5;
-    }
-  
-    .alegra-md-h6 {
-      font-size: $font-size-h6;
-    }
+
+  .alegra-xs-subtitle {
+    font-size: $font-size-subtitle;
   }
-  @media (min-width: 992px) {
-    .alegra-lg-small {
-      font-size: $font-size-small;
-    }
-  
-    .alegra-lg-normal {
-      font-size: $font-size-normal;
-    }
-  
-    .alegra-lg-title {
-      font-size: $font-size-title;
-    }
-  
-    .alegra-lg-subtitle {
-      font-size: $font-size-subtitle;
-    }
-  
-    .alegra-lg-h1 {
-      font-size: $font-size-h1;
-    }
-  
-    .alegra-lg-h2 {
-      font-size: $font-size-h2;
-    }
-  
-    .alegra-lg-h3 {
-      font-size: $font-size-h3;
-    }
-  
-    .alegra-lg-h4 {
-      font-size: $font-size-h4;
-    }
-  
-    .alegra-lg-h5 {
-      font-size: $font-size-h5;
-    }
-  
-    .alegra-lg-h6 {
-      font-size: $font-size-h6;
-    }
+
+  .alegra-xs-h1 {
+    font-size: $font-size-h1;
   }
-  @media (min-width: 1200px) {
-    .alegra-xl-small {
-      font-size: $font-size-small;
-    }
-  
-    .alegra-xl-normal {
-      font-size: $font-size-normal;
-    }
-  
-    .alegra-xl-title {
-      font-size: $font-size-title;
-    }
-  
-    .alegra-xl-subtitle {
-      font-size: $font-size-subtitle;
-    }
-  
-    .alegra-xl-h1 {
-      font-size: $font-size-h1;
-    }
-  
-    .alegra-xl-h2 {
-      font-size: $font-size-h2;
-    }
-  
-    .alegra-xl-h3 {
-      font-size: $font-size-h3;
-    }
-  
-    .alegra-xl-h4 {
-      font-size: $font-size-h4;
-    }
-  
-    .alegra-xl-h5 {
-      font-size: $font-size-h5;
-    }
-  
-    .alegra-xl-h6 {
-      font-size: $font-size-h6;
-    }
+
+  .alegra-xs-h2 {
+    font-size: $font-size-h2;
   }
-  
-  /* Font weights */
-  .alegra-fw-300 {
+
+  .alegra-xs-h3 {
+    font-size: $font-size-h3;
+  }
+
+  .alegra-xs-h4 {
+    font-size: $font-size-h4;
+  }
+
+  .alegra-xs-h5 {
+    font-size: $font-size-h5;
+  }
+
+  .alegra-xs-h6 {
+    font-size: $font-size-h6;
+  }
+}
+@media (min-width: 576px) {
+  .alegra-sm-small {
+    font-size: $font-size-small;
+  }
+
+  .alegra-sm-normal {
+    font-size: $font-size-normal;
+  }
+
+  .alegra-sm-title {
+    font-size: $font-size-title;
+  }
+
+  .alegra-sm-subtitle {
+    font-size: $font-size-subtitle;
+  }
+
+  .alegra-sm-h1 {
+    font-size: $font-size-h1;
+  }
+
+  .alegra-sm-h2 {
+    font-size: $font-size-h2;
+  }
+
+  .alegra-sm-h3 {
+    font-size: $font-size-h3;
+  }
+
+  .alegra-sm-h4 {
+    font-size: $font-size-h4;
+  }
+
+  .alegra-sm-h5 {
+    font-size: $font-size-h5;
+  }
+
+  .alegra-sm-h6 {
+    font-size: $font-size-h6;
+  }
+}
+@media (min-width: 768px) {
+  .alegra-md-small {
+    font-size: $font-size-small;
+  }
+
+  .alegra-md-normal {
+    font-size: $font-size-normal;
+  }
+
+  .alegra-md-title {
+    font-size: $font-size-title;
+  }
+
+  .alegra-md-subtitle {
+    font-size: $font-size-subtitle;
+  }
+
+  .alegra-md-h1 {
+    font-size: $font-size-h1;
+  }
+
+  .alegra-md-h2 {
+    font-size: $font-size-h2;
+  }
+
+  .alegra-md-h3 {
+    font-size: $font-size-h3;
+  }
+
+  .alegra-md-h4 {
+    font-size: $font-size-h4;
+  }
+
+  .alegra-md-h5 {
+    font-size: $font-size-h5;
+  }
+
+  .alegra-md-h6 {
+    font-size: $font-size-h6;
+  }
+}
+@media (min-width: 992px) {
+  .alegra-lg-small {
+    font-size: $font-size-small;
+  }
+
+  .alegra-lg-normal {
+    font-size: $font-size-normal;
+  }
+
+  .alegra-lg-title {
+    font-size: $font-size-title;
+  }
+
+  .alegra-lg-subtitle {
+    font-size: $font-size-subtitle;
+  }
+
+  .alegra-lg-h1 {
+    font-size: $font-size-h1;
+  }
+
+  .alegra-lg-h2 {
+    font-size: $font-size-h2;
+  }
+
+  .alegra-lg-h3 {
+    font-size: $font-size-h3;
+  }
+
+  .alegra-lg-h4 {
+    font-size: $font-size-h4;
+  }
+
+  .alegra-lg-h5 {
+    font-size: $font-size-h5;
+  }
+
+  .alegra-lg-h6 {
+    font-size: $font-size-h6;
+  }
+}
+@media (min-width: 1200px) {
+  .alegra-xl-small {
+    font-size: $font-size-small;
+  }
+
+  .alegra-xl-normal {
+    font-size: $font-size-normal;
+  }
+
+  .alegra-xl-title {
+    font-size: $font-size-title;
+  }
+
+  .alegra-xl-subtitle {
+    font-size: $font-size-subtitle;
+  }
+
+  .alegra-xl-h1 {
+    font-size: $font-size-h1;
+  }
+
+  .alegra-xl-h2 {
+    font-size: $font-size-h2;
+  }
+
+  .alegra-xl-h3 {
+    font-size: $font-size-h3;
+  }
+
+  .alegra-xl-h4 {
+    font-size: $font-size-h4;
+  }
+
+  .alegra-xl-h5 {
+    font-size: $font-size-h5;
+  }
+
+  .alegra-xl-h6 {
+    font-size: $font-size-h6;
+  }
+}
+
+/* Font weights */
+.alegra-fw-300 {
+  font-weight: 300;
+}
+
+.alegra-fw-400 {
+  font-weight: 400;
+}
+
+.alegra-fw-600 {
+  font-weight: 600;
+}
+
+.alegra-fw-700 {
+  font-weight: 700;
+}
+@media (min-width: 0) {
+  .alegra-fw-xs-300 {
     font-weight: 300;
   }
-  
-  .alegra-fw-400 {
+
+  .alegra-fw-xs-400 {
     font-weight: 400;
   }
-  
-  .alegra-fw-600 {
+
+  .alegra-fw-xs-600 {
     font-weight: 600;
   }
-  
-  .alegra-fw-700 {
+
+  .alegra-fw-xs-700 {
     font-weight: 700;
   }
-  @media (min-width: 0) {
-    .alegra-fw-xs-300 {
-      font-weight: 300;
-    }
-  
-    .alegra-fw-xs-400 {
-      font-weight: 400;
-    }
-  
-    .alegra-fw-xs-600 {
-      font-weight: 600;
-    }
-  
-    .alegra-fw-xs-700 {
-      font-weight: 700;
-    }
+}
+@media (min-width: 576px) {
+  .alegra-fw-sm-300 {
+    font-weight: 300;
   }
-  @media (min-width: 576px) {
-    .alegra-fw-sm-300 {
-      font-weight: 300;
-    }
-  
-    .alegra-fw-sm-400 {
-      font-weight: 400;
-    }
-  
-    .alegra-fw-sm-600 {
-      font-weight: 600;
-    }
-  
-    .alegra-fw-sm-700 {
-      font-weight: 700;
-    }
+
+  .alegra-fw-sm-400 {
+    font-weight: 400;
   }
-  @media (min-width: 768px) {
-    .alegra-fw-md-300 {
-      font-weight: 300;
-    }
-  
-    .alegra-fw-md-400 {
-      font-weight: 400;
-    }
-  
-    .alegra-fw-md-600 {
-      font-weight: 600;
-    }
-  
-    .alegra-fw-md-700 {
-      font-weight: 700;
-    }
+
+  .alegra-fw-sm-600 {
+    font-weight: 600;
   }
-  @media (min-width: 992px) {
-    .alegra-fw-lg-300 {
-      font-weight: 300;
-    }
-  
-    .alegra-fw-lg-400 {
-      font-weight: 400;
-    }
-  
-    .alegra-fw-lg-600 {
-      font-weight: 600;
-    }
-  
-    .alegra-fw-lg-700 {
-      font-weight: 700;
-    }
+
+  .alegra-fw-sm-700 {
+    font-weight: 700;
   }
-  @media (min-width: 1200px) {
-    .alegra-fw-xl-300 {
-      font-weight: 300;
-    }
-  
-    .alegra-fw-xl-400 {
-      font-weight: 400;
-    }
-  
-    .alegra-fw-xl-600 {
-      font-weight: 600;
-    }
-  
-    .alegra-fw-xl-700 {
-      font-weight: 700;
-    }
+}
+@media (min-width: 768px) {
+  .alegra-fw-md-300 {
+    font-weight: 300;
   }
-  
-  /***************
+
+  .alegra-fw-md-400 {
+    font-weight: 400;
+  }
+
+  .alegra-fw-md-600 {
+    font-weight: 600;
+  }
+
+  .alegra-fw-md-700 {
+    font-weight: 700;
+  }
+}
+@media (min-width: 992px) {
+  .alegra-fw-lg-300 {
+    font-weight: 300;
+  }
+
+  .alegra-fw-lg-400 {
+    font-weight: 400;
+  }
+
+  .alegra-fw-lg-600 {
+    font-weight: 600;
+  }
+
+  .alegra-fw-lg-700 {
+    font-weight: 700;
+  }
+}
+@media (min-width: 1200px) {
+  .alegra-fw-xl-300 {
+    font-weight: 300;
+  }
+
+  .alegra-fw-xl-400 {
+    font-weight: 400;
+  }
+
+  .alegra-fw-xl-600 {
+    font-weight: 600;
+  }
+
+  .alegra-fw-xl-700 {
+    font-weight: 700;
+  }
+}
+
+/***************
   **** Colors ****
   ***************/
-  
-  /* Black & White */
-  .alegra-color-black {
-    color: $color-black;
-  }
-  
-  .alegra-bg-black {
-    background-color: $color-black;
-  }
-  
-  .alegra-color-white {
-    color: $color-white;
-  }
-  
-  .alegra-bg-white {
-    background-color: $color-white;
-  }
-  
-  /* Primary */
-  
-  .alegra-color-primary {
-    color: $color-primary-5;
-  }
-  
-  .alegra-bg-primary {
-    background-color: $color-primary-5;
-  }
 
-  .alegra-color-primary-10 {
-    color: $color-primary-10;
-  }
-  
-  .alegra-bg-primary-10 {
-    background-color: $color-primary-10;
-  }
+/* Black & White */
+.alegra-color-black {
+  color: $color-black;
+}
 
-  .alegra-color-primary-20 {
-    color: $color-primary-20;
-  }
-  
-  .alegra-bg-primary-20 {
-    background-color: $color-primary-20;
-  }
+.alegra-bg-black {
+  background-color: $color-black;
+}
 
-  .alegra-color-primary-30 {
-    color: $color-primary-30;
-  }
-  
-  .alegra-bg-primary-30 {
-    background-color: $color-primary-30;
-  }
+.alegra-color-white {
+  color: $color-white;
+}
 
-  .alegra-color-primary-40 {
-    color: $color-primary-40;
-  }
-  
-  .alegra-bg-primary-40 {
-    background-color: $color-primary-40;
-  }
+.alegra-bg-white {
+  background-color: $color-white;
+}
 
-  .alegra-color-primary-50 {
-    color: $color-primary-50;
-  }
-  
-  .alegra-bg-primary-50 {
-    background-color: $color-primary-50;
-  }
+/* Primary */
 
-  .alegra-color-primary-70 {
-    color: $color-primary-70;
-  }
-  
-  .alegra-bg-primary-70 {
-    background-color: $color-primary-70;
-  }
-  .alegra-color-primary-90 {
-    color: $color-primary-90;
-  }
-  
-  .alegra-bg-primary-90 {
-    background-color: $color-primary-90;
-  }
-  
-  .alegra-color-dark {
-    color: $color-dark;
-  }
-  
-  .alegra-bg-dark {
-    background-color: $color-dark;
-  }
-  
-  .alegra-color-medium {
-    color: $color-medium;
-  }
-  
-  .alegra-bg-medium {
-    background-color: $color-medium;
-  }
-  
-  .alegra-color-light {
-    color: $color-light;
-  }
-  
-  .alegra-bg-light {
-    background-color: $color-light;
-  }
-  
-  .alegra-color-white-90 {
-    color: $color-white-90;
-  }
-  
-  .alegra-bg-white-90 {
-    background-color: $color-white-90;
-  }
-  
-  .alegra-color-white {
-    color: $color-white;
-  }
-  
-  .alegra-bg-white {
-    background-color: $color-white;
-  }
-  
-  .alegra-color-blue {
-    color: $color-blue;
-  }
-  
-  .alegra-bg-blue {
-    background-color: $color-blue;
-  }
-  
-  .alegra-border-color {
-    border-color: $color-medium;
-  }
+.alegra-color-primary {
+  color: $color-primary-5;
+}
+
+.alegra-bg-primary {
+  background-color: $color-primary-5;
+}
+
+.alegra-color-primary-10 {
+  color: $color-primary-10;
+}
+
+.alegra-bg-primary-10 {
+  background-color: $color-primary-10;
+}
+
+.alegra-color-primary-20 {
+  color: $color-primary-20;
+}
+
+.alegra-bg-primary-20 {
+  background-color: $color-primary-20;
+}
+
+.alegra-color-primary-30 {
+  color: $color-primary-30;
+}
+
+.alegra-bg-primary-30 {
+  background-color: $color-primary-30;
+}
+
+.alegra-color-primary-40 {
+  color: $color-primary-40;
+}
+
+.alegra-bg-primary-40 {
+  background-color: $color-primary-40;
+}
+
+.alegra-color-primary-50 {
+  color: $color-primary-50;
+}
+
+.alegra-bg-primary-50 {
+  background-color: $color-primary-50;
+}
+
+.alegra-color-primary-70 {
+  color: $color-primary-70;
+}
+
+.alegra-bg-primary-70 {
+  background-color: $color-primary-70;
+}
+.alegra-color-primary-90 {
+  color: $color-primary-90;
+}
+
+.alegra-bg-primary-90 {
+  background-color: $color-primary-90;
+}
+
+.alegra-color-dark {
+  color: $color-dark;
+}
+
+.alegra-bg-dark {
+  background-color: $color-dark;
+}
+
+.alegra-color-medium {
+  color: $color-medium;
+}
+
+.alegra-bg-medium {
+  background-color: $color-medium;
+}
+
+.alegra-color-light {
+  color: $color-light;
+}
+
+.alegra-bg-light {
+  background-color: $color-light;
+}
+
+.alegra-color-white-90 {
+  color: $color-white-90;
+}
+
+.alegra-bg-white-90 {
+  background-color: $color-white-90;
+}
+
+.alegra-color-white {
+  color: $color-white;
+}
+
+.alegra-bg-white {
+  background-color: $color-white;
+}
+
+@import "./mixin.scss";
