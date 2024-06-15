@@ -13,8 +13,19 @@ const mutations = {
   ) {
     const seller = state.sellers.find((vendor) => vendor.id === id);
     if (seller) {
-      seller.points = points;
+      seller.points += points;
+      if (seller.points >= 20) {
+        state.contestEnded = true;
+        state.winner = seller;
+      }
+      seller.clickable = false;
     }
+  },
+  SET_CLICKABLE_SELLER(state: SellersState) {
+    state.sellers = state.sellers.map((seller) => ({
+      ...seller,
+      clickable: true,
+    }));
   },
   FETCH_SELLERS_LOADING(state: SellersState, loading: boolean) {
     state.loading = loading;
