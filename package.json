@@ -12,7 +12,8 @@
     "core-js": "^3.8.3",
     "sass": "^1.77.5",
     "vue": "^3.2.13",
-    "vue-class-component": "^8.0.0-0"
+    "vue-class-component": "^8.0.0-0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
