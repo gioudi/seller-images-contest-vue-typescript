@@ -16,6 +16,14 @@ const mutations = {
       seller.points = points;
     }
   },
+  FETCH_SELLERS_LOADING(state: SellersState, loading: boolean) {
+    state.loading = loading;
+    state.error = null;
+  },
+  FETCH_SELLERS_FAILURE(state: SellersState, error: string) {
+    state.loading = false;
+    state.error = error;
+  },
 };
 
 export default mutations;

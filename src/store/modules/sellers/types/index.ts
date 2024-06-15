@@ -6,4 +6,6 @@ export interface Seller {
 
 export interface SellersState {
   sellers: Seller[];
+  loading: boolean;
+  error: string | null;
 }
