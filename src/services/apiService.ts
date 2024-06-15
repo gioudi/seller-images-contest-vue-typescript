@@ -1,3 +1,4 @@
+import toastService from "@/utils/toastService";
 import axios from "axios";
 
 const API_ULR = "https://api.alegra.com/api/v1/";
@@ -12,8 +13,17 @@ const apiClient = axios.create({
 });
 
 const apiService = {
-  getSellers() {
-    return apiClient.get("/sellers");
+  async getSellers() {
+    try {
+      const response = await apiClient.get("/sellers");
+      return response.data;
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message || "Error fetching sellers";
+      toastService.showError(errorMessage);
+
+      throw new Error(errorMessage);
+    }
   },
 };
 

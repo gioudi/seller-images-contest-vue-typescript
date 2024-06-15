@@ -9,6 +9,8 @@ const getters = {
     (id: number): Seller | undefined => {
       return state.sellers.find((seller) => seller.id === id);
     },
+  getError: (state: SellersState) => state.error,
+  getLoading: (state: SellersState) => state.loading,
 };
 
 export default getters;

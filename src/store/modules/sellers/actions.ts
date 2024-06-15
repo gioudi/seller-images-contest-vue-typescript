@@ -1,5 +1,9 @@
 import apiService from "@/services/apiService";
 import { Seller } from "./types";
+import { useToast } from "vue-toastification";
+import toastService from "@/utils/toastService";
+
+const toast = useToast();
 
 const actions = {
   async handleFetchSellers({ commit }: any) {
@@ -10,6 +14,9 @@ const actions = {
       commit("SET_SELLERS", response);
     } catch (error: any) {
       commit("FETCH_SELLERS_FAILURE", error.message);
+      const errorMessage =
+        error.response?.data?.message || "Error fetching sellers";
+      toastService.showError(errorMessage);
     } finally {
       commit("FETCH_SELLERS_LOADING", false);
     }
