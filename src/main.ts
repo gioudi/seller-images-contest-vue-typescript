@@ -5,6 +5,7 @@ import store from "./store";
 import Toast, { PluginOptions } from "vue-toastification";
 
 import "vue-toastification/dist/index.css";
+import router from "./routes";
 
 const options: PluginOptions = {
   timeout: 3000,
@@ -23,4 +24,5 @@ const app = createApp(App);
 
 app.use(store);
 app.use(Toast, options);
+app.use(router);
 app.mount("#alegra-test");

@@ -1,7 +1,7 @@
 import { Seller, SellersState } from "./types";
 
 const mutations = {
-  SET_SELLER(state: SellersState, sellers: Seller[]) {
+  SET_SELLERS(state: SellersState, sellers: Seller[]) {
     state.sellers = sellers;
   },
   ADD_SELLER(state: SellersState, seller: Seller) {

@@ -8,7 +8,7 @@ const apiClient = axios.create({
   baseURL: API_ULR,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Basic ${btoa(API_KEY + ":")}`,
+    Authorization: `Basic ${API_KEY}}`,
   },
 });
 
