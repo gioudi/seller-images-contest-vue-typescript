@@ -24,6 +24,20 @@ const apiService = {
       throw new Error(errorMessage);
     }
   },
+  async createInvoice(payload: any) {
+    try {
+      const response = await apiClient.post("/invoices", {
+        body: JSON.stringify(payload),
+      });
+      return response.data;
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message || "Error creating an Invoice";
+      toastService.showError(errorMessage);
+
+      throw new Error(errorMessage);
+    }
+  },
 };
 
 export default apiService;
