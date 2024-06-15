@@ -32,4 +32,68 @@
    @content;
   }
   }
+
+// Define a list of spacing values
+$spacing-values: 0, 1, 2, 3, 4, 5, 6;
+
+// Generate padding classes
+@mixin generate-padding-classes() {
+  @each $value in $spacing-values {
+    .p-#{$value} {
+      padding: #{$value * 0.25}rem;
+    }
+    .pt-#{$value} {
+      padding-top: #{$value * 0.25}rem;
+    }
+    .pb-#{$value} {
+      padding-bottom: #{$value * 0.25}rem;
+    }
+    .pl-#{$value} {
+      padding-left: #{$value * 0.25}rem;
+    }
+    .pr-#{$value} {
+      padding-right: #{$value * 0.25}rem;
+    }
+    .py-#{$value} {
+      padding-top: #{$value * 0.25}rem;
+      padding-bottom: #{$value * 0.25}rem;
+    }
+    .px-#{$value} {
+      padding-left: #{$value * 0.25}rem;
+      padding-right: #{$value * 0.25}rem;
+    }
+  }
+}
+
+// Generate margin classes
+@mixin generate-margin-classes() {
+  @each $value in $spacing-values {
+    .m-#{$value} {
+      margin: #{$value * 0.25}rem;
+    }
+    .mt-#{$value} {
+      margin-top: #{$value * 0.25}rem;
+    }
+    .mb-#{$value} {
+      margin-bottom: #{$value * 0.25}rem;
+    }
+    .ml-#{$value} {
+      margin-left: #{$value * 0.25}rem;
+    }
+    .mr-#{$value} {
+      margin-right: #{$value * 0.25}rem;
+    }
+    .my-#{$value} {
+      margin-top: #{$value * 0.25}rem;
+      margin-bottom: #{$value * 0.25}rem;
+    }
+    .mx-#{$value} {
+      margin-left: #{$value * 0.25}rem;
+      margin-right: #{$value * 0.25}rem;
+    }
+  }
+}
+
+@include generate-padding-classes();
+@include generate-margin-classes();
   

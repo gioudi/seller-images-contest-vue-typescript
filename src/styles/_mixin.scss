@@ -1,0 +1,80 @@
+// Content
+// -----------------------
+// 0. General purpose mixins
+// 1. Input
+// 2. Button
+// 3. List
+// 4. Card    
+// -----------------------
+
+@mixin alegra-input {
+    font-size: $font-size-normal;
+    padding: 0.5rem 1rem;
+    border: 1px solid $color-medium;
+    border-radius: $border-radius-sm;
+    background-color: $color-white;
+    color: $color-dark;
+    box-shadow: $box-shadow-sm;
+
+    &:focus {
+        outline: none;
+        border-color: $color-primary-50;
+        box-shadow: $box-shadow-md;
+    }
+}
+
+@mixin alegra-button($color: $color-primary-50, $bg-color: $color-primary-20, $hover-color: $color-white, $hover-bg-color: $color-primary-30) {
+    font-size: $font-size-normal;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: $border-radius-sm;
+    background-color: $bg-color;
+    color: $color;
+    box-shadow: $box-shadow-sm;
+    cursor: pointer;
+    transition: background-color 0.3s color 0.3s ease-in;
+
+    &:focus, &:hover {
+        outline: none;
+        border-color: $hover-bg-color;
+        color: $hover-color;
+    }
+}
+
+@mixin alegra-list {
+    font-size: $font-size-normal;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+}
+
+@mixin alegra-card($padding: 1rem, $background-color: $color-white) {
+    padding: $padding;
+    border: none;
+    border-radius: $border-radius-sm;
+    box-shadow: $box-shadow-md;
+    background-color: $background-color;
+}
+  
+
+// Calling them
+// -----------------------
+
+input {
+    @include alegra-input();
+}
+
+button {
+    @include alegra-button();
+}
+
+ul {
+    @include alegra-list;
+}
+
+.alegra-card {
+    @include alegra-card();
+}

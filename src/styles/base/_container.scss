@@ -4,6 +4,10 @@
   padding-left: .9375rem;
   padding-right: .9375rem;
   width: 100%;
+
+  @media (min-width: 20.625rem) {
+    max-width: 15rem;
+  }
   @media (min-width: 36rem) {
     max-width: 33.75rem;
   }

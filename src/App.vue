@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container py-5">
     <router-view></router-view>
   </section>
 </template>

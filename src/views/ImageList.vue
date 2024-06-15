@@ -9,14 +9,23 @@
       <ErrorFile></ErrorFile>
     </article>
     <article v-if="!loading && !error" class="grid-col-sm-12">
-      <h2 class="alegra-title">Image List</h2>
-      <div class="grid" v-for="image in images" :key="image">
-        <div class="grid-col-sm-12 grid-col-md-4">
-          <img :src="image.urls.full" :alt="image.alt_description" srcset="" />
+      <h2 class="alegra-h2">{{ searchTerm.toUpperCase() }}</h2>
+      <div class="grid">
+        <div
+          v-for="image in images"
+          :key="image"
+          class="grid-col-xs-12 grid-col-sm-12 grid-col-md-4 grid-col-lg-4"
+        >
+          <img
+            class="alegra-card image-container"
+            :src="image.urls.full"
+            :alt="image.alt_description"
+            srcset=""
+          />
         </div>
       </div>
       <div class="grid">
-        <div class="grid-col-sm-12">
+        <div class="grid-col-xs-12 grid-col-sm-12">
           <ul v-for="seller in sellers" :key="seller">
             <li>{{ seller }}</li>
           </ul>
@@ -62,7 +71,18 @@ export default defineComponent({
       error,
       sellers,
       images,
+      searchTerm,
     };
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.image-container {
+  width: 100%;
+  max-width: 13.125rem;
+  display: flex;
+  height: 15.625rem;
+  object-fit: cover;
+}
+</style>
