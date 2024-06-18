@@ -1,3 +1,4 @@
+import { InvoicePayload } from "@/store/modules/invoices/types";
 import toastService from "@/utils/toastService";
 import axios from "axios";
 
@@ -24,11 +25,10 @@ const apiService = {
       throw new Error(errorMessage);
     }
   },
-  async createInvoice(payload: any) {
+  async createInvoice(payload: InvoicePayload) {
     try {
-      const response = await apiClient.post("/invoices", {
-        body: JSON.stringify(payload),
-      });
+      console.log(payload);
+      const response = await apiClient.post("/invoices", payload);
       return response.data;
     } catch (error: any) {
       const errorMessage =
