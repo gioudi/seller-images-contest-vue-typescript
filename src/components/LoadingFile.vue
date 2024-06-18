@@ -1,17 +1,22 @@
 <template>
-  <article class="grid">
-    <article class="grid-col-sm-12">
-      <div class="error">
-        <img src="" alt="Error" />
-        <p>Loading ...</p>
-      </div>
+  <section class="alegra-loading">
+    <h4 class="h4 alegra-color-dark">
+      Procesando su solicitud, por favor espere...
+    </h4>
+    <article class="alegra-loading__item background-animation">
+      <article class="container-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </article>
+      <article class="container-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </article>
     </article>
-  </article>
+  </section>
 </template>
-
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-
+import { defineComponent } from "vue";
 export default defineComponent({
   name: "LoadingFile",
 });

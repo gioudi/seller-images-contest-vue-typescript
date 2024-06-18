@@ -4,106 +4,170 @@
 // 1. Input
 // 2. Button
 // 3. List
-// 4. Card    
+// 4. Card
 // 5. Modal
 // -----------------------
 
 @mixin alegra-input {
-    font-size: $font-size-normal;
-    padding: 0.5rem 1rem;
-    border: 1px solid $color-medium;
-    border-radius: $border-radius-sm;
-    background-color: $color-white;
-    color: $color-dark;
-    box-shadow: $box-shadow-sm;
+  font-size: $font-size-normal;
+  padding: 0.5rem 1rem;
+  border: 1px solid $color-primary-10;
+  border-radius: $border-radius-sm;
+  background-color: $color-white;
+  color: $color-dark;
+  box-shadow: $box-shadow-sm;
+  text-align: left;
+  font-size: .875rem;
+  font-weight: normal;
+  letter-spacing: 0;
 
-    &:focus {
-        outline: none;
-        border-color: $color-primary-50;
-        box-shadow: $box-shadow-md;
-    }
+  &:focus {
+    outline: none;
+    border-color: $color-primary-50;
+    box-shadow: $box-shadow-md;
+  }
 }
 
-@mixin alegra-button($color: $color-primary-50, $bg-color: $color-primary-20, $hover-color: $color-white, $hover-bg-color: $color-primary-30) {
-    font-size: $font-size-normal;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: $border-radius-sm;
-    background-color: $bg-color;
-    color: $color;
-    box-shadow: $box-shadow-sm;
-    cursor: pointer;
-    transition: background-color 0.3s color 0.3s ease-in;
+@mixin alegra-button(
+  $color: $color-primary-50,
+  $bg-color: $color-primary-20,
+  $hover-color: $color-black,
+  $hover-bg-color: $color-primary-30
+) {
+  font-size: $font-size-normal;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: $border-radius-sm;
+  background-color: $bg-color;
+  color: $color;
+  box-shadow: $box-shadow-sm;
+  cursor: pointer;
+  transition: background-color 0.3s color 0.3s ease-in;
 
-    &:focus, &:hover {
-        outline: none;
-        border-color: $hover-bg-color;
-        color: $hover-color;
-    }
+  &:focus,
+  &:hover {
+    outline: none;
+    border-color: $hover-bg-color;
+    color: $hover-color;
+  }
 }
 
 @mixin alegra-list {
-    font-size: $font-size-normal;
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-    
-    li {
-      margin-bottom: 0.5rem;
-    }
+  font-size: $font-size-normal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
 }
 
 @mixin alegra-card($padding: 0.4rem, $background-color: $color-white) {
-    padding: $padding;
-    border: none;
-    border-radius: $border-radius-sm;
-    box-shadow: $box-shadow-md;
-    background-color: $background-color;
+  padding: $padding;
+  border: none;
+  border-radius: $border-radius-sm;
+  box-shadow: $box-shadow-md;
+  background-color: $background-color;
 }
 
 @mixin alegra-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 0.6s ease-in;
+}
+
+@mixin alegra-modal-content {
+  background: $color-white;
+  padding: 1.25rem;
+  border-radius: $border-radius-sm;
+  text-align: center;
+}
+
+@mixin alegra-nav($width: 100%, $height: auto, $margin: 0, $background:$color-primary-50, $color: $color-dark) {
+    width: $width;
+    height: $height;
+    margin: $margin;
+    max-height: 5.8125rem;
+    background: $background;
+    font-size: 2rem;
+    font-weight: bold;
+    opacity: 1;
+    box-sizing: border-box;
+    padding: 1rem 0.5rem;
+    box-shadow: $box-shadow-md;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    transition: 0.6s ease-in;
-  }
-  
-  @mixin alegra-modal-content {
-    background: $color-white;
+    .alegra-navbar-title {
+        font-size: 1.5rem;
+      }
+    
+      .alegra-navbar-buttons {
+        display: flex;
+        gap: 1rem;
+    
+        .alegra-navbar-button {
+          background-color: transparent;
+          border: none;
+          color: $color-white;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+    
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+}
+
+@mixin alegra-footer(){
+    color: $color-dark;
     padding: 1.25rem;
-    border-radius: $border-radius-sm;
-    text-align: center;
-  }
-  
-  
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
 // Calling them
 // -----------------------
 
 input {
-    @include alegra-input();
+  @include alegra-input();
 }
 
 button {
-    @include alegra-button();
+  @include alegra-button();
 }
 
 ul {
-    @include alegra-list;
+  @include alegra-list;
 }
 
-.alegra-card {
-    @include alegra-card();
+.alegra-card, .card {
+  @include alegra-card();
 }
 
-.alegra-modal {
-    @include alegra-modal(); 
+.alegra-modal, .modal {
+  @include alegra-modal();
 }
 .alegra-modal-content {
-    @include alegra-modal-content(); 
+  @include alegra-modal-content();
+}
+
+.alegra-nav, nav {
+    @include alegra-nav;
+}
+
+.alegra-footer, footer{
+    @include alegra-footer();
 }
