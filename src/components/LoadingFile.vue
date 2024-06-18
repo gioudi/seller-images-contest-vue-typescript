@@ -1,6 +1,6 @@
 <template>
   <section class="alegra-loading">
-    <h4 class="h4 alegra-color-dark">
+    <h4 class="h4 mt-3 alegra-color-dark">
       Procesando su solicitud, por favor espere...
     </h4>
     <article class="alegra-loading__item background-animation">
