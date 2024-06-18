@@ -6,7 +6,7 @@
     </article>
     <article v-else-if="error" class="grid-col-sm-12">
       <!-- Error -->
-      <ErrorFile></ErrorFile>
+      <ErrorFile :message="error"></ErrorFile>
     </article>
     <article v-if="!loading && !error" class="grid-col-sm-12">
       <h5 class="mb-4 mt-3">Lista de Imágenes que Inspiran</h5>
