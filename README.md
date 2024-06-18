@@ -69,31 +69,32 @@ For frontend, I used Vue and Vuex. As a developer always looking to improve the 
 
 ## Strcuture
 
-alegra-test-vue-typescript/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   │   ├── CarouselFile.vue
-│   │   ├── ErrorFile.vue
-│   │   └── LoadingFile.vue
-│   ├── store/
-│   │   ├── index.ts
-│   │   └── modules/
-│   │       ├── images.ts
-│   │       └── invoices.ts
-│   ├── views/
-│   │   ├── LandingPage.vue
-│   │   ├── ImageList.vue
-│   │   └── InvoiceForm.vue
-│   ├── App.vue
-│   ├── main.ts
-│   └── router/
-│       └── index.ts
-├── .gitignore
-├── package.json
-├── README.md
-└── tsconfig.json
+- alegra-test-vue-typescript/
+  - public/
+  - src/
+    - assets/
+    - components/
+      - CarouselFile.vue
+      - ErrorFile.vue
+      - LoadingFile.vue
+    - store/
+      - index.ts
+      - modules/
+        - images.ts
+        - invoices.ts
+    - views/
+      - LandingPage.vue
+      - ImageList.vue
+      - InvoiceForm.vue
+    - App.vue
+    - main.ts
+    - router/
+      - index.ts
+  - .gitignore
+  - package.json
+  - README.md
+  - tsconfig.json
+
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.
