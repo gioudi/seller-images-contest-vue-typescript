@@ -124,7 +124,10 @@ export default defineComponent({
     /*Handle continue */
 
     const handleContinue = () => {
-      router.push({ name: "InvoiceForm" });
+      router.push({
+        name: "InvoiceForm",
+        query: { q: winner?.value?.id },
+      });
     };
 
     onMounted(() => {
