@@ -585,27 +585,4 @@ body {
 }
 
 
-.container-greet {
-  &__icon {
-    width: 3.125rem;
-    height: 3.125rem;
-    position: absolute;
-    right: 30%;
-    path {
-      transition: all 0.3s;
-    }
-  }
-  &:hover {
-    cursor: pointer;
-    .container-greet__icon {
-      width: 4.375rem;
-      height: 4.375rem;
-      transform: rotate(45deg);
-      path {
-        transform: scale(6);
-      }
-    }
-  }
-}
-
 

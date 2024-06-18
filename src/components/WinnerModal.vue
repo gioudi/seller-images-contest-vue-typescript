@@ -2,9 +2,9 @@
 <template>
   <div v-if="show" class="alegra-modal">
     <div class="alegra-modal-content">
-      <h2>Congratulations!</h2>
-      <p>The winner is {{ winnerName }}!</p>
-      <button @click="proceed">Continue</button>
+      <h2>Felicitationes!</h2>
+      <p>El ganador es {{ winnerName }}!</p>
+      <button @click="proceed">Continuar</button>
     </div>
   </div>
 </template>
