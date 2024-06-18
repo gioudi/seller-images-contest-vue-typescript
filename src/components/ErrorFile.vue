@@ -1,9 +1,8 @@
 <template>
   <article class="grid">
     <article class="grid-col-sm-12">
-      <h4 class="h4 alegra-color-dark">Error!</h4>
       <div class="error">
-        <img src="" alt="Error" />
+        <h4 class="h4 alegra-color-dark mt-3 mb-4">Error!</h4>
         <p>{{ message }}</p>
       </div>
     </article>
@@ -24,3 +23,11 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="scss">
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+</style>
