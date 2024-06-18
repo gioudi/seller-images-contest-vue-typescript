@@ -111,7 +111,7 @@ export default defineComponent({
       if (!contestEnded.value) {
         store.commit("sellers/UPDATE_SELLER_POINTS", {
           id: seller.id,
-          points: 11,
+          points: 3,
         });
       }
     };
