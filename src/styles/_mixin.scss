@@ -62,12 +62,14 @@
   }
 }
 
-@mixin alegra-card($padding: 0.4rem, $background-color: $color-white) {
+@mixin alegra-panel($padding: 1rem, $background-color: $color-white) {
   padding: $padding;
   border: none;
   border-radius: $border-radius-sm;
   box-shadow: $box-shadow-md;
   background-color: $background-color;
+  word-wrap: break-word;
+  box-sizing: border-box;  
 }
 
 @mixin alegra-modal {
@@ -153,8 +155,8 @@ ul {
   @include alegra-list;
 }
 
-.alegra-card, .card {
-  @include alegra-card();
+.alegra-panel, .panel {
+  @include alegra-panel();
 }
 
 .alegra-modal, .modal {
