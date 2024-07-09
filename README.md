@@ -69,7 +69,7 @@ For frontend, I used Vue and Vuex. As a developer always looking to improve the 
 
 ## Strcuture
 
-- alegra-test-vue-typescript/
+- seller-images-contest-vue-typescript/
   - public/
   - src/
     - assets/
