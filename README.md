@@ -1,8 +1,8 @@
-# Alegra test
+# Image test
 
 Hi there!
 
-I hope you are doing well. In this project, you can find a feature to consume the Alegra API and displays a list of sellers and images based on the customer's wish.
+I hope you are doing well. In this project, you can find a feature to consume an API and displays a list of sellers and images based on the customer's wish.
 
 For frontend, I used Vue and Vuex. As a developer always looking to improve the code quality, I have integrated TypeScript and ESLint as well.
 
