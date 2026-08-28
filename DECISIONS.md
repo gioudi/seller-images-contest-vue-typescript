@@ -125,6 +125,30 @@ Jör, 2026-08-28 (accepted via direct response to PD-002)
 3. **Keep native validation**
    - Zero deps, but no async validation, no i18n error messages
 
+### ADR-003: Sequencing - Pinia before Vite
+
+**Status:** PROPOSED (awaiting Jör PR approval)
+
+**Context:**
+W2 contains two platform migrations approved separately: ADR-001 (Vuex → Pinia) and ADR-002 (Vue CLI → Vite). Both are large. RULE 3A (small PRs) requires one-platform-change-per-PR.
+
+**Options considered:**
+1. **Pinia first** (RECOMMENDED)
+   - Pinia swap is runtime-only: the webpack build and the jest test infra we fixed in W1 stay untouched, so behavior is proven by the same 8 guard tests.
+   - Review surface: store + rewired components only. Verifiable on its own.
+2. **Vite first**
+   - Touches build tooling + test infrastructure (config, index.html, scripts, test runner) at the same time the store still needs swapping — two big unknowns in one PR.
+3. **Both in one PR**
+   - Violates RULE 3A; impossible to bisect a regression.
+
+**Decision:** Pinia first (`refactor/pinia-migration`), then Vite (`refactor/vite-migration`) as its own spec + PR.
+
+**Rationale:** "one platform change per PR". Pinia keeps the current proven toolchain; Vite is the riskier platform change and lands after the store is already green on Pinia.
+
+**Consequences:**
+- Two sequential reviews instead of one big one (slower wall-clock, better review quality).
+- On the Pinia PR, `jest.config.js` and build tooling must NOT be touched (enforced by SPEC-P2-01 out-of-scope).
+
 <!--
 Template for new ADRs - to be copied by Broker:
 

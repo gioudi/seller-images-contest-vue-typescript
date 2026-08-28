@@ -81,6 +81,57 @@ Foundation & type-safety wave (W1):
 - EST-M08 create `src/config/index.ts` constants module (2h)
 
 ### Status
+IMPLEMENTED (merged to staging via PR #21 on 2026-08-28; services follow-up separate PR)
+
+### Approval
+- **Jör Approved:** 2026-08-28, via PR review + merge (#21)
+- **Notes:** Reworked on SPEC-TEMPLATE (10 sections) before implementation
+
+---
+
+## PROPOSAL-2026-003
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-28 |
+| **Branch** | `refactor/type-service-errors` |
+| **Spec** | SPEC-P1-02 |
+| **Estimate** | 0.5h |
+| **Submitted By** | Broker |
+
+### Description
+Type the service-layer error handlers, the last three lint `any` warnings:
+- `src/services/apiService.ts`: `getSellers` + `createInvoice` catches
+- `src/services/apiImagesService.ts`: `getImagesList` catch
+`any` → `unknown` + `instanceof` narrowing. Behavior unchanged.
+
+### Status
+PENDING
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
+## PROPOSAL-2026-004
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-28 |
+| **Branch** | `refactor/pinia-migration` |
+| **Spec** | SPEC-P2-01 |
+| **Estimate** | 14h |
+| **Submitted By** | Broker |
+
+### Description
+Migrate the state layer from Vuex to Pinia (ADR-001):
+- Add `pinia`, remove `vuex`
+- Create `src/stores/{sellers,images,invoices}Store.ts`
+- Replace `src/store/index.ts` + `RootState` with a Pinia instance + per-store types
+- Rewire all `useStore()`/`getters`/`dispatch`/`commit` in views/components/App to Pinia composables
+- Only the store. Vite migration is the next, separate PR (allows one-platform-change-per-PR under RULE 3A)
+
+### Status
 PENDING
 
 ### Approval
