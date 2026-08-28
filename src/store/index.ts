@@ -1,12 +1,10 @@
 import { createStore } from "vuex";
 import { sellers } from "./modules/sellers";
-import { SellersState } from "./modules/sellers/types";
 import { images } from "./modules/images";
 import { invoices } from "./modules/invoices";
+import { RootState } from "./types";
 
-export interface RootState {
-  sellers: SellersState;
-}
+export { RootState } from "./types";
 
 const store = createStore<RootState>({
   modules: {

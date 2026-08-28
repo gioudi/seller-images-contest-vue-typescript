@@ -1,8 +1,15 @@
+import { ActionContext } from "vuex";
+import { RootState } from "@/store";
 import apiService from "@/services/apiService";
-import { InvoicePayload } from "./types";
+import { InvoicesState, InvoicePayload } from "./types";
+
+type InvoicesActionContext = ActionContext<InvoicesState, RootState>;
 
 const actions = {
-  async handleCreateInvoice({ commit }: any, payload: InvoicePayload) {
+  async handleCreateInvoice(
+    { commit }: InvoicesActionContext,
+    payload: InvoicePayload
+  ) {
     try {
       const data = await apiService.createInvoice(payload);
       commit("SET_INVOICE_STATUS", data);

@@ -1,4 +1,5 @@
 import { Seller, SellersState } from "./types";
+import { CONTEST } from "@/config";
 
 const mutations = {
   SET_SELLERS(state: SellersState, sellers: Seller[]) {
@@ -14,7 +15,7 @@ const mutations = {
     const seller = state.sellers.find((vendor) => vendor.id === id);
     if (seller) {
       seller.points += points;
-      if (seller.points >= 20) {
+      if (seller.points >= CONTEST.WIN_THRESHOLD) {
         state.contestEnded = true;
         state.winner = seller;
       }

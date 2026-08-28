@@ -1,37 +1,28 @@
 import { useToast } from "vue-toastification";
+import { TOAST } from "@/config";
 
 const toast = useToast();
 
+const baseOptions = {
+  timeout: TOAST.ERROR_DURATION,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: TOAST.DRAGGABLE_PERCENT,
+  showCloseButtonOnHover: false,
+  hideProgressBar: false,
+  closeButton: "button",
+  icon: true,
+  rtl: false,
+};
+
 const toastService = {
   showError(message: string) {
-    toast.error(message, {
-      timeout: 5000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.3,
-      showCloseButtonOnHover: false,
-      hideProgressBar: false,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
-    });
+    toast.error(message, baseOptions);
   },
   showWarn(message: string) {
-    toast.warning(message, {
-      timeout: 5000,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      pauseOnHover: true,
-      draggable: true,
-      draggablePercent: 0.3,
-      showCloseButtonOnHover: false,
-      hideProgressBar: false,
-      closeButton: "button",
-      icon: true,
-      rtl: false,
-    });
+    toast.warning(message, baseOptions);
   },
 };
 

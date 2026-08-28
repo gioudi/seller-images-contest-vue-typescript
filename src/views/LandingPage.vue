@@ -58,8 +58,8 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
     const images = computed(() => store.getters["images/getImages"]);
-    const loading = computed(() => store.getters["sellers/getLoading"]);
-    const error = computed(() => store.getters["sellers/getError"]);
+    const loading = computed(() => store.getters["images/getLoading"]);
+    const error = computed(() => store.getters["images/getError"]);
     const searchImages = () => {
       if (searchTerm.value.trim()) {
         router.push({

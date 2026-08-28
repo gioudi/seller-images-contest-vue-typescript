@@ -1,9 +1,14 @@
+import { ActionContext } from "vuex";
+import { AxiosError } from "axios";
+import { RootState } from "@/store";
 import apiService from "@/services/apiService";
 import toastService from "@/utils/toastService";
-import { Seller } from "./types";
+import { Seller, SellersState } from "./types";
+
+type SellersActionContext = ActionContext<SellersState, RootState>;
 
 const actions = {
-  async handleFetchSellers({ commit }: any) {
+  async handleFetchSellers({ commit }: SellersActionContext) {
     commit("FETCH_SELLERS_LOADING", true);
 
     try {
@@ -15,24 +20,18 @@ const actions = {
         contestEnded: false,
       }));
       commit("SET_SELLERS", sellers);
-    } catch (error: any) {
-      commit("FETCH_SELLERS_FAILURE", error.message);
+    } catch (error) {
       const errorMessage =
-        error.response?.data?.message || "Error fetching sellers";
+        error instanceof AxiosError
+          ? error.response?.data?.message ?? "Error fetching sellers"
+          : error instanceof Error
+          ? error.message
+          : "Error fetching sellers";
+      commit("FETCH_SELLERS_FAILURE", errorMessage);
       toastService.showError(errorMessage);
     } finally {
       commit("FETCH_SELLERS_LOADING", false);
     }
-  },
-  handleAddSeller({ commit }: any) {
-    //Consume Api
-    const seller: any = [];
-    commit("ADD_SELLER", seller);
-  },
-  handleUpdateSellerPoints({ commit }: any) {
-    // API call
-    const payload: any = 0;
-    commit("UPDATE_SELLER_POINTS", payload);
   },
 };
 

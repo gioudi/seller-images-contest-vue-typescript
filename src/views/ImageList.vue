@@ -63,10 +63,10 @@
 </template>
 <script lang="ts">
 import { Seller } from "@/store/modules/sellers/types";
-import { Image } from "@/store/modules/images/types";
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { CONTEST, IMAGES } from "@/config";
 import WinnerModal from "@/components/WinnerModal.vue";
 import LoadingFile from "../components/LoadingFile.vue";
 import ErrorFile from "../components/ErrorFile.vue";
@@ -110,7 +110,7 @@ export default defineComponent({
       if (!contestEnded.value) {
         store.commit("sellers/UPDATE_SELLER_POINTS", {
           id: seller.id,
-          points: 3,
+          points: CONTEST.VOTE_POINTS,
         });
       }
     };
@@ -146,15 +146,17 @@ export default defineComponent({
       error,
       searchTerm,
       sellerWithImages: computed(() => {
+        const totalImages = images.value.length;
         return sellers.value.map((seller: Seller) => {
-          const image = images.value.find(
-            (img: Image, index: number) => index === seller.id
-          );
+          const image =
+            totalImages > 0 ? images.value[seller.id % totalImages] : undefined;
           return {
             ...seller,
             points: seller.points,
-            image: image ? image.urls.full : "",
-            alt_description: image ? image.alt_description : "",
+            image: image ? image.urls.full : IMAGES.FALLBACK_URL,
+            alt_description: image
+              ? image.alt_description
+              : "Imagen del concurso",
           };
         });
       }),

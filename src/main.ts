@@ -6,14 +6,15 @@ import Toast, { PluginOptions } from "vue-toastification";
 
 import "vue-toastification/dist/index.css";
 import router from "./routes";
+import { TOAST } from "@/config";
 
 const options: PluginOptions = {
-  timeout: 3000,
+  timeout: TOAST.DEFAULT_DURATION,
   closeOnClick: true,
   pauseOnFocusLoss: true,
   pauseOnHover: true,
   draggable: true,
-  draggablePercent: 0.3,
+  draggablePercent: TOAST.DRAGGABLE_PERCENT,
   showCloseButtonOnHover: false,
   hideProgressBar: false,
   closeButton: "button",
