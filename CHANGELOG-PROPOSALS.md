@@ -59,6 +59,35 @@ APPROVED - IMPLEMENTED (merged to staging 2026-08-28, awaiting main release + ta
 
 ---
 
+## PROPOSAL-2026-002
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-28 |
+| **Branch** | `refactor/w1-foundation` (proposed) |
+| **Spec** | SPEC-P1-01 |
+| **Estimate** | 16.1h |
+| **Submitted By** | Broker |
+
+### Description
+Foundation & type-safety wave (W1):
+- EST-H01 replace broken `HelloWorld` test with real component tests (3h)
+- EST-H04 complete `RootState` interface with `images` + `invoices` (2h)
+- EST-H03 type all Vuex action contexts, remove `any` (5h)
+- EST-H05 fix type mismatch in `handleAddSeller` (0.5h)
+- EST-H06 fix `LandingPage` using wrong loading getter (0.3h)
+- EST-H07 fix fragile image-to-seller mapping (3h)
+- EST-H08 fix carousel type declaration (0.3h)
+- EST-M08 create `src/config/index.ts` constants module (2h)
+
+### Status
+PENDING
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
