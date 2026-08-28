@@ -1,6 +1,6 @@
 import { InvoicePayload } from "@/store/modules/invoices/types";
 import toastService from "@/utils/toastService";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const API_URL =
   process.env.VUE_APP_ALEGRA_BASE_URL || "https://api.alegra.com/api/v1/";
@@ -18,9 +18,13 @@ const apiService = {
     try {
       const response = await apiClient.get("/sellers");
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
       const errorMessage =
-        error.response?.data?.message || "Error fetching sellers";
+        error instanceof AxiosError
+          ? error.response?.data?.message || "Error fetching sellers"
+          : error instanceof Error
+          ? error.message
+          : "Error fetching sellers";
       toastService.showError(errorMessage);
 
       throw new Error(errorMessage);
@@ -30,9 +34,13 @@ const apiService = {
     try {
       const response = await apiClient.post("/invoices", payload);
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
       const errorMessage =
-        error.response?.data?.message || "Error creating an Invoice";
+        error instanceof AxiosError
+          ? error.response?.data?.message || "Error creating an Invoice"
+          : error instanceof Error
+          ? error.message
+          : "Error creating an Invoice";
       toastService.showError(errorMessage);
 
       throw new Error(errorMessage);
