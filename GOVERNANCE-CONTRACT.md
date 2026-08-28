@@ -3,9 +3,16 @@
 ## Seller Images Contest - Vue TypeScript
 
 **Effective Date:** 2026-08-28  
-**Version:** 1.0  
+**Version:** 1.1  
 
 ---
+
+## Amendment History
+
+| Version | Date | Change |
+|---------|------|--------|
+| 1.0 | 2026-08-28 | Initial contract |
+| 1.1 | 2026-08-28 | Added RULE 3A (Small Pull Requests) at Jör's request after reviewing a 22-file PR |
 
 ## Parties
 
@@ -88,6 +95,19 @@ feature/xyz  -->  staging  -->  main (with tag)
                     |
               (review & approval)
 ```
+
+### RULE 3A: Small Pull Requests
+
+> **Small PRs beat big PRs. One task = one branch = one PR.**
+
+- Every Pull Request must be small enough to review in one sitting.
+- Guidance:
+  - 1 task = 1 spec = 1 branch = 1 PR
+  - Soft limits: at most **8 files** OR at most **1 work day**, whichever is smaller
+  - Do not mix change types (docs + code + tooling) in one PR even if they share a topic
+  - Spec-only PRs are separate from the implementation PR that follows them
+- If a task cannot meet the soft limits, the Broker MUST say so explicitly when pushing the branch and justify the size (e.g., "Vite migration - expected large, split into commits by concern").
+- Jör may reject any PR for being too large and ask for it to be split.
 
 ### RULE 4: No Changes Without Approval
 
