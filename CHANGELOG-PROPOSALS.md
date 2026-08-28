@@ -51,7 +51,7 @@ Apply the Phase 0 emergency stabilization fixes from ESTIMATIONS-AND-RESOLUTIONS
 - EST-M10: Create .env.example
 
 ### Status
-APPROVED - IMPLEMENTED (awaiting staging merge)
+APPROVED - IMPLEMENTED (merged to staging 2026-08-28, awaiting main release + tag)
 
 ### Approval
 - **Jör Approved:** 2026-08-28, written ("Start with phase 0")
