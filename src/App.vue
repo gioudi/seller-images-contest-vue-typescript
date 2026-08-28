@@ -24,7 +24,6 @@ export default defineComponent({
     const handleGetSellers = async () => {
       try {
         store.commit("sellers/FETCH_SELLERS_LOADING", true);
-        await new Promise((resolve) => setTimeout(resolve, 5000));
         await store.dispatch("images/handleFetchImagesList", "cute");
         await store.dispatch("sellers/handleFetchSellers");
       } catch (error) {

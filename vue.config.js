@@ -5,4 +5,11 @@ dotenv.config();
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  css: {
+    loaderOptions: {
+      sass: {
+        implementation: require("sass"),
+      },
+    },
+  },
 });

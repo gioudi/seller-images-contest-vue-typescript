@@ -97,7 +97,6 @@ export default defineComponent({
         store.commit("images/FETCH_IMAGES_LOADING", true);
 
         searchTerm.value = (route.query.q as string) ?? "";
-        await new Promise((resolve) => setTimeout(resolve, 3000));
         await store.dispatch(`images/handleFetchImagesList`, searchTerm.value);
       } catch (error) {
         store.commit("images/FETCH_IMAGES_FAILURE", error);
@@ -120,7 +119,6 @@ export default defineComponent({
     const handleGetNewImages = async () => {
       try {
         store.commit("images/FETCH_IMAGES_LOADING", true);
-        await new Promise((resolve) => setTimeout(resolve, 3000));
         await store.dispatch(`images/handleFetchImagesList`, searchTerm.value);
         store.commit("sellers/SET_CLICKABLE_SELLER");
       } catch (error) {
