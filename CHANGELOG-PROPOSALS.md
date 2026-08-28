@@ -88,6 +88,30 @@ PENDING
 
 ---
 
+## PROPOSAL-2026-003
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-28 |
+| **Branch** | `refactor/type-service-errors` |
+| **Spec** | SPEC-P1-02 |
+| **Estimate** | 0.5h |
+| **Submitted By** | Broker |
+
+### Description
+Type the service-layer error handlers, the last three lint `any` warnings:
+- `src/services/apiService.ts`: `getSellers` + `createInvoice` catches
+- `src/services/apiImagesService.ts`: `getImagesList` catch
+`any` → `unknown` + `instanceof` narrowing. Behavior unchanged.
+
+### Status
+PENDING
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
