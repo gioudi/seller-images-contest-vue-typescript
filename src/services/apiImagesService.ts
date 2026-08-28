@@ -1,10 +1,10 @@
 import toastService from "@/utils/toastService";
 import { createApi } from "unsplash-js";
 
-//const API_KEY_UNSPLASH = process.env.VUE_APP_UNSPLASH_ACCESS_KEY;
+const accessKey = process.env.VUE_APP_UNSPLASH_ACCESS_KEY || "";
 
 const unsplash = createApi({
-  accessKey: "Zau8FoWGR7ZuRehy_4mq7atvzL-tsEPmbMRuPWDEzbg",
+  accessKey,
 });
 
 const apiServiceImages = {

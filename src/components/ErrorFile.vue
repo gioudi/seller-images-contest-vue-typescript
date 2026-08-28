@@ -8,7 +8,6 @@
     </article>
   </article>
 </template>
-s
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";

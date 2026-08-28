@@ -4,8 +4,7 @@ import { InvoicePayload } from "./types";
 const actions = {
   async handleCreateInvoice({ commit }: any, payload: InvoicePayload) {
     try {
-      const response = await apiService.createInvoice(payload);
-      const data = await response.json();
+      const data = await apiService.createInvoice(payload);
       commit("SET_INVOICE_STATUS", data);
       return data;
     } catch (error) {

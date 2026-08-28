@@ -2,13 +2,14 @@ import { InvoicePayload } from "@/store/modules/invoices/types";
 import toastService from "@/utils/toastService";
 import axios from "axios";
 
-const API_URL = "https://api.alegra.com/api/v1/";
+const API_URL =
+  process.env.VUE_APP_ALEGRA_BASE_URL || "https://api.alegra.com/api/v1/";
 const API_KEY = process.env.VUE_APP_ALEGRA_API_KEY;
 const apiClient = axios.create({
   baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Basic ${API_KEY}}`,
+    Authorization: `Basic ${API_KEY}`,
   },
 });
 
@@ -27,7 +28,6 @@ const apiService = {
   },
   async createInvoice(payload: InvoicePayload) {
     try {
-      console.log(payload);
       const response = await apiClient.post("/invoices", payload);
       return response.data;
     } catch (error: any) {
