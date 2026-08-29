@@ -8,7 +8,9 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { useStore } from "vuex";
+import { useSellersStore } from "@/stores/sellersStore";
+import { useImagesStore } from "@/stores/imagesStore";
+import getErrorMessage from "@/utils/getErrorMessage";
 import NavbarFile from "./components/NavbarFile.vue";
 import FooterFile from "./components/FooterFile.vue";
 
@@ -19,17 +21,20 @@ export default defineComponent({
     FooterFile,
   },
   setup() {
-    const store = useStore();
+    const sellersStore = useSellersStore();
+    const imagesStore = useImagesStore();
 
     const handleGetSellers = async () => {
       try {
-        store.commit("sellers/FETCH_SELLERS_LOADING", true);
-        await store.dispatch("images/handleFetchImagesList", "cute");
-        await store.dispatch("sellers/handleFetchSellers");
+        sellersStore.setLoading(true);
+        await imagesStore.fetchImagesList("cute");
+        await sellersStore.handleFetchSellers();
       } catch (error) {
-        store.commit("sellers/FETCH_SELLERS_FAILURE", error);
+        sellersStore.setFailure(
+          getErrorMessage(error, "Error fetching sellers")
+        );
       } finally {
-        store.commit("sellers/FETCH_SELLERS_LOADING", false);
+        sellersStore.setLoading(false);
       }
     };
 

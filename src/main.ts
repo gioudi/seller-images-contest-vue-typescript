@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./styles/index.scss";
-import store from "./store";
+import { createPinia } from "pinia";
 import Toast, { PluginOptions } from "vue-toastification";
 
 import "vue-toastification/dist/index.css";
@@ -22,8 +22,9 @@ const options: PluginOptions = {
   rtl: false,
 };
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(store);
+app.use(pinia);
 app.use(Toast, options);
 app.use(router);
 app.mount("#alegra-test");
