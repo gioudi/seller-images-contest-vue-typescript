@@ -1,4 +1,4 @@
-import { InvoicePayload } from "@/store/modules/invoices/types";
+import { InvoicePayload } from "@/stores/invoices/types";
 import toastService from "@/utils/toastService";
 import axios, { AxiosError } from "axios";
 
