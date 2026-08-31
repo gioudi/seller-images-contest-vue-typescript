@@ -127,7 +127,7 @@ Jör, 2026-08-28 (accepted via direct response to PD-002)
 
 ### ADR-003: Sequencing - Pinia before Vite
 
-**Status:** PROPOSED (awaiting Jör PR approval)
+**Status:** ACCEPTED
 
 **Context:**
 W2 contains two platform migrations approved separately: ADR-001 (Vuex → Pinia) and ADR-002 (Vue CLI → Vite). Both are large. RULE 3A (small PRs) requires one-platform-change-per-PR.

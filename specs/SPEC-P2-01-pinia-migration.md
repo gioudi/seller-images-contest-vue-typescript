@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | DRAFT (awaiting Jör approval via PR) |
+| **Status** | IMPLEMENTED (merged to staging via PR #25, 2026-08-28) |
 | **Topic** | Migrate the state layer from Vuex to Pinia (ADR-001). Single topic: the store. Nothing else. |
 | **Estimate** | 14h |
 | **Branch** | `refactor/pinia-migration` |

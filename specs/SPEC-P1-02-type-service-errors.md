@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | DRAFT (awaiting Jör approval via PR) |
+| **Status** | IMPLEMENTED (merged to staging via PR #23, 2026-08-28) |
 | **Topic** | Remove `any` from service-layer error handlers (single topic: finish the W1 type-safety goal in the services layer) |
 | **Estimate** | 0.5h |
 | **Branch** | `refactor/type-service-errors` |
