@@ -36,14 +36,13 @@ import { InvoicePayload } from "@/stores/invoices/types";
 import toastService from "@/utils/toastService";
 import { defineComponent, reactive } from "vue";
 import { useRoute } from "vue-router";
-import { useInvoicesStore } from "@/stores/invoicesStore";
-import getErrorMessage from "@/utils/getErrorMessage";
+import { useInvoices } from "@/composables/useInvoices";
 
 export default defineComponent({
   name: "InvoiceForm",
   setup() {
     const route = useRoute();
-    const invoicesStore = useInvoicesStore();
+    const { submit } = useInvoices();
 
     const formData: InvoicePayload = reactive({
       date: "",
@@ -67,19 +66,10 @@ export default defineComponent({
     };
 
     const handleSubmitFormData = async () => {
-      try {
-        invoicesStore.setLoading(true);
-        if (validateFormData()) {
-          await invoicesStore.handleCreateInvoice(formData);
-        } else {
-          toastService.showWarn("Todos los campos son necesarios!");
-        }
-      } catch (error) {
-        invoicesStore.setFailure(
-          getErrorMessage(error, "Error creating an Invoice")
-        );
-      } finally {
-        invoicesStore.setLoading(false);
+      if (validateFormData()) {
+        await submit(formData);
+      } else {
+        toastService.showWarn("Todos los campos son necesarios!");
       }
     };
 

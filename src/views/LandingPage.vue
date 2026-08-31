@@ -40,9 +40,9 @@
 <script lang="ts">
 import toastService from "@/utils/toastService";
 import { useRouter } from "vue-router";
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import CarouselFile from "../components/CarouselFile.vue";
-import { useImagesStore } from "@/stores/imagesStore";
+import { useImages } from "@/composables/useImages";
 import LoadingFile from "../components/LoadingFile.vue";
 import ErrorFile from "../components/ErrorFile.vue";
 
@@ -56,10 +56,7 @@ export default defineComponent({
   setup() {
     const searchTerm = ref("");
     const router = useRouter();
-    const imagesStore = useImagesStore();
-    const images = computed(() => imagesStore.getImages);
-    const loading = computed(() => imagesStore.getLoading);
-    const error = computed(() => imagesStore.getError);
+    const { images, loading, error } = useImages();
     const searchImages = () => {
       if (searchTerm.value.trim()) {
         router.push({

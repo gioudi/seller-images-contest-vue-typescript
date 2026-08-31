@@ -9,6 +9,10 @@ export const useInvoicesStore = defineStore("invoices", {
     error: null as string | null,
     invoiceStatus: false,
   }),
+  getters: {
+    getLoading: (state) => state.loading,
+    getError: (state) => state.error,
+  },
   actions: {
     setLoading(loading: boolean) {
       this.loading = loading;
