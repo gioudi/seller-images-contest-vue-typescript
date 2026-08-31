@@ -161,10 +161,10 @@ Migrate the build tool from Vue CLI (webpack) to Vite (ADR-002):
 - Rename `.eslintrc.js` → `.eslintrc.cjs` for ES module project
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+APPROVED - IMPLEMENTED (merged to staging via PR #27 on 2026-08-31, awaiting main release + tag)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** 2026-08-31, via PR review + merge (#27)
 
 ---
 
@@ -187,10 +187,10 @@ Decompose the `ImageList.vue` God Component into single-responsibility sub-compo
 - Behavior identical: search, vote +3, winner modal. No composables (EST-M05) or SCSS 7-1 (EST-M06) in this PR.
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+APPROVED - IMPLEMENTED (merged to staging via PR #28 on 2026-08-31, awaiting main release + tag)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** 2026-08-31, via PR review + merge (#28)
 
 ---
 
@@ -214,10 +214,10 @@ Move business logic + Pinia store usage out of components/views and into reusabl
 - Also encodes GOVERNANCE RULE 1B (plain-language specs) in the contract and refreshes the README per Jör's direction, grouped into this branch.
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+APPROVED - IMPLEMENTED (merged to staging via PR #29 on 2026-08-31, awaiting main release + tag)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** 2026-08-31, via PR review + merge (#29)
 
 ---
 
@@ -240,6 +240,31 @@ Reorganize the global styles into the classic SCSS 7-1 architecture (EST-M06), s
 - Deduplicate: remove the double `.alegra-color-white`/`.alegra-bg-white` pair present in the old file
 - Single entry `main.scss` imported by `main.ts`; update the two component `@import` paths and drop the empty/vestigial style block in `CarouselFile.vue`
 - Behavior identical. CSS output slightly smaller (~35.74kB → 35.56kB) thanks to the dedup.
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #30 on 2026-08-31, awaiting main release + tag)
+
+### Approval
+- **Jör Approved:** 2026-08-31, via PR review + merge (#30)
+
+---
+
+## PROPOSAL-2026-009: Lazy Loading & Payload Reduction
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `feature/lazy-loading` |
+| **Spec** | SPEC-P3-04 |
+| **Estimate** | 3.5h |
+| **Submitted By** | Broker |
+
+### Description
+Reduce initial load time and wasted bandwidth — single topic: performance / load time (ADS 8.1/8.3):
+- **EST-L03 Route lazy loading:** `src/routes/index.ts` uses dynamic imports, so each screen (Landing, ImageList, InvoiceForm, ErrorFile) compiles into its own chunk loaded on demand → main entry dropped from 189 kB to ~17 kB, with per-route chunks
+- **EST-L04 Image lazy loading:** `SellerCard.vue` card `<img>` gets native `loading="lazy"` so below-the-fold card images are fetched as the user scrolls
+- **EST-L05 Smaller image URLs:** `src/composables/useContest.ts` maps each card to `image.urls.small` instead of `urls.full` (2000+px originals), plus test update
+- Behavior identical. Verified: build splits into per-route chunks, lint clean, 23/23 tests.
 
 ### Status
 PENDING (awaiting Jör approval via PR)
