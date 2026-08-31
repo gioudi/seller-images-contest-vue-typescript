@@ -141,6 +141,33 @@ APPROVED - IMPLEMENTED (merged to staging via PR #25 on 2026-08-28, awaiting mai
 
 ---
 
+## PROPOSAL-2026-005: Vite Migration
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `refactor/vite-migration` |
+| **Spec** | SPEC-P2-02 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Migrate the build tool from Vue CLI (webpack) to Vite (ADR-002):
+- Add `vite` + `@vitejs/plugin-vue`, remove all `@vue/cli-*` / webpack / babel / jest deps
+- Add `vite.config.ts` (@ alias), `vitest.config.ts`, root `index.html`, `src/env.d.ts`
+- Migrate env vars `VUE_APP_*` → `VITE_*`; `process.env` → `import.meta.env`
+- Port the 8 Jest unit tests to Vitest (`@vue/test-utils` + jsdom)
+- Remove `vue.config.js`, `babel.config.js`, `jest.config.js`
+- Rename `.eslintrc.js` → `.eslintrc.cjs` for ES module project
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
