@@ -1,0 +1,81 @@
+/* Loading animation — the full-page spinner and its circles. */
+.alegra-loading {
+  width: 100%;
+  height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &__item {
+    max-width: 60%;
+    animation-duration: 3s;
+    animation-name: periods-rotation;
+    animation-iteration-count: infinite;
+    position: relative;
+  }
+
+  .container-circles {
+    .circle:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    &:nth-child(2) {
+      .circle {
+        animation-delay: 1s;
+      }
+      .circle:nth-child(2) {
+        animation-delay: 1.5s;
+      }
+    }
+  }
+}
+
+.circle {
+  border-radius: 1.25rem;
+  height: 0.6875rem;
+  width: 0.6875rem;
+  display: inline-block;
+  background-color: $color-black;
+  animation-duration: 1.5s;
+  animation-name: periods-shift;
+  animation-iteration-count: infinite;
+  position: relative;
+  margin-right: 2.7813rem;
+  margin-bottom: 2.7813rem;
+}
+
+@keyframes periods-rotation {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(150deg);
+  }
+  100% {
+    transform: rotate(320deg);
+  }
+}
+@keyframes periods-shift {
+  0% {
+    top: 0;
+    left: 0;
+    background-color: $color-black;
+  }
+  25% {
+    top: 0;
+    left: 3.0625rem;
+    background-color: $color-primary-70;
+  }
+  50% {
+    top: 3.0625rem;
+    left: 3.0625rem;
+  }
+  75% {
+    top: 3.0625rem;
+    left: 0;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    background-color: $color-black;
+  }
+}

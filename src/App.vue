@@ -30,10 +30,4 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="scss" scoped>
-@media (min-width: 62rem) {
-  .app {
-    height: calc(100vh - 220px);
-  }
-}
-</style>
+<style lang="scss" scoped></style>
