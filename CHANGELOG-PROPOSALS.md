@@ -221,6 +221,34 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-008: SCSS 7-1 Architecture
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `feature/scss-7-1-architecture` |
+| **Spec** | SPEC-P3-03 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Reorganize the global styles into the classic SCSS 7-1 architecture (EST-M06), single topic — styles organization only:
+- Create `src/styles/` subfolders: `abstracts/`, `base/`, `components/`, `layout/`, `pages/`, `utilities/`, `vendors/`
+- Split the monolith `index.scss` + `_styles.scss` + `_mixin.scss` + `_variables.scss` into single-purpose files per folder
+- Remove dependency on bare element selectors for layout (`nav`, `footer`, `input`, `button`, `ul`) where templates actually use classes — restyle to the real root classes (`.alegra-navbar`, `.footer`, etc.) so components keep their look without global element overrides
+- Move the `.app` shell height rule out of App.vue's scoped block into `layout/_app.scss` (mobile-first)
+- Deduplicate: remove the double `.alegra-color-white`/`.alegra-bg-white` pair present in the old file
+- Single entry `main.scss` imported by `main.ts`; update the two component `@import` paths and drop the empty/vestigial style block in `CarouselFile.vue`
+- Behavior identical. CSS output slightly smaller (~35.74kB → 35.56kB) thanks to the dedup.
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

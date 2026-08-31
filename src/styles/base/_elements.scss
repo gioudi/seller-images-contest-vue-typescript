@@ -1,0 +1,15 @@
+/* Base element styling for shared controls (inputs, buttons, lists).
+   Kept as deliberate base styling so forms keep their look without
+   reach-in from components. */
+
+input {
+  @include alegra-input();
+}
+
+button {
+  @include alegra-button();
+}
+
+ul {
+  @include alegra-list;
+}

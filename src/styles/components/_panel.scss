@@ -1,0 +1,5 @@
+/* Panel — the standard card/panel look used across views. */
+.alegra-panel,
+.panel {
+  @include alegra-panel();
+}

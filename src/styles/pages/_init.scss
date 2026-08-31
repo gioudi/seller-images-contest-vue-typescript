@@ -1,0 +1,7 @@
+/* Pages layer
+   ------------
+   Holds styles that apply to a single page only (e.g. the invoice form
+   layout). The app currently keeps page-specific styles scoped inside each
+   `.vue` file, so this folder stays empty for now — place any page-level
+   overrides here as `_<page>.scss` and import them below when they exist.
+*/

@@ -1,0 +1,9 @@
+/* Modal — full-screen overlay and its content box. */
+.alegra-modal,
+.modal {
+  @include alegra-modal();
+}
+
+.alegra-modal-content {
+  @include alegra-modal-content();
+}

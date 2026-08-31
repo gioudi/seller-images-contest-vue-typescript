@@ -1,0 +1,43 @@
+/* Navbar — styles applied to the real `.alegra-navbar` root so no
+   styling depends on the bare `nav` element. Inner class names kept
+   identical to what the template uses. */
+
+.alegra-navbar {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  max-height: 5.8125rem;
+  background: $color-primary-50;
+  color: $color-dark;
+  font-size: 2rem;
+  font-weight: bold;
+  opacity: 1;
+  box-sizing: border-box;
+  padding: 1rem 0.5rem;
+  box-shadow: $box-shadow-md;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .alegra-navbar-title {
+    font-size: 1.5rem;
+  }
+
+  .alegra-navbar-buttons {
+    display: flex;
+    gap: 1rem;
+
+    .alegra-navbar-button {
+      background-color: transparent;
+      border: none;
+      color: $color-white;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
