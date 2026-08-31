@@ -3,7 +3,7 @@
 ## Seller Images Contest - Vue TypeScript
 
 **Effective Date:** 2026-08-28  
-**Version:** 1.1  
+**Version:** 1.2  
 
 ---
 
@@ -13,6 +13,7 @@
 |---------|------|--------|
 | 1.0 | 2026-08-28 | Initial contract |
 | 1.1 | 2026-08-28 | Added RULE 3A (Small Pull Requests) at Jör's request after reviewing a 22-file PR |
+| 1.2 | 2026-08-31 | Added RULE 1B (Plain-Language Specs) at Jör's request: spec design/SOLID sections must be written so a non-technical reader can follow them |
 
 ## Parties
 
@@ -40,6 +41,22 @@ All parties agree to abide by the following rules. No exception shall be made wi
   - **Testing Strategy:** How will it be verified?
 - The spec must be approved by Jör before any branch is created.
 - Specs live in the `specs/` directory with the naming convention: `SPEC-{phase}-{number}-{short-description}.md`.
+
+### RULE 1B: Plain-Language Specs
+
+> **A spec must be readable by a human, not just by a developer.**
+
+The "Design in plain words" and "The five design principles, in plain words" sections (the ones that explain *why* the change is structured this way) MUST be written so that Jör — who reads them without a computer-science degree — can follow them.
+
+When writing a spec, the Broker MUST:
+
+- **Say what something is in one clear sentence** before (or instead of) labeling it with technical jargon. For example, introduce a composable as *"a small helper the view calls to do one thing"*, and only then mention technical names.
+- **Avoid unexplained acronyms or buzzwords** (SOLID, SRP, DIP, God Component, etc.). If a term is used, give its meaning in plain words right where it first appears.
+- **Explain the "why" behind the "how."** Each design choice must say what problem it solves for the person reading it, not only describe the mechanics.
+- **Use short sentences and everyday language.** The goal is clarity, not impressing a technical reviewer.
+- **Translate each of the five principles (S-O-L-I-D) into everyday terms** (e.g., "every file has one job", "easy to extend without rewriting"), instead of writing the formal definitions.
+
+A quick rule of thumb: **if a line would only make sense to a professional software architect, rewrite it so an interested reader can understand it.** Jör may reject or ask to rework any spec that reads as overly technical.
 
 ### RULE 2: Environment Strategy
 
