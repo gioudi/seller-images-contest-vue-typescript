@@ -81,10 +81,63 @@ Foundation & type-safety wave (W1):
 - EST-M08 create `src/config/index.ts` constants module (2h)
 
 ### Status
-PENDING
+IMPLEMENTED (merged to staging via PR #21 on 2026-08-28; services follow-up separate PR)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** 2026-08-28, via PR review + merge (#21)
+- **Notes:** Reworked on SPEC-TEMPLATE (10 sections) before implementation
+
+---
+
+## PROPOSAL-2026-003
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-28 |
+| **Branch** | `refactor/type-service-errors` |
+| **Spec** | SPEC-P1-02 |
+| **Estimate** | 0.5h |
+| **Submitted By** | Broker |
+
+### Description
+Type the service-layer error handlers, the last three lint `any` warnings:
+- `src/services/apiService.ts`: `getSellers` + `createInvoice` catches
+- `src/services/apiImagesService.ts`: `getImagesList` catch
+`any` → `unknown` + `instanceof` narrowing. Behavior unchanged.
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #23 on 2026-08-28; included in #25 staging merge)
+
+### Approval
+- **Jör Approved:** 2026-08-28, via PR review + merge (#23)
+- **Notes:** No behavior change; last three `no-explicit-any` warnings removed. Verified via `npm run lint` clean.
+
+---
+
+## PROPOSAL-2026-004
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-28 |
+| **Branch** | `refactor/pinia-migration` |
+| **Spec** | SPEC-P2-01 |
+| **Estimate** | 14h |
+| **Submitted By** | Broker |
+
+### Description
+Migrate the state layer from Vuex to Pinia (ADR-001):
+- Add `pinia`, remove `vuex`
+- Create `src/stores/{sellers,images,invoices}Store.ts`
+- Replace `src/store/index.ts` + `RootState` with a Pinia instance + per-store types
+- Rewire all `useStore()`/`getters`/`dispatch`/`commit` in views/components/App to Pinia composables
+- Only the store. Vite migration is the next, separate PR (allows one-platform-change-per-PR under RULE 3A)
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #25 on 2026-08-28, awaiting main release + v1.0.0 tag)
+
+### Approval
+- **Jör Approved:** 2026-08-28, via PR review + merge (#25)
+- **Notes:** Zero `vuex`/`useStore`/`dispatch`/`commit` references remain in `src`. Verified via `npm run test:unit` (8/8), `npm run lint` clean, `npm run build` success.
 
 ---
 

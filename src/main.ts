@@ -1,19 +1,20 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./styles/index.scss";
-import store from "./store";
+import { createPinia } from "pinia";
 import Toast, { PluginOptions } from "vue-toastification";
 
 import "vue-toastification/dist/index.css";
 import router from "./routes";
+import { TOAST } from "@/config";
 
 const options: PluginOptions = {
-  timeout: 3000,
+  timeout: TOAST.DEFAULT_DURATION,
   closeOnClick: true,
   pauseOnFocusLoss: true,
   pauseOnHover: true,
   draggable: true,
-  draggablePercent: 0.3,
+  draggablePercent: TOAST.DRAGGABLE_PERCENT,
   showCloseButtonOnHover: false,
   hideProgressBar: false,
   closeButton: "button",
@@ -21,8 +22,9 @@ const options: PluginOptions = {
   rtl: false,
 };
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(store);
+app.use(pinia);
 app.use(Toast, options);
 app.use(router);
 app.mount("#alegra-test");

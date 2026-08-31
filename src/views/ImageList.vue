@@ -62,11 +62,13 @@
   </article>
 </template>
 <script lang="ts">
-import { Seller } from "@/store/modules/sellers/types";
-import { Image } from "@/store/modules/images/types";
+import { Seller } from "@/stores/sellers/types";
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useStore } from "vuex";
+import { useImagesStore } from "@/stores/imagesStore";
+import { useSellersStore } from "@/stores/sellersStore";
+import { CONTEST, IMAGES } from "@/config";
+import getErrorMessage from "@/utils/getErrorMessage";
 import WinnerModal from "@/components/WinnerModal.vue";
 import LoadingFile from "../components/LoadingFile.vue";
 import ErrorFile from "../components/ErrorFile.vue";
@@ -78,53 +80,49 @@ export default defineComponent({
     ErrorFile,
   },
   setup() {
-    const store = useStore();
+    const imagesStore = useImagesStore();
+    const sellersStore = useSellersStore();
     const route = useRoute();
     const router = useRouter();
     const searchTerm = ref("");
-    const loading = computed(() => store.getters["images/getLoading"]);
-    const error = computed(() => store.getters["images/getError"]);
-    const images = computed(() => store.getters["images/getImages"]);
-    const sellers = computed(() => store.getters["sellers/getSellers"]);
-    const contestEnded = computed(
-      () => store.getters["sellers/getContestEnded"]
-    );
-    const winner = computed(() => store.getters["sellers/getWinner"]);
+    const loading = computed(() => imagesStore.getLoading);
+    const error = computed(() => imagesStore.getError);
+    const images = computed(() => imagesStore.getImages);
+    const sellers = computed(() => sellersStore.getSellers);
+    const contestEnded = computed(() => sellersStore.getContestEnded);
+    const winner = computed(() => sellersStore.getWinner);
 
     /* Get Images */
     const handleGetImages = async () => {
       try {
-        store.commit("images/FETCH_IMAGES_LOADING", true);
+        imagesStore.setLoading(true);
 
         searchTerm.value = (route.query.q as string) ?? "";
-        await store.dispatch(`images/handleFetchImagesList`, searchTerm.value);
+        await imagesStore.fetchImagesList(searchTerm.value);
       } catch (error) {
-        store.commit("images/FETCH_IMAGES_FAILURE", error);
+        imagesStore.setFailure(getErrorMessage(error, "Error fetching images"));
       } finally {
-        store.commit("images/FETCH_IMAGES_LOADING", false);
+        imagesStore.setLoading(false);
       }
     };
 
     /* Vote images */
     const handleUpdateSellerPoints = (seller: Seller) => {
       if (!contestEnded.value) {
-        store.commit("sellers/UPDATE_SELLER_POINTS", {
-          id: seller.id,
-          points: 3,
-        });
+        sellersStore.updateSellerPoints(seller.id, CONTEST.VOTE_POINTS);
       }
     };
 
     /* Research for new Images */
     const handleGetNewImages = async () => {
       try {
-        store.commit("images/FETCH_IMAGES_LOADING", true);
-        await store.dispatch(`images/handleFetchImagesList`, searchTerm.value);
-        store.commit("sellers/SET_CLICKABLE_SELLER");
+        imagesStore.setLoading(true);
+        await imagesStore.fetchImagesList(searchTerm.value);
+        sellersStore.setClickableSeller();
       } catch (error) {
-        store.commit("images/FETCH_IMAGES_FAILURE", error);
+        imagesStore.setFailure(getErrorMessage(error, "Error fetching images"));
       } finally {
-        store.commit("images/FETCH_IMAGES_LOADING", false);
+        imagesStore.setLoading(false);
       }
     };
 
@@ -146,15 +144,17 @@ export default defineComponent({
       error,
       searchTerm,
       sellerWithImages: computed(() => {
+        const totalImages = images.value.length;
         return sellers.value.map((seller: Seller) => {
-          const image = images.value.find(
-            (img: Image, index: number) => index === seller.id
-          );
+          const image =
+            totalImages > 0 ? images.value[seller.id % totalImages] : undefined;
           return {
             ...seller,
             points: seller.points,
-            image: image ? image.urls.full : "",
-            alt_description: image ? image.alt_description : "",
+            image: image ? image.urls.full : IMAGES.FALLBACK_URL,
+            alt_description: image
+              ? image.alt_description
+              : "Imagen del concurso",
           };
         });
       }),

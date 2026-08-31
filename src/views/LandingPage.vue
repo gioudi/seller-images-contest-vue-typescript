@@ -42,7 +42,7 @@ import toastService from "@/utils/toastService";
 import { useRouter } from "vue-router";
 import { computed, defineComponent, ref } from "vue";
 import CarouselFile from "../components/CarouselFile.vue";
-import { useStore } from "vuex";
+import { useImagesStore } from "@/stores/imagesStore";
 import LoadingFile from "../components/LoadingFile.vue";
 import ErrorFile from "../components/ErrorFile.vue";
 
@@ -56,10 +56,10 @@ export default defineComponent({
   setup() {
     const searchTerm = ref("");
     const router = useRouter();
-    const store = useStore();
-    const images = computed(() => store.getters["images/getImages"]);
-    const loading = computed(() => store.getters["sellers/getLoading"]);
-    const error = computed(() => store.getters["sellers/getError"]);
+    const imagesStore = useImagesStore();
+    const images = computed(() => imagesStore.getImages);
+    const loading = computed(() => imagesStore.getLoading);
+    const error = computed(() => imagesStore.getError);
     const searchImages = () => {
       if (searchTerm.value.trim()) {
         router.push({
