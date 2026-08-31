@@ -34,8 +34,8 @@ describe("useContest", () => {
     const imagesStore = useImagesStore();
 
     imagesStore.images = [
-      { id: "pic-a", urls: { full: "full-a" }, alt_description: "photo a" },
-      { id: "pic-b", urls: { full: "full-b" }, alt_description: "photo b" },
+      { id: "pic-a", urls: { small: "small-a" }, alt_description: "photo a" },
+      { id: "pic-b", urls: { small: "small-b" }, alt_description: "photo b" },
     ];
     sellersStore.sellers = [
       { id: 1, name: "A", points: 0, clickable: true },
@@ -45,9 +45,9 @@ describe("useContest", () => {
     const { sellerWithImages } = useContest();
 
     expect(sellerWithImages.value).toHaveLength(2);
-    expect(sellerWithImages.value[0].image).toBe("full-b");
+    expect(sellerWithImages.value[0].image).toBe("small-b");
     expect(sellerWithImages.value[0].alt_description).toBe("photo b");
-    expect(sellerWithImages.value[1].image).toBe("full-a");
+    expect(sellerWithImages.value[1].image).toBe("small-a");
   });
 
   it("uses a placeholder image when there are no images", () => {
@@ -82,7 +82,7 @@ describe("useContest", () => {
     const sellersStore = useSellersStore();
     sellersStore.sellers = [{ id: 1, name: "A", points: 3, clickable: false }];
 
-    const results = [{ id: "1", urls: { full: "u" }, alt_description: "d" }];
+    const results = [{ id: "1", urls: { small: "u" }, alt_description: "d" }];
     vi.mocked(apiImagesService.getImagesList).mockResolvedValue({
       response: { results },
     } as never);

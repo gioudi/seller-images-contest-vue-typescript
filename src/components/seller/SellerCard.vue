@@ -17,6 +17,7 @@
         class="alegra-card__image"
         :src="seller.image"
         :alt="seller.alt_description"
+        loading="lazy"
       />
     </div>
   </section>

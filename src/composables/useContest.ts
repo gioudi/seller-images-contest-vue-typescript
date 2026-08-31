@@ -22,7 +22,7 @@ export function useContest() {
         totalImages > 0 ? images.value[seller.id % totalImages] : undefined;
       return {
         ...seller,
-        image: image ? image.urls.full : IMAGES.FALLBACK_URL,
+        image: image ? image.urls.small : IMAGES.FALLBACK_URL,
         alt_description: image ? image.alt_description : "Imagen del concurso",
       };
     });
