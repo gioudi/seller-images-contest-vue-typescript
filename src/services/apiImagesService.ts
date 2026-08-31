@@ -2,7 +2,7 @@ import toastService from "@/utils/toastService";
 import { createApi } from "unsplash-js";
 import { AxiosError } from "axios";
 
-const accessKey = process.env.VUE_APP_UNSPLASH_ACCESS_KEY || "";
+const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY || "";
 
 const unsplash = createApi({
   accessKey,
