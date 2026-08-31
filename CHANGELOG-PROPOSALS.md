@@ -168,6 +168,32 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-006: Split ImageList.vue (SRP)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `refactor/split-image-list` |
+| **Spec** | SPEC-P3-01 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Decompose the `ImageList.vue` God Component into single-responsibility sub-components (EST-M04), single topic — component decomposition only:
+- `src/components/search/SearchBar.vue` — the search form, emits `search(term)`
+- `src/components/seller/SellerCard.vue` — one 3D seller card + its scoped SCSS (moved out of the view); emits `vote(seller)`
+- `src/components/seller/SellerGrid.vue` — responsive column grid of `SellerCard`s; re-emits `vote(seller)`
+- Slim `ImageList.vue` down to orchestration only (store reads, mapping, handlers, state branching, WinnerModal)
+- Behavior identical: search, vote +3, winner modal. No composables (EST-M05) or SCSS 7-1 (EST-M06) in this PR.
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
