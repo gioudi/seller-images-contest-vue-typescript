@@ -23,13 +23,9 @@
   </article>
 </template>
 <script lang="ts">
-import { Seller } from "@/stores/sellers/types";
 import { computed, defineComponent, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useImagesStore } from "@/stores/imagesStore";
-import { useSellersStore } from "@/stores/sellersStore";
-import { CONTEST, IMAGES } from "@/config";
-import getErrorMessage from "@/utils/getErrorMessage";
+import { useRoute } from "vue-router";
+import { useContest } from "@/composables/useContest";
 import WinnerModal from "@/components/WinnerModal.vue";
 import SearchBar from "@/components/search/SearchBar.vue";
 import SellerGrid from "@/components/seller/SellerGrid.vue";
@@ -45,88 +41,24 @@ export default defineComponent({
     ErrorFile,
   },
   setup() {
-    const imagesStore = useImagesStore();
-    const sellersStore = useSellersStore();
     const route = useRoute();
-    const router = useRouter();
-    const loading = computed(() => imagesStore.getLoading);
-    const error = computed(() => imagesStore.getError);
-    const images = computed(() => imagesStore.getImages);
-    const sellers = computed(() => sellersStore.getSellers);
-    const contestEnded = computed(() => sellersStore.getContestEnded);
-    const winner = computed(() => sellersStore.getWinner);
+    const contest = useContest();
     const initialTerm = computed(() => (route.query.q as string) ?? "");
 
-    /* Get Images */
-    const handleGetImages = async () => {
-      try {
-        imagesStore.setLoading(true);
-
-        await imagesStore.fetchImagesList(initialTerm.value);
-      } catch (error) {
-        imagesStore.setFailure(getErrorMessage(error, "Error fetching images"));
-      } finally {
-        imagesStore.setLoading(false);
-      }
-    };
-
-    /* Vote images */
-    const handleUpdateSellerPoints = (seller: Seller) => {
-      if (!contestEnded.value) {
-        sellersStore.updateSellerPoints(seller.id, CONTEST.VOTE_POINTS);
-      }
-    };
-
-    /* Research for new Images */
-    const handleGetNewImages = async (term: string) => {
-      try {
-        imagesStore.setLoading(true);
-        await imagesStore.fetchImagesList(term);
-        sellersStore.setClickableSeller();
-      } catch (error) {
-        imagesStore.setFailure(getErrorMessage(error, "Error fetching images"));
-      } finally {
-        imagesStore.setLoading(false);
-      }
-    };
-
-    /*Handle continue */
-
-    const handleContinue = () => {
-      router.push({
-        name: "InvoiceForm",
-        query: { q: winner?.value?.id },
-      });
-    };
-
     onMounted(() => {
-      handleGetImages();
+      contest.fetchInitialImages(initialTerm.value);
     });
 
     return {
-      loading,
-      error,
+      loading: contest.loading,
+      error: contest.error,
       initialTerm,
-      sellerWithImages: computed(() => {
-        const totalImages = images.value.length;
-        return sellers.value.map((seller: Seller) => {
-          const image =
-            totalImages > 0 ? images.value[seller.id % totalImages] : undefined;
-          return {
-            ...seller,
-            points: seller.points,
-            image: image ? image.urls.full : IMAGES.FALLBACK_URL,
-            alt_description: image
-              ? image.alt_description
-              : "Imagen del concurso",
-          };
-        });
-      }),
-      handleUpdateSellerPoints,
-      handleGetNewImages,
-      contestEnded,
-      winner,
-      handleContinue,
+      sellerWithImages: contest.sellerWithImages,
+      handleGetNewImages: contest.searchNewImages,
+      handleUpdateSellerPoints: contest.vote,
+      contestEnded: contest.contestEnded,
+      winner: contest.winner,
+      handleContinue: contest.handleContinue,
     };
   },
 });

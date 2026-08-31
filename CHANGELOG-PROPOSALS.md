@@ -194,6 +194,33 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-007: Extract Composables
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `refactor/extract-composables` |
+| **Spec** | SPEC-P3-02 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Move business logic + Pinia store usage out of components/views and into reusable composables (EST-M05), single topic — composable extraction only:
+- Add `src/composables/`: `useLoading`, `useError`, `useImages`, `useSellers`, `useInvoices`, `useContest`
+- Add the missing `getLoading`/`getError` getters to the invoices store so all stores share the same shape
+- Rewire `App.vue`, `ImageList.vue`, `InvoiceForm.vue`, `LandingPage.vue` to consume composables — no direct store calls in `.vue` files
+- Add unit tests for each composable
+- Behavior identical: search, vote +3, winner modal, invoice submit. Note: an invalid invoice form now keeps `loading` untouched (previously a brief flicker) — visible behavior unchanged.
+- Also encodes GOVERNANCE RULE 1B (plain-language specs) in the contract and refreshes the README per Jör's direction, grouped into this branch.
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
