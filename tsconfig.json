@@ -14,12 +14,15 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "jest"
+      "vite/client",
+      "vitest/globals"
     ],
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@@/*": [
+        "tests/*"
       ]
     },
     "lib": [
@@ -33,6 +36,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/env.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],

@@ -3,8 +3,8 @@ import toastService from "@/utils/toastService";
 import axios, { AxiosError } from "axios";
 
 const API_URL =
-  process.env.VUE_APP_ALEGRA_BASE_URL || "https://api.alegra.com/api/v1/";
-const API_KEY = process.env.VUE_APP_ALEGRA_API_KEY;
+  import.meta.env.VITE_ALEGRA_BASE_URL || "https://api.alegra.com/api/v1/";
+const API_KEY = import.meta.env.VITE_ALEGRA_API_KEY;
 const apiClient = axios.create({
   baseURL: API_URL,
   headers: {

@@ -1,4 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
+import { vi } from "vitest";
 import NavbarFile from "@/components/NavbarFile.vue";
 
 describe("NavbarFile.vue", () => {
@@ -10,7 +11,7 @@ describe("NavbarFile.vue", () => {
   });
 
   it("navigates home when the button is clicked", async () => {
-    const push = jest.fn();
+    const push = vi.fn();
     const wrapper = shallowMount(NavbarFile, {
       global: {
         mocks: {
