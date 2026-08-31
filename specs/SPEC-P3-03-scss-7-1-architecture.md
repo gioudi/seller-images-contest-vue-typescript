@@ -72,7 +72,23 @@ Think of the styles folder as a **library with labeled shelves**. Right now ever
 - **I — files get only what they need.** Utilities are separate from components, so a page doesn't load whole component styles it never uses; each import pulls exactly the layer it needs.
 - **D — the structure is clear end to end.** Components depend on the abstract "materials" (tokens/mixins), never the other way around — so changing a color token updates everything that uses it, predictably.
 
-## 5. Where things live and why
+## 4b. Technical design patterns & vocabulary
+
+For reference — these are the formal names of the patterns this step uses, so they're easy to point to in an interview. Each maps to the plain-language idea above.
+
+- **SCSS 7-1 pattern** — the folder architecture itself: 7 directories by responsibility (`abstracts`, `base`, `components`, `layout`, `pages`, `utilities`, `vendors`) plus 1 entry file that aggregates them. (Popularised by Hugo Giraudel's *Sass Guidelines*.)
+- **Partial & Manifest (index)** — every non-entry `_*.scss` file is a **partial** (the leading `_` tells Sass not to compile it on its own). The entry `main.scss` is the **manifest/index** that compiles all partials into one CSS bundle, in dependency order.
+- **Design tokens** — the named Sass variables in `abstracts/_variables.scss` (colors, fonts, spacing, shadows, breakpoints). The **single source of truth** for the design system; everything references tokens, never raw values.
+- **Sass mixins (`@mixin` / `@include`) & OOCSS** — reusable "recipes" factored out so the same style block is applied in several places (DRY). This is an OOCSS (Object-Oriented CSS) "skin" approach: visual recipes reused and themed without rewriting. Parameters with defaults make them configurable.
+- **Sass functions (`@function`) & maps** — pure helpers that return values. `breakpoint-min` reads from a Sass **map** (`$grid-breakpoints`) via `map-get`.
+- **Metaprogramming with `@each` + string interpolation** — the utilities build their own classes in a loop (`@each $value in $spacing-values { .p-#{$value} { … } }`), generating dozens of padding/margin helpers instead of hand-writing them.
+- **BEM (Block-Element-Modifier) naming** — the class convention `block__element--modifier` (e.g. `.alegra-modal`, `.alegra-modal__content`). Keeps selectors flat, low-specificity, and collision-free.
+- **CSS reset / normalization** — `base/_reset.scss` strips browser defaults (box-sizing, margins, image sizing) so the app looks consistent across browsers.
+- **Mobile-first & responsive breakpoints** — base styles target the smallest screen; `min-width` media queries progressively enhance larger screens, instead of `max-width` overrides (progressive enhancement, not graceful degradation).
+- **Feature query (`@supports`)** — the grid checks `@supports (display: grid)`: browsers with CSS Grid get the grid layout, older ones keep the **flexbox fallback** (graceful / progressive enhancement).
+- **CSS cascade & specificity** — because all partials compile into one stylesheet, `main.scss` controls the cascade order (broad base first, narrow utilities/vendors last).
+
+## 6. Where things live and why
 
 ```
 src/styles/
@@ -106,7 +122,7 @@ src/styles/
 
 Why this shape: it follows the accepted 7-1 convention, matches what the ESTIMATION already promised (`EST-M06` lists exactly these folders: base, abstracts, components, layout, pages, utilities, vendors), and it keeps every style in a place whose name says what it is.
 
-## 6. Rules going forward (so this stays clean)
+## 7. Rules going forward (so this stays clean)
 
 - [ ] New styles go in the right shelf — no dumping random CSS into `main.scss`
 - [ ] Component classes use BEM: `block__element--modifier`
@@ -115,7 +131,7 @@ Why this shape: it follows the accepted 7-1 convention, matches what the ESTIMAT
 - [ ] Design tokens (colors/type/spacing) come from `abstracts/_variables.scss`
 - [ ] No duplicate mixins or styles
 
-## 7. Acceptance Criteria
+## 8. Acceptance Criteria
 
 - [ ] `npm run build` exits 0
 - [ ] `npm run lint` exits 0
@@ -127,7 +143,7 @@ Why this shape: it follows the accepted 7-1 convention, matches what the ESTIMAT
 - [ ] Component classes that templates use are untouched (no renames that break rendering)
 - [ ] Manual `npm run dev` smoke: landing page, search, list, cards, loader, navbar, footer all render as before, and the layout still stacks nicely on a narrow (mobile) viewport and expands on wider screens
 
-## 8. Risks & Mitigation
+## 9. Risks & Mitigation
 
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
@@ -137,13 +153,13 @@ Why this shape: it follows the accepted 7-1 convention, matches what the ESTIMAT
 | Removing global element styles changes forms | Medium | High | keep input/button/list base styling in `base/_elements.scss`; only drop bare `nav`/`footer` dual selectors, replacing them with the app's real classes |
 | Scope creep into redesign/features | Medium | Low | explicit out-of-scope above; separate PRs |
 
-## 9. Testing Strategy
+## 10. Testing Strategy
 
 - Gate: `npm run build` + `npm run lint` + `npm run test:unit`
 - Manual `npm run dev` smoke across every screen and at narrow + wide viewports
 - Verify the compiled stylesheet still contains every class the templates depend on
 
-## 10. Estimate & Dependencies
+## 11. Estimate & Dependencies
 
 | Task | h |
 |------|---|
