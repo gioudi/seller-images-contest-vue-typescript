@@ -28,13 +28,13 @@ export default defineComponent({
   components: {
     SellerCard,
   },
-  emits: ["vote"],
   props: {
     sellers: {
       type: Array as PropType<SellerGridData[]>,
       required: true,
     },
   },
+  emits: ["vote"],
   setup(_, { emit }) {
     const emitVote = (seller: SellerGridData) => emit("vote", seller);
 

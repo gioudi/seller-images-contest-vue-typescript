@@ -22,7 +22,9 @@ export function useSellers() {
     }
   };
 
-  const resetClickable = () => store.setClickableSeller();
+  const resetClickable = () => {
+    store.setClickableSeller();
+  };
 
   return {
     sellers,

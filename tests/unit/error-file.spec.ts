@@ -1,6 +1,12 @@
 import { shallowMount } from "@vue/test-utils";
 import ErrorFile from "@/components/ErrorFile.vue";
 
+const errorProps = (
+  ErrorFile as unknown as {
+    props: { message: { required: boolean } };
+  }
+).props;
+
 describe("ErrorFile.vue", () => {
   it("renders the error message prop", () => {
     const wrapper = shallowMount(ErrorFile, {
@@ -10,6 +16,6 @@ describe("ErrorFile.vue", () => {
   });
 
   it("is required to receive a message prop", () => {
-    expect(ErrorFile.props.message.required).toBe(true);
+    expect(errorProps.message.required).toBe(true);
   });
 });

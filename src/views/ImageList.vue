@@ -17,7 +17,7 @@
     <WinnerModal
       v-if="contestEnded"
       :show="contestEnded"
-      :winnerName="winner?.name || ''"
+      :winner-name="winner?.name || ''"
       @proceed="handleContinue"
     />
   </article>

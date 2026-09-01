@@ -1,9 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
-import apiImagesService from "@/services/apiImagesService";
+
+const imageServiceMock = vi.hoisted(() => ({
+  getImagesList: vi.fn(),
+}));
 
 vi.mock("@/services/apiImagesService", () => ({
-  default: { getImagesList: vi.fn() },
+  default: imageServiceMock,
 }));
 vi.mock("@/utils/toastService", () => ({
   default: { showError: vi.fn(), showWarn: vi.fn() },
@@ -11,12 +14,10 @@ vi.mock("@/utils/toastService", () => ({
 
 import { useImages } from "@/composables/useImages";
 
-const getImagesListMock = vi.mocked(apiImagesService.getImagesList);
-
 describe("useImages", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
-    getImagesListMock.mockReset();
+    imageServiceMock.getImagesList.mockReset();
   });
 
   it("starts with empty images, idle loading and no error", () => {
@@ -30,14 +31,14 @@ describe("useImages", () => {
     const results = [
       { id: "1", urls: { full: "full-url" }, alt_description: "desc" },
     ];
-    getImagesListMock.mockResolvedValue({
+    imageServiceMock.getImagesList.mockResolvedValue({
       response: { results },
-    } as never);
+    });
 
     const { fetchImages, images } = useImages();
     await fetchImages("cute");
 
-    expect(getImagesListMock).toHaveBeenCalledWith("cute");
+    expect(imageServiceMock.getImagesList).toHaveBeenCalledWith("cute");
     expect(images.value).toEqual(results);
   });
 });

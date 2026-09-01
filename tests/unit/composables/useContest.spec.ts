@@ -1,13 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
-import apiImagesService from "@/services/apiImagesService";
-import apiService from "@/services/apiService";
+
+const serviceMocks = vi.hoisted(() => ({
+  getImagesList: vi.fn(),
+  getSellers: vi.fn(),
+  createInvoice: vi.fn(),
+}));
 
 vi.mock("@/services/apiImagesService", () => ({
-  default: { getImagesList: vi.fn() },
+  default: { getImagesList: serviceMocks.getImagesList },
 }));
 vi.mock("@/services/apiService", () => ({
-  default: { getSellers: vi.fn(), createInvoice: vi.fn() },
+  default: serviceMocks,
 }));
 vi.mock("@/utils/toastService", () => ({
   default: { showError: vi.fn(), showWarn: vi.fn() },
@@ -24,8 +28,8 @@ import { useImagesStore } from "@/stores/imagesStore";
 describe("useContest", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
-    vi.mocked(apiImagesService.getImagesList).mockReset();
-    vi.mocked(apiService.getSellers).mockReset();
+    serviceMocks.getImagesList.mockReset();
+    serviceMocks.getSellers.mockReset();
     push.mockReset();
   });
 
@@ -83,9 +87,9 @@ describe("useContest", () => {
     sellersStore.sellers = [{ id: 1, name: "A", points: 3, clickable: false }];
 
     const results = [{ id: "1", urls: { small: "u" }, alt_description: "d" }];
-    vi.mocked(apiImagesService.getImagesList).mockResolvedValue({
+    serviceMocks.getImagesList.mockResolvedValue({
       response: { results },
-    } as never);
+    });
 
     const { searchNewImages } = useContest();
     await searchNewImages("tech");

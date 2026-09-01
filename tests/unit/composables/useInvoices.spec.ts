@@ -1,9 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
-import apiService from "@/services/apiService";
+
+const serviceMocks = vi.hoisted(() => ({
+  getSellers: vi.fn(),
+  createInvoice: vi.fn(),
+}));
 
 vi.mock("@/services/apiService", () => ({
-  default: { getSellers: vi.fn(), createInvoice: vi.fn() },
+  default: serviceMocks,
 }));
 vi.mock("@/utils/toastService", () => ({
   default: { showError: vi.fn(), showWarn: vi.fn() },
@@ -25,7 +29,7 @@ const samplePayload: InvoicePayload = {
 describe("useInvoices", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
-    vi.mocked(apiService.createInvoice).mockReset();
+    serviceMocks.createInvoice.mockReset();
   });
 
   it("starts idle with no error", () => {
@@ -35,12 +39,12 @@ describe("useInvoices", () => {
   });
 
   it("submit creates the invoice and reports success", async () => {
-    vi.mocked(apiService.createInvoice).mockResolvedValue({ id: 1 } as never);
+    serviceMocks.createInvoice.mockResolvedValue({ id: 1 });
 
     const { submit } = useInvoices();
     await submit(samplePayload);
 
-    expect(apiService.createInvoice).toHaveBeenCalledWith(samplePayload);
+    expect(serviceMocks.createInvoice).toHaveBeenCalledWith(samplePayload);
     expect(useInvoicesStore().invoiceStatus).toBe(true);
   });
 });

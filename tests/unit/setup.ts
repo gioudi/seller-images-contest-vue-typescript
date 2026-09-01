@@ -1,7 +1,12 @@
-if (!global.ResizeObserver) {
-  global.ResizeObserver = class ResizeObserver {
-    observe = () => undefined;
-    unobserve = () => undefined;
-    disconnect = () => undefined;
+const maybeObserver = (globalThis as { ResizeObserver?: typeof ResizeObserver })
+  .ResizeObserver;
+if (!maybeObserver) {
+  globalThis.ResizeObserver = class {
+    observe(): void {}
+    unobserve(): void {}
+    disconnect(): void {}
+    takeRecords(): ResizeObserverEntry[] {
+      return [];
+    }
   };
 }

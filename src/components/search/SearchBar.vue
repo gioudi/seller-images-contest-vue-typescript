@@ -4,10 +4,10 @@
       >¿Quieres buscar algo nuevo?
     </label>
     <input
-      type="text"
       id="searchTerm"
-      class="d-flex form-control"
       v-model="term"
+      type="text"
+      class="d-flex form-control"
       placeholder="Buscar imágenes"
       required
     />
@@ -20,13 +20,13 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "SearchBar",
-  emits: ["search"],
   props: {
     initialTerm: {
       type: String,
       default: "",
     },
   },
+  emits: ["search"],
   setup(props, { emit }) {
     const term = ref(props.initialTerm ?? "");
 

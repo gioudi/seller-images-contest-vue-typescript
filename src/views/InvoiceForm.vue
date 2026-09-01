@@ -2,26 +2,26 @@
   <article class="grid invoice-form">
     <article class="grid-col-xs-12 grid-col-md-6 form-wrapper">
       <h1 class="h5 mb-4 mt-3">Crear factura de venta!</h1>
-      <form @submit.prevent="handleSubmitFormData" class="form-container">
+      <form class="form-container" @submit.prevent="handleSubmitFormData">
         <div class="mb-3 form-field">
           <label for="date" class="normal mb-1">Fecha:</label>
-          <input type="date" v-model="formData.date" required />
+          <input v-model="formData.date" type="date" required />
         </div>
         <div class="mb-3 form-field">
           <label for="dueDate" class="normal mb-1">Fecha de venta:</label>
-          <input type="date" v-model="formData.dueDate" required />
+          <input v-model="formData.dueDate" type="date" required />
         </div>
         <div class="mb-3 form-field">
           <label for="clientId" class="normal mb-1">Id Cliente:</label>
-          <input type="number" v-model="formData.client" required />
+          <input v-model="formData.client" type="number" required />
         </div>
         <div class="mb-3 form-field">
           <label for="productId" class="normal mb-1">Id Producto:</label>
-          <input type="number" v-model="formData.productId" required />
+          <input v-model="formData.productId" type="number" required />
         </div>
         <div class="mb-3 form-field">
           <label for="total" class="normal mb-1">Total:</label>
-          <input type="number" v-model="formData.total" required />
+          <input v-model="formData.total" type="number" required />
         </div>
         <button type="submit" class="btn btn-primary my-3">
           Crear factura

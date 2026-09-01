@@ -1,6 +1,18 @@
 import { shallowMount } from "@vue/test-utils";
 import CarouselFile from "@/components/CarouselFile.vue";
 
+interface CarouselPropsShape {
+  images: {
+    validator: (value: unknown[]) => boolean;
+  };
+}
+
+const carouselProps = (
+  CarouselFile as unknown as {
+    props: CarouselPropsShape;
+  }
+).props;
+
 describe("CarouselFile.vue", () => {
   const images = [
     { urls: { small: "https://example.com/a.jpg" }, slug: "slug-a" },
@@ -12,11 +24,11 @@ describe("CarouselFile.vue", () => {
       props: { images },
     });
     expect((wrapper.props() as Record<string, unknown>).images).toHaveLength(2);
-    expect(CarouselFile.props.images.validator(images)).toBe(true);
+    expect(carouselProps.images.validator(images)).toBe(true);
   });
 
   it("rejects images without a small url", () => {
     const invalid = [{ urls: {}, slug: "broken" }];
-    expect(CarouselFile.props.images.validator(invalid)).toBe(false);
+    expect(carouselProps.images.validator(invalid)).toBe(false);
   });
 });
