@@ -1,8 +1,8 @@
 <template>
   <section class="alegra-loading">
-    <h4 class="h4 mt-3 alegra-color-dark">
+    <p class="h4 mt-3 alegra-color-dark">
       Procesando su solicitud, por favor espere...
-    </h4>
+    </p>
     <article class="alegra-loading__item background-animation">
       <article class="container-circles">
         <div class="circle"></div>
