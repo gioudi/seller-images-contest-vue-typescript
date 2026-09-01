@@ -293,6 +293,37 @@ Fix the page outline so every view has exactly one `<h1>` and headings read h1 �
 - Behavior and appearance identical. Verified: build green, lint clean, 23/23 tests.
 
 ### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #33 on 2026-09-01)
+
+### Approval
+- **Jör Approved:** 2026-09-01, via PR review + merge (#33)
+
+---
+
+## PROPOSAL-2026-012: Upgrade TypeScript to 5.x (EST-L10)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-01 |
+| **Branch** | `feature/upgrade-typescript` |
+| **Spec** | SPEC-P3-06 |
+| **Estimate** | 4h |
+| **Submitted By** | Broker |
+
+### Description
+Refresh the TypeScript compiler from `~4.5.5` (Vue CLI era, four majors behind) to `^5.9.3` — the last old tool now that Vite, Pinia, SCSS 7-1 and lazy-loading are done (ADS Phase-3 Quality & DX checklist):
+- `package.json` `typescript` devDependency `~4.5.5` → `^5.9.3`, lockfile regenerated; the only installed package change
+- No source or config change: the app doesn't type-check at build (esbuild), lint is syntax-only (`@typescript-eslint` 5.62 without type-aware rules), `skipLibCheck` is on
+- Empirically verified: lint green, 23/23 tests, build green; `tsc --noEmit` adds zero new errors (the same 4 pre-existing test/config type errors remain — a separate concern)
+- Establishes the version baseline EST-L11 (ESLint + Prettier upgrade) needs for TS-5-compatible linting
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+### Status
 PENDING (awaiting Jör approval via PR)
 
 ### Approval
