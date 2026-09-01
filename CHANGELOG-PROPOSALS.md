@@ -274,6 +274,32 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-011: Fix Heading Hierarchy (EST-L09)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-01 |
+| **Branch** | `fix/heading-hierarchy` |
+| **Spec** | SPEC-P0-02 |
+| **Estimate** | 0.5h |
+| **Submitted By** | Broker |
+
+### Description
+Fix the page outline so every view has exactly one `<h1>` and headings read h1 → h2 → h3 with no skips (ADS 2.4.6):
+- **Page titles:** LandingPage `h3` → `h1`, ImageList `h5` → `h1`, InvoiceForm `h5` → `h1` — each keeps its current visual size via `.h3`/`.h5` utility classes
+- **Card titles:** SellerCard `h4` → `h2` (now correctly nested under the ImageList `h1`)
+- **Status messages:** LoadingFile and ErrorFile `h4` → `<p>` (they are status text, not headings, and previously left pages heading-less)
+- WinnerModal stays `h2` (correct level for a dialog over the ImageList `h1`)
+- Behavior and appearance identical. Verified: build green, lint clean, 23/23 tests.
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

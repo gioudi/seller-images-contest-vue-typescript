@@ -1,9 +1,9 @@
 <template>
   <section class="alegra-card-container">
     <div class="alegra-card p-1">
-      <h4 class="alegra-card__title">
+      <h2 class="alegra-card__title">
         {{ seller.name }}-{{ seller.points ?? 0 }} puntos
-      </h4>
+      </h2>
       <button
         class="mt-3"
         @click="emitVote"

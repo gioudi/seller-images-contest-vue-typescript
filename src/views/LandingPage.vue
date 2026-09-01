@@ -9,7 +9,7 @@
       <ErrorFile :message="error"></ErrorFile>
     </article>
     <article v-if="!loading && !error" class="grid-col-xs-11 grid-col-lg-6">
-      <h3 class="mt-3 mb-4">Descubre Imágenes que Inspiran</h3>
+      <h1 class="h3 mt-3 mb-4">Descubre Imágenes que Inspiran</h1>
       <p class="mb-3">
         Busca y encuentra imágenes asombrosas para cualquier proyecto.
         Simplemente ingresa una palabra clave para comenzar.
