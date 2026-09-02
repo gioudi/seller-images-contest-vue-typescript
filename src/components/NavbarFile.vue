@@ -6,14 +6,9 @@
     </div>
   </nav>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "NavbarFile",
-  methods: {
-    goHome() {
-      this.$router.push("/");
-    },
-  },
-});
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const goHome = () => router.push("/");
 </script>

@@ -379,6 +379,33 @@ APPROVED - IMPLEMENTED (merged to staging via PR #37 on 2026-09-02)
 
 ---
 
+## PROPOSAL-2026-015: Standardize Composition API (EST-M03)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/composition-api-standardization` |
+| **Spec** | SPEC-P4-02 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Rewrite the last four Options-API components to `<script setup lang="ts">` (EST-M03), removing the Options-API vs Composition-API split:
+- `NavbarFile.vue` — `methods.goHome()` → `useRouter()` (`this.$router` gone)
+- `WinnerModal.vue` — `methods.proceed()` → `defineEmits` + `defineProps` (`this.$emit` gone)
+- `LoadingFile.vue` — state-less `defineComponent` → empty `<script setup lang="ts">`
+- `FooterFile.vue` — state-less `defineComponent` → empty `<script setup lang="ts">`
+- Existing unit tests kept green (`navbar-file.spec.ts` `$router` mock verified)
+- Visual output identical; no markup/SCSS/copy changes
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

@@ -9,26 +9,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+defineProps<{
+  show: boolean;
+  winnerName: string;
+}>();
 
-export default defineComponent({
-  name: "WinnerModal",
-  props: {
-    show: {
-      type: Boolean,
-      required: true,
-    },
-    winnerName: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: ["proceed"],
-  methods: {
-    proceed() {
-      this.$emit("proceed");
-    },
-  },
-});
+const emit = defineEmits<{
+  (e: "proceed"): void;
+}>();
+
+const proceed = () => emit("proceed");
 </script>
