@@ -267,10 +267,10 @@ Reduce initial load time and wasted bandwidth — single topic: performance / lo
 - Behavior identical. Verified: build splits into per-route chunks, lint clean, 23/23 tests.
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+APPROVED - IMPLEMENTED (merged to staging via PR #31 on 2026-08-31)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** 2026-08-31, via PR review + merge (#31)
 
 ---
 
@@ -344,10 +344,10 @@ Rebuild the lint layer on the modern toolchain and turn on type-aware rules (ADS
 - Verified: `npm run lint` clean, 23/23 tests, build green (128 modules)
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+APPROVED - IMPLEMENTED (merged to staging via PR #35 on 2026-09-01)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** 2026-09-01, via PR review + merge (#35)
 
 ---
 
