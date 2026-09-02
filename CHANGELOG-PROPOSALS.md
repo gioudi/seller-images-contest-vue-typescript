@@ -406,6 +406,31 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-016: GitHub Actions CI Pipeline (EST-L02)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/ci-pipeline` |
+| **Spec** | SPEC-P4-03 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Add a GitHub Actions CI pipeline that automatically runs the repo's own checks on every push/PR to `staging`/`main` (EST-L02):
+- `.github/workflows/ci.yml` — single `ci` job: `npm ci` → lint → type-check → unit tests → build
+- `package.json` — add `type-check` script (`tsc --noEmit`) so CI and devs share one command
+- Companion fix: `tests/unit/composables/useContest.spec.ts` had 2 pre-existing type errors that `vite build` (esbuild) did not surface; added a typed `makeImage()` fixture so the new `type-check` step starts green (CI would otherwise be red on day one)
+- No deploy/secret handling in this workflow (Netlify deploy stays separate)
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
