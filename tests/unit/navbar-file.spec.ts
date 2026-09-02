@@ -2,6 +2,12 @@ import { shallowMount } from "@vue/test-utils";
 import { vi } from "vitest";
 import NavbarFile from "@/components/NavbarFile.vue";
 
+const { pushMock } = vi.hoisted(() => ({ pushMock: vi.fn() }));
+
+vi.mock("vue-router", () => ({
+  useRouter: () => ({ push: pushMock }),
+}));
+
 describe("NavbarFile.vue", () => {
   it("renders the navbar title", () => {
     const wrapper = shallowMount(NavbarFile);
@@ -11,15 +17,8 @@ describe("NavbarFile.vue", () => {
   });
 
   it("navigates home when the button is clicked", async () => {
-    const push = vi.fn();
-    const wrapper = shallowMount(NavbarFile, {
-      global: {
-        mocks: {
-          $router: { push },
-        },
-      },
-    });
+    const wrapper = shallowMount(NavbarFile);
     await wrapper.find(".alegra-navbar-button").trigger("click");
-    expect(push).toHaveBeenCalledWith("/");
+    expect(pushMock).toHaveBeenCalledWith("/");
   });
 });

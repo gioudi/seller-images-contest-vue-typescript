@@ -4,10 +4,4 @@
   </footer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "FooterFile",
-});
-</script>
+<script setup lang="ts"></script>
