@@ -486,6 +486,32 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-019: Husky + lint-staged Pre-Commit Hooks (EST-L01)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/husky-lint-staged` |
+| **Spec** | SPEC-P4-06 |
+| **Estimate** | 2h |
+| **Submitted By** | Broker |
+
+### Description
+Add local pre-commit hooks that lint staged source files, complementing the remote CI (EST-L02):
+- Add `husky` (^9.1.7) + `lint-staged` (^17.4.1) as devDependencies
+- `package.json` — `prepare: "husky"` script (auto-installs hooks on `npm install`) + `lint-staged` config: `*.{ts,tsx,vue,js}` → `eslint --fix`
+- `.husky/pre-commit` hook (runs `npx lint-staged`); the husky-managed `_` internal dir is git-ignored
+- Verified manually: a staged `.ts` file with `any` blocks the commit (lint-staged errors + reverts staging); exit 1
+- All CI gates (lint, type-check, 23/23 tests, build) re-verified green
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
