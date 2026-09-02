@@ -458,6 +458,34 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-018: Complete `<script setup>` Conversion (EST-M03 follow-up)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/script-setup-complete` |
+| **Spec** | SPEC-P4-05 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Convert the last five `defineComponent` components to `<script setup lang="ts">`, finishing Composition-API uniformity started in EST-M03:
+- `CarouselFile.vue` — object-form `defineProps` keeps the custom `images` validator
+- `ErrorFile.vue` — type-only `defineProps<{ message: string }>()`
+- `search/SearchBar.vue` — `ref` + type-only props + emit
+- `seller/SellerCard.vue` — type-only props + emit
+- `seller/SellerGrid.vue` — type-only array props + emit
+- Existing `error-file.spec.ts` / `carousel-file.spec.ts` still pass unchanged — `<script setup>` exposes runtime `props` metadata (required/validator), so no test rewrites required
+- After this, all 9 components use `<script setup lang="ts">` (zero `defineComponent`); visual output identical
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

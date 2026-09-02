@@ -23,9 +23,7 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
-
+<script setup lang="ts">
 interface SellerCardData {
   name: string;
   points: number;
@@ -34,21 +32,15 @@ interface SellerCardData {
   alt_description: string;
 }
 
-export default defineComponent({
-  name: "SellerCard",
-  props: {
-    seller: {
-      type: Object as PropType<SellerCardData>,
-      required: true,
-    },
-  },
-  emits: ["vote"],
-  setup(props, { emit }) {
-    const emitVote = () => emit("vote", props.seller);
+const props = defineProps<{
+  seller: SellerCardData;
+}>();
 
-    return { emitVote };
-  },
-});
+const emit = defineEmits<{
+  (e: "vote", seller: SellerCardData): void;
+}>();
+
+const emitVote = () => emit("vote", props.seller);
 </script>
 
 <style lang="scss" scoped>
