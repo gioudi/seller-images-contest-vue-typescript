@@ -431,6 +431,33 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-017: Remove Unused Dependencies (EST-M09)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/remove-unused-deps` |
+| **Spec** | SPEC-P4-04 |
+| **Estimate** | 0.5h |
+| **Submitted By** | Broker |
+
+### Description
+Remove Vue-CLI-era dependencies that are dead after the Vite + `<script setup>` migration (EST-M09):
+- `core-js` — Babel polyfill helper, unused under esbuild/Vite
+- `dotenv` — Vite reads env via `import.meta.env` natively; `dotenv` never referenced
+- `vue-class-component` — only used by Options-API class-style components, eliminated in EST-M03
+- Verified via grep across `src`, `tests`, and configs: zero import sites for all three
+- `node-sass` already absent from `package.json` (SCSS uses `sass` under Vite) — no action needed there
+- Behavior unchanged; all CI gates (lint, type-check, 23/23 tests, build) re-verified green after removal
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
