@@ -14,8 +14,7 @@
   </Carousel>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
 
@@ -26,19 +25,12 @@ interface ImageSlide {
   slug: string;
 }
 
-export default defineComponent({
-  name: "CarouselFile",
-  components: { Carousel, Slide, Pagination, Navigation },
-  props: {
-    images: {
-      type: Array as PropType<ImageSlide[]>,
-      required: true,
-      validator: (images: ImageSlide[]) => {
-        return images.every(
-          (image) => image.urls && image.urls.small && image.slug
-        );
-      },
-    },
+defineProps({
+  images: {
+    type: Array as import("vue").PropType<ImageSlide[]>,
+    required: true,
+    validator: (images: ImageSlide[]) =>
+      images.every((image) => image.urls && image.urls.small && image.slug),
   },
 });
 </script>

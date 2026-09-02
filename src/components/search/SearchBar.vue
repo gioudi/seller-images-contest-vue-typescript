@@ -15,24 +15,18 @@
   </form>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "SearchBar",
-  props: {
-    initialTerm: {
-      type: String,
-      default: "",
-    },
-  },
-  emits: ["search"],
-  setup(props, { emit }) {
-    const term = ref(props.initialTerm ?? "");
+const props = defineProps<{
+  initialTerm?: string;
+}>();
 
-    const submit = () => emit("search", term.value);
+const emit = defineEmits<{
+  (e: "search", term: string): void;
+}>();
 
-    return { term, submit };
-  },
-});
+const term = ref(props.initialTerm ?? "");
+
+const submit = () => emit("search", term.value);
 </script>

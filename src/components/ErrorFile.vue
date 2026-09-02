@@ -9,18 +9,10 @@
   </article>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
-
-export default defineComponent({
-  name: "ErrorFile",
-  props: {
-    message: {
-      type: String as PropType<string>,
-      required: true,
-    },
-  },
-});
+<script setup lang="ts">
+defineProps<{
+  message: string;
+}>();
 </script>
 <style lang="scss">
 .error-container {

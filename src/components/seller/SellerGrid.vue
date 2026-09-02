@@ -10,8 +10,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
 import SellerCard from "./SellerCard.vue";
 
 interface SellerGridData {
@@ -23,22 +22,13 @@ interface SellerGridData {
   alt_description: string;
 }
 
-export default defineComponent({
-  name: "SellerGrid",
-  components: {
-    SellerCard,
-  },
-  props: {
-    sellers: {
-      type: Array as PropType<SellerGridData[]>,
-      required: true,
-    },
-  },
-  emits: ["vote"],
-  setup(_, { emit }) {
-    const emitVote = (seller: SellerGridData) => emit("vote", seller);
+defineProps<{
+  sellers: SellerGridData[];
+}>();
 
-    return { emitVote };
-  },
-});
+const emit = defineEmits<{
+  (e: "vote", seller: SellerGridData): void;
+}>();
+
+const emitVote = (seller: SellerGridData) => emit("vote", seller);
 </script>
