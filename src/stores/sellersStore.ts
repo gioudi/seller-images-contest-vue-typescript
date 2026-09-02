@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { Seller } from "./sellers/types";
 import { CONTEST } from "@/config";
 import apiService from "@/services/apiService";
-import toastService from "@/utils/toastService";
 import getErrorMessage from "@/utils/getErrorMessage";
 
 export const useSellersStore = defineStore("sellers", {
@@ -46,7 +45,6 @@ export const useSellersStore = defineStore("sellers", {
       } catch (error) {
         const errorMessage = getErrorMessage(error, "Error fetching sellers");
         this.setFailure(errorMessage);
-        toastService.showError(errorMessage);
       } finally {
         this.loading = false;
       }

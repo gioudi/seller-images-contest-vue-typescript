@@ -351,6 +351,34 @@ APPROVED - IMPLEMENTED (merged to staging via PR #35 on 2026-09-01)
 
 ---
 
+## PROPOSAL-2026-014: Axios Interceptors & Timeout (EST-M07)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/axios-interceptors` |
+| **Spec** | SPEC-P4-01 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Centralize Alegra HTTP error handling and add a timeout. Establishes a shared Axios client with a 10s `timeout` and a response interceptor that normalizes every Alegra error and shows a single toast (EST-M07):
+- `src/services/axiosClient.ts` (new) — one Axios instance, `timeout: API.TIMEOUT_MS`, response interceptor rejects with a normalized `Error` + single toast
+- `src/services/apiService.ts` — consumes `axiosClient`, drops per-call toast/error duplication
+- `src/stores/sellersStore.ts` — removes its redundant toast, fixing the existing double-toast on sellers failures
+- `src/utils/getErrorMessage.ts` — friendly message for timeouts
+- `src/config/index.ts` — `API.TIMEOUT_MS = 10000` (removes magic number)
+- Unsplash flow intentionally untouched (unsplash-js is a separate HTTP stack, already resilient via `IMAGES.FALLBACK_URL`)
+
+### Status
+APPROVED (Jör, 2026-09-02, verbal) - awaiting PR review + merge
+
+### Approval
+- **Jör Approved:** 2026-09-02, verbal
+- **Notes:** no spec existed before; SPEC-P4-01 created and approved.
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
