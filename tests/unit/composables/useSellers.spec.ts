@@ -1,9 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
-import apiService from "@/services/apiService";
+
+const serviceMocks = vi.hoisted(() => ({
+  getSellers: vi.fn(),
+  createInvoice: vi.fn(),
+}));
 
 vi.mock("@/services/apiService", () => ({
-  default: { getSellers: vi.fn(), createInvoice: vi.fn() },
+  default: serviceMocks,
 }));
 vi.mock("@/utils/toastService", () => ({
   default: { showError: vi.fn(), showWarn: vi.fn() },
@@ -15,7 +19,7 @@ import { useSellersStore } from "@/stores/sellersStore";
 describe("useSellers", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
-    vi.mocked(apiService.getSellers).mockReset();
+    serviceMocks.getSellers.mockReset();
   });
 
   it("starts with empty sellers and idle contest state", () => {

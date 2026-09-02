@@ -12,3 +12,7 @@ export interface InvoicePayload {
   productId: number;
   total: number;
 }
+
+export interface InvoiceResponse {
+  id: number;
+}

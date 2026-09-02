@@ -19,10 +19,10 @@
           >¿Qué estás buscando?
         </label>
         <input
-          type="text"
           id="searchTerm"
-          class="d-flex form-control"
           v-model="searchTerm"
+          type="text"
+          class="d-flex form-control"
           placeholder="Buscar imágenes"
           required
         />
@@ -30,8 +30,8 @@
       </form>
     </article>
     <article
-      class="grid-col-xs-11 grid-col-lg-5"
       v-if="images && !loading && !error"
+      class="grid-col-xs-11 grid-col-lg-5"
     >
       <CarouselFile :images="images" />
     </article>

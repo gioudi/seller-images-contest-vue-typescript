@@ -1,6 +1,8 @@
-import { InvoicePayload } from "@/stores/invoices/types";
+import { InvoicePayload, InvoiceResponse } from "@/stores/invoices/types";
+import { Seller } from "@/stores/sellers/types";
+import getErrorMessage from "@/utils/getErrorMessage";
+import axios from "axios";
 import toastService from "@/utils/toastService";
-import axios, { AxiosError } from "axios";
 
 const API_URL =
   import.meta.env.VITE_ALEGRA_BASE_URL || "https://api.alegra.com/api/v1/";
@@ -9,38 +11,31 @@ const apiClient = axios.create({
   baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Basic ${API_KEY}`,
+    Authorization: `Basic ${API_KEY ?? ""}`,
   },
 });
 
 const apiService = {
-  async getSellers() {
+  async getSellers(): Promise<Seller[]> {
     try {
-      const response = await apiClient.get("/sellers");
+      const response = await apiClient.get<Seller[]>("/sellers");
       return response.data;
     } catch (error) {
-      const errorMessage =
-        error instanceof AxiosError
-          ? error.response?.data?.message || "Error fetching sellers"
-          : error instanceof Error
-          ? error.message
-          : "Error fetching sellers";
+      const errorMessage = getErrorMessage(error, "Error fetching sellers");
       toastService.showError(errorMessage);
 
       throw new Error(errorMessage);
     }
   },
-  async createInvoice(payload: InvoicePayload) {
+  async createInvoice(payload: InvoicePayload): Promise<InvoiceResponse> {
     try {
-      const response = await apiClient.post("/invoices", payload);
+      const response = await apiClient.post<InvoiceResponse>(
+        "/invoices",
+        payload
+      );
       return response.data;
     } catch (error) {
-      const errorMessage =
-        error instanceof AxiosError
-          ? error.response?.data?.message || "Error creating an Invoice"
-          : error instanceof Error
-          ? error.message
-          : "Error creating an Invoice";
+      const errorMessage = getErrorMessage(error, "Error creating an Invoice");
       toastService.showError(errorMessage);
 
       throw new Error(errorMessage);

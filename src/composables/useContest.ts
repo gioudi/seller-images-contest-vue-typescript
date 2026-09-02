@@ -36,7 +36,7 @@ export function useContest() {
   };
 
   const handleContinue = () => {
-    router.push({
+    void router.push({
       name: "InvoiceForm",
       query: { q: winner.value?.id },
     });

@@ -318,10 +318,30 @@ Refresh the TypeScript compiler from `~4.5.5` (Vue CLI era, four majors behind) 
 - Establishes the version baseline EST-L11 (ESLint + Prettier upgrade) needs for TS-5-compatible linting
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+APPROVED - IMPLEMENTED (merged to staging via PR #34 on 2026-09-01)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** 2026-09-01, via PR review + merge (#34)
+
+---
+
+## PROPOSAL-2026-013: Upgrade ESLint + Prettier (EST-L11)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-01 |
+| **Branch** | `feature/upgrade-linting` |
+| **Spec** | SPEC-P3-07 |
+| **Estimate** | 4h |
+| **Submitted By** | Broker |
+
+### Description
+Rebuild the lint layer on the modern toolchain and turn on type-aware rules (ADS Phase-3 checklist):
+- **Toolchain swap:** ESLint 7.32 → `^9.39.5` (flat config), `@typescript-eslint/*` 5.62 → `typescript-eslint` `^8.69.0`, `eslint-plugin-vue` 8 → `^10.10.0`, `vue-eslint-parser` → 10.4.1, Prettier 2 → `^3.9.6`, `eslint-config-prettier` → 10, `eslint-plugin-prettier` → latest flat build, added `globals`; removed all 2021-era legacy packages
+- **Config:** `.eslintrc.cjs` → `eslint.config.js` (flat config, ESM); `.prettierrc.json` pins `trailingComma: "es5"` so Prettier 3's changed default doesn't reformat the repo; `lint` script now `eslint src tests` (ESLint 9 drops `--ext`)
+- **Type-aware rules ON:** `@typescript-eslint/strict-type-checked` for `.ts`/`.tsx` (chosen per the spec's empirical gate — `recommendedTypeChecked` passed clean, `strictTypeChecked` surfaced only 3 small real issues, all fixed: a void-return arrow shorthand in `useSellers.ts`, an unguarded `Authorization` template literal in `apiService.ts` (`?? ""`), and a `globalThis`-cast for the `ResizeObserver` polyfill guard in `tests/unit/setup.ts`); `.vue` SFCs keep non-type-aware `vue3-recommended` + prettier
+- **Real issues fixed (no suppressions, no `eslint-disable`):** typed API contracts (`getSellers(): Promise<Seller[]>`, `createInvoice(): Promise<InvoiceResponse>`), `getErrorMessage` reused in both services, `void router.push` for a floating promise, `vi.hoisted` mocks replacing unbound `vi.mocked(method)` passes, typed `globalThis.ResizeObserver`
+- Verified: `npm run lint` clean, 23/23 tests, build green (128 modules)
 
 ### Status
 PENDING (awaiting Jör approval via PR)

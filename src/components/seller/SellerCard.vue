@@ -5,10 +5,10 @@
         {{ seller.name }}-{{ seller.points ?? 0 }} puntos
       </h2>
       <button
-        class="mt-3"
-        @click="emitVote"
         v-if="seller.clickable"
+        class="mt-3"
         type="button"
+        @click="emitVote"
       >
         Votar
       </button>
@@ -36,13 +36,13 @@ interface SellerCardData {
 
 export default defineComponent({
   name: "SellerCard",
-  emits: ["vote"],
   props: {
     seller: {
       type: Object as PropType<SellerCardData>,
       required: true,
     },
   },
+  emits: ["vote"],
   setup(props, { emit }) {
     const emitVote = () => emit("vote", props.seller);
 

@@ -2,7 +2,7 @@
   <nav class="alegra-navbar">
     <div class="alegra-navbar-title">Imágenes del mundo</div>
     <div class="alegra-navbar-buttons">
-      <button @click="goHome" class="alegra-navbar-button">Volver</button>
+      <button class="alegra-navbar-button" @click="goHome">Volver</button>
     </div>
   </nav>
 </template>
