@@ -512,6 +512,31 @@ IMPLEMENTED (merged via PR #43)
 
 ---
 
+## PROPOSAL-2026-020: Deliver the Open Graph / Twitter preview image (EST-L08)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/est-l08-open-graph` |
+| **Spec** | SPEC-P4-07 |
+| **Estimate** | 1.5h |
+| **Submitted By** | Broker |
+
+### Description
+The SEO metadata (SPEC-P3-05, merged) added all `og:*` / `twitter:*` tags to `index.html` — including `og:image`/`twitter:image` → `/og-image.png` (1200×630) — but the referenced asset **never existed** in `public/`, so social previews 404'd on the image. This was even flagged as a known risk in SPEC-P3-05 §8. EST-L08 is the missing piece:
+- Generated a real, valid branded `public/og-image.png` (1200×630, PNG signature verified, ~15.5 KB) — brand teal `#00b19d` with white "Imágenes del mundo" / "Concurso de vendedores · Vota por tu favorito"
+- Confirmed `vite build` copies it to `dist/og-image.png` (served at `/og-image.png`, matching the unchanged tags)
+- `og:image`/`twitter:image` values, `index.html`, and `og:image:width/height` left untouched
+- No code changed; gates re-verified (lint 0, type-check 0, tests green, build ✓)
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 
