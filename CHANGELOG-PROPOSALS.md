@@ -371,10 +371,10 @@ Centralize Alegra HTTP error handling and add a timeout. Establishes a shared Ax
 - Unsplash flow intentionally untouched (unsplash-js is a separate HTTP stack, already resilient via `IMAGES.FALLBACK_URL`)
 
 ### Status
-APPROVED (Jör, 2026-09-02, verbal) - awaiting PR review + merge
+APPROVED - IMPLEMENTED (merged to staging via PR #37 on 2026-09-02)
 
 ### Approval
-- **Jör Approved:** 2026-09-02, verbal
+- **Jör Approved:** 2026-09-02, verbal + via PR merge (#37)
 - **Notes:** no spec existed before; SPEC-P4-01 created and approved.
 
 ---

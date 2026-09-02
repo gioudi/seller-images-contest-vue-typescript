@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | APPROVED (Jör, 2026-09-02) |
+| **Status** | APPROVED - IMPLEMENTED (merged to staging via PR #37, 2026-09-02) |
 | **Topic** | Centralize Alegra HTTP error handling and add a timeout (single topic: service-layer resilience for the Alegra API) |
 | **Estimate** | 3h |
 | **Branch** | `feature/axios-interceptors` |
@@ -70,13 +70,13 @@ Why this shape:
 
 ## 7. Acceptance Criteria
 
-- [ ] `npm run lint` exits 0 (zero warnings/errors)
-- [ ] `npm run test:unit` passes (23/23)
-- [ ] `npm run build` exits 0
-- [ ] One failure on `getSellers`/`createInvoice` produces exactly one toast (no double-toast)
-- [ ] A request that exceeds 10s aborts with: friendly message "La solicitud tardó demasiado. Inténtalo de nuevo." and `loading` returns to `false`
-- [ ] Unsplash image fetch behavior unchanged (still falls back to `IMAGES.FALLBACK_URL`)
-- [ ] Touched files: `src/services/axiosClient.ts`, `src/services/apiService.ts`, `src/stores/sellersStore.ts`, `src/utils/getErrorMessage.ts`, `src/config/index.ts`, `specs/SPEC-P4-01-*.md`, `CHANGELOG-PROPOSALS.md`
+- [x] `npm run lint` exits 0 (zero warnings/errors)
+- [x] `npm run test:unit` passes (23/23)
+- [x] `npm run build` exits 0
+- [x] One failure on `getSellers`/`createInvoice` produces exactly one toast (no double-toast)
+- [x] A request that exceeds 10s aborts with: friendly message "La solicitud tardó demasiado. Inténtalo de nuevo." and `loading` returns to `false`
+- [x] Unsplash image fetch behavior unchanged (still falls back to `IMAGES.FALLBACK_URL`)
+- [x] Touched files: `src/services/axiosClient.ts`, `src/services/apiService.ts`, `src/stores/sellersStore.ts`, `src/utils/getErrorMessage.ts`, `src/config/index.ts`, `specs/SPEC-P4-01-*.md`, `CHANGELOG-PROPOSALS.md`
 
 ## 8. Risks & Mitigation
 
