@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | DRAFT (awaiting PR review) |
+| **Status** | IMPLEMENTED (merged via PR #43) |
 | **Topic** | Add pre-commit hooks that lint staged source/test files (single topic: local git hooks for quality) |
 | **Estimate** | 2h |
 | **Branch** | `feature/husky-lint-staged` |
@@ -92,5 +92,5 @@ Why:
 
 ## Approval
 
-- **Jör Approved:** (pending)
-- **Status:** DRAFT — await PR review on GitHub
+- **Jör Approved:** yes (merged via PR #43)
+- **Status:** IMPLEMENTED — merged to `staging`; hooks active (proven to fire on commit)

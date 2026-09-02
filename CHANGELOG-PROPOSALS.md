@@ -505,10 +505,10 @@ Add local pre-commit hooks that lint staged source files, complementing the remo
 - All CI gates (lint, type-check, 23/23 tests, build) re-verified green
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+IMPLEMENTED (merged via PR #43)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** yes
 
 ---
 
