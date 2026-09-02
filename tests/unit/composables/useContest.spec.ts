@@ -1,5 +1,34 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
+import { Image } from "@/stores/images/types";
+
+const makeImage = (id: string, small: string, alt: string): Image => ({
+  id,
+  slug: id,
+  created_at: "2026-01-01T00:00:00Z",
+  updated_at: "2026-01-01T00:00:00Z",
+  width: 400,
+  height: 300,
+  color: "#ffffff",
+  blur_hash: "abc",
+  alt_description: alt,
+  urls: {
+    raw: `${small}-raw`,
+    full: `${small}-full`,
+    regular: `${small}-regular`,
+    small,
+    thumb: `${small}-thumb`,
+    small_s3: `${small}-s3`,
+  },
+  links: {
+    self: "self",
+    html: "html",
+    download: "download",
+    download_location: "download_location",
+  },
+  likes: 0,
+  liked_by_user: false,
+});
 
 const serviceMocks = vi.hoisted(() => ({
   getImagesList: vi.fn(),
@@ -38,8 +67,8 @@ describe("useContest", () => {
     const imagesStore = useImagesStore();
 
     imagesStore.images = [
-      { id: "pic-a", urls: { small: "small-a" }, alt_description: "photo a" },
-      { id: "pic-b", urls: { small: "small-b" }, alt_description: "photo b" },
+      makeImage("pic-a", "small-a", "photo a"),
+      makeImage("pic-b", "small-b", "photo b"),
     ];
     sellersStore.sellers = [
       { id: 1, name: "A", points: 0, clickable: true },
