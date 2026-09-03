@@ -14,9 +14,7 @@
           {{ $t("landing.subtitle") }}
         </p>
         <form class="landing__search" @submit.prevent="searchImages">
-          <label for="searchTerm" class="mb-2 d-block">
-            {{ $t("landing.label") }}
-          </label>
+          <label for="searchTerm">{{ $t("landing.label") }}</label>
           <div class="landing__search-row">
             <input
               id="searchTerm"
