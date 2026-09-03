@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | DRAFT (awaiting PR review) |
+| **Status** | IMPLEMENTED (merged via PR #44) |
 | **Topic** | Make the Open Graph / Twitter Card preview image actually work by delivering the `og:image` asset that the existing tags already reference. Single topic: the missing OG/Twitter preview image. Nothing else. |
 | **Estimate** | 1.5h (asset 0.75h, audit 0.25h, docs 0.25h, verify 0.25h) |
 | **Branch** | `feature/est-l08-open-graph` |
@@ -103,5 +103,5 @@ Why: Vite copies the entire `public/` directory verbatim into `dist/` at build t
 
 ## Approval
 
-- **Jör Approved:** (pending)
-- **Status:** DRAFT — await PR review on GitHub
+- **Jör Approved:** yes (merged via PR #44)
+- **Status:** IMPLEMENTED — merged to `staging`; `og-image.png` now served at `/og-image.png`

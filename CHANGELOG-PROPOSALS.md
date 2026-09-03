@@ -530,10 +530,10 @@ The SEO metadata (SPEC-P3-05, merged) added all `og:*` / `twitter:*` tags to `in
 - No code changed; gates re-verified (lint 0, type-check 0, tests green, build ✓)
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+IMPLEMENTED (merged via PR #44)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** yes
 
 ---
 
