@@ -1,13 +1,7 @@
 <template>
   <footer class="footer">
-    <p>&copy; Sergio Penagos All rights reserved.</p>
+    <p>&copy; Sergio Penagos {{ $t("nav.rightsReserved") }}</p>
   </footer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "FooterFile",
-});
-</script>
+<script setup lang="ts"></script>

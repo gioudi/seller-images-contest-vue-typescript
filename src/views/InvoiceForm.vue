@@ -1,97 +1,89 @@
 <template>
   <article class="grid invoice-form">
     <article class="grid-col-xs-12 grid-col-md-6 form-wrapper">
-      <h5 class="mb-4 mt-3">Crear factura de venta!</h5>
-      <form @submit.prevent="handleSubmitFormData" class="form-container">
+      <h1 class="h3 mb-4 mt-3">{{ $t("invoice.title") }}</h1>
+      <form class="form-container" @submit.prevent="handleSubmitFormData">
         <div class="mb-3 form-field">
-          <label for="date" class="normal mb-1">Fecha:</label>
-          <input type="date" v-model="formData.date" required />
+          <label for="date" class="normal mb-1">{{ $t("invoice.date") }}</label>
+          <input v-model="formData.date" type="date" required />
         </div>
         <div class="mb-3 form-field">
-          <label for="dueDate" class="normal mb-1">Fecha de venta:</label>
-          <input type="date" v-model="formData.dueDate" required />
+          <label for="dueDate" class="normal mb-1">
+            {{ $t("invoice.dueDate") }}
+          </label>
+          <input v-model="formData.dueDate" type="date" required />
         </div>
         <div class="mb-3 form-field">
-          <label for="clientId" class="normal mb-1">Id Cliente:</label>
-          <input type="number" v-model="formData.client" required />
+          <label for="clientId" class="normal mb-1">
+            {{ $t("invoice.clientId") }}
+          </label>
+          <input v-model="formData.client" type="number" required />
         </div>
         <div class="mb-3 form-field">
-          <label for="productId" class="normal mb-1">Id Producto:</label>
-          <input type="number" v-model="formData.productId" required />
+          <label for="productId" class="normal mb-1">
+            {{ $t("invoice.productId") }}
+          </label>
+          <input v-model="formData.productId" type="number" required />
         </div>
         <div class="mb-3 form-field">
-          <label for="total" class="normal mb-1">Total:</label>
-          <input type="number" v-model="formData.total" required />
+          <label for="total" class="normal mb-1">
+            {{ $t("invoice.total") }}
+          </label>
+          <input v-model="formData.total" type="number" required />
         </div>
         <button type="submit" class="btn btn-primary my-3">
-          Crear factura
+          {{ $t("invoice.submit") }}
         </button>
       </form>
     </article>
   </article>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { reactive } from "vue";
+import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { InvoicePayload } from "@/stores/invoices/types";
 import toastService from "@/utils/toastService";
-import { defineComponent, reactive } from "vue";
-import { useRoute } from "vue-router";
-import { useInvoicesStore } from "@/stores/invoicesStore";
-import getErrorMessage from "@/utils/getErrorMessage";
+import { useInvoices } from "@/composables/useInvoices";
 
-export default defineComponent({
-  name: "InvoiceForm",
-  setup() {
-    const route = useRoute();
-    const invoicesStore = useInvoicesStore();
+const { t } = useI18n();
+const route = useRoute();
+const { submit } = useInvoices();
 
-    const formData: InvoicePayload = reactive({
-      date: "",
-      dueDate: "",
-      client: 1,
-      winnerId: Number(route.query.q) || 1,
-      productId: 1,
-      total: 0,
-    });
-
-    const validateFormData = () => {
-      for (const key in formData) {
-        if (
-          formData[key as keyof InvoicePayload] === null ||
-          formData[key as keyof InvoicePayload] === ""
-        ) {
-          return false;
-        }
-      }
-      return true;
-    };
-
-    const handleSubmitFormData = async () => {
-      try {
-        invoicesStore.setLoading(true);
-        if (validateFormData()) {
-          await invoicesStore.handleCreateInvoice(formData);
-        } else {
-          toastService.showWarn("Todos los campos son necesarios!");
-        }
-      } catch (error) {
-        invoicesStore.setFailure(
-          getErrorMessage(error, "Error creating an Invoice")
-        );
-      } finally {
-        invoicesStore.setLoading(false);
-      }
-    };
-
-    return {
-      handleSubmitFormData,
-      formData,
-    };
-  },
+const formData: InvoicePayload = reactive({
+  date: "",
+  dueDate: "",
+  client: 1,
+  winnerId: Number(route.query.q) || 1,
+  productId: 1,
+  total: 0,
 });
+
+const validateFormData = () => {
+  for (const key in formData) {
+    if (
+      formData[key as keyof InvoicePayload] === null ||
+      formData[key as keyof InvoicePayload] === ""
+    ) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const handleSubmitFormData = async () => {
+  if (validateFormData()) {
+    await submit(formData);
+  } else {
+    toastService.showWarn(t("invoice.allFieldsRequired"));
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/abstracts/variables";
+
 .invoice-form {
   display: flex;
   justify-content: center;
@@ -110,6 +102,8 @@ export default defineComponent({
 
 .form-field {
   box-sizing: border-box;
+  text-align: left;
+
   label {
     display: inline-block;
     text-align: left;

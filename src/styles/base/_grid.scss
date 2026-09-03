@@ -1,5 +1,5 @@
 /* A flex grid to be used as a backup in case display grid
-   is not supported in the browser. */
+   is not supported in the browser. Mobile-first: xs base, then sm/md/lg via min-width. */
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -60,59 +60,57 @@
     position: relative;
     width: 100%;
     min-height: 1px;
-/*     padding-right: 15px;
-    padding-left: 15px; */
   }
   @media (max-width: 420px) {
-     .grid-col-xs-1 {
-       flex: 0 0 8.3333333333%;
-       max-width: 8.3333333333%;
-     }
-     .grid-col-xs-2 {
-       flex: 0 0 16.6666666667%;
-       max-width: 16.6666666667%;
-     }
-     .grid-col-xs-3 {
-       flex: 0 0 25%;
-       max-width: 25%;
-     }
-     .grid-col-xs-4 {
-       flex: 0 0 33.3333333333%;
-       max-width: 33.3333333333%;
-     }
-     .grid-col-xs-5 {
-       flex: 0 0 41.6666666667%;
-       max-width: 41.6666666667%;
-     }
-     .grid-col-xs-6 {
-       flex: 0 0 50%;
-       max-width: 50%;
-     }
-     .grid-col-xs-7 {
-       flex: 0 0 58.3333333333%;
-       max-width: 58.3333333333%;
-     }
-     .grid-col-xs-8 {
-       flex: 0 0 66.6666666667%;
-       max-width: 66.6666666667%;
-     }
-     .grid-col-xs-9 {
-       flex: 0 0 75%;
-       max-width: 75%;
-     }
-     .grid-col-xs-10 {
-       flex: 0 0 83.3333333333%;
-       max-width: 83.3333333333%;
-     }
-     .grid-col-xs-11 {
-       flex: 0 0 91.6666666667%;
-       max-width: 91.6666666667%;
-     }
-     .grid-col-xs-12 {
-       flex: 0 0 100%;
-       max-width: 100%;
-     }
-   }
+    .grid-col-xs-1 {
+      flex: 0 0 8.3333333333%;
+      max-width: 8.3333333333%;
+    }
+    .grid-col-xs-2 {
+      flex: 0 0 16.6666666667%;
+      max-width: 16.6666666667%;
+    }
+    .grid-col-xs-3 {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+    .grid-col-xs-4 {
+      flex: 0 0 33.3333333333%;
+      max-width: 33.3333333333%;
+    }
+    .grid-col-xs-5 {
+      flex: 0 0 41.6666666667%;
+      max-width: 41.6666666667%;
+    }
+    .grid-col-xs-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+    .grid-col-xs-7 {
+      flex: 0 0 58.3333333333%;
+      max-width: 58.3333333333%;
+    }
+    .grid-col-xs-8 {
+      flex: 0 0 66.6666666667%;
+      max-width: 66.6666666667%;
+    }
+    .grid-col-xs-9 {
+      flex: 0 0 75%;
+      max-width: 75%;
+    }
+    .grid-col-xs-10 {
+      flex: 0 0 83.3333333333%;
+      max-width: 83.3333333333%;
+    }
+    .grid-col-xs-11 {
+      flex: 0 0 91.6666666667%;
+      max-width: 91.6666666667%;
+    }
+    .grid-col-xs-12 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
 
   @media (min-width: 576px) {
     .grid-col-sm-1 {

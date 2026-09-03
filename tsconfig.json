@@ -5,6 +5,7 @@
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,12 +15,15 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "jest"
+      "vite/client",
+      "vitest/globals"
     ],
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@@/*": [
+        "tests/*"
       ]
     },
     "lib": [
@@ -33,6 +37,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/env.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],

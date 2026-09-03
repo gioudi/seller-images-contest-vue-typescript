@@ -8,9 +8,8 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import { useSellersStore } from "@/stores/sellersStore";
-import { useImagesStore } from "@/stores/imagesStore";
-import getErrorMessage from "@/utils/getErrorMessage";
+import { useSellers } from "@/composables/useSellers";
+import { useImages } from "@/composables/useImages";
 import NavbarFile from "./components/NavbarFile.vue";
 import FooterFile from "./components/FooterFile.vue";
 
@@ -21,33 +20,14 @@ export default defineComponent({
     FooterFile,
   },
   setup() {
-    const sellersStore = useSellersStore();
-    const imagesStore = useImagesStore();
+    const { fetchSellers } = useSellers();
+    const { fetchImages } = useImages();
 
-    const handleGetSellers = async () => {
-      try {
-        sellersStore.setLoading(true);
-        await imagesStore.fetchImagesList("cute");
-        await sellersStore.handleFetchSellers();
-      } catch (error) {
-        sellersStore.setFailure(
-          getErrorMessage(error, "Error fetching sellers")
-        );
-      } finally {
-        sellersStore.setLoading(false);
-      }
-    };
-
-    onMounted(() => {
-      handleGetSellers();
+    onMounted(async () => {
+      await fetchImages("cute");
+      await fetchSellers();
     });
   },
 });
 </script>
-<style lang="scss" scoped>
-@media (min-width: 62rem) {
-  .app {
-    height: calc(100vh - 220px);
-  }
-}
-</style>
+<style lang="scss" scoped></style>

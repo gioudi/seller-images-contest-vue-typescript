@@ -1,0 +1,7 @@
+/* App shell layout — small screens scroll naturally; on wide screens the
+   surrounding panel keeps a stable height. Mobile-first (min-width). */
+.app {
+  @media (min-width: 62rem) {
+    height: calc(100vh - 220px);
+  }
+}

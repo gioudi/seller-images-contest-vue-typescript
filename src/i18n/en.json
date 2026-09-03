@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "appName": "Images of the World",
+    "home": "Back to home",
+    "back": "Back",
+    "rightsReserved": "All rights reserved."
+  },
+  "common": {
+    "search": "Search",
+    "searchPlaceholder": "Search images",
+    "vote": "Vote",
+    "voted": "Voted"
+  },
+  "landing": {
+    "title": "Discover Inspiring Images",
+    "subtitle": "Search and find amazing images for any project. Just type a keyword to get started.",
+    "label": "What are you looking for?",
+    "emptyQuery": "Please enter a word"
+  },
+  "results": {
+    "title": "Inspiring Images List",
+    "label": "Looking for something new?"
+  },
+  "contest": {
+    "points": "{n} points"
+  },
+  "invoice": {
+    "title": "Create sales invoice!",
+    "date": "Date:",
+    "dueDate": "Sale date:",
+    "clientId": "Client Id:",
+    "productId": "Product Id:",
+    "total": "Total:",
+    "submit": "Create invoice",
+    "allFieldsRequired": "All fields are required!"
+  },
+  "winner": {
+    "title": "Congratulations!",
+    "message": "The winner is {name}!",
+    "continue": "Continue"
+  },
+  "loading": {
+    "message": "Processing your request, please wait..."
+  },
+  "error": {
+    "title": "Error!",
+    "message": "Could not load the information."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "Sorry, the page you are looking for does not exist.",
+    "goHome": "Back to home"
+  },
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  }
+}

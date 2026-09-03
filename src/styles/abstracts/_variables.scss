@@ -1,0 +1,92 @@
+$font-family: "Inter", sans-serif;
+
+/* ================================================================
+   Color palette via CSS custom properties (runtime theme support).
+   Light values are the defaults on :root; dark overrides the tokens
+   on html[data-theme="dark"]. The SCSS variables below simply forward
+   the corresponding CSS custom property, so components that use the
+   SCSS $color-* tokens automatically switch with the theme.
+   ================================================================ */
+:root {
+  --color-primary-5: #ebfafb;
+  --color-primary-10: #d4f2f1;
+  --color-primary-20: #b6ecea;
+  --color-primary-30: #a0e4e2;
+  --color-primary-40: #86dfdc;
+  --color-primary-50: #00b19d;
+  --color-primary-70: #00535e;
+  --color-primary-90: #005452;
+  --color-background: #f4f4f4;
+  --color-surface: #ffffff;
+  --color-accent: #60c368;
+  --color-dark: #333333;
+  --color-medium: #666666;
+  --color-light: #999999;
+  --color-white-90: #eee;
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+html[data-theme="dark"] {
+  --color-primary-5: #0b2e2d;
+  --color-primary-10: #12403e;
+  --color-primary-20: #174e4b;
+  --color-primary-30: #1d5d59;
+  --color-primary-40: #266b66;
+  --color-primary-50: #00b19d;
+  --color-primary-70: #7fd9d0;
+  --color-primary-90: #a0e4e2;
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-accent: #60c368;
+  --color-dark: #e8e8e8;
+  --color-medium: #b5b5b5;
+  --color-light: #888888;
+  --color-white-90: #2a2a2a;
+  --color-white: #e6e6e6;
+  --color-black: #ffffff;
+}
+
+/* Palette (SCSS tokens forward the CSS custom properties) */
+$color-primary-5: var(--color-primary-5);
+$color-primary-10: var(--color-primary-10);
+$color-primary-20: var(--color-primary-20);
+$color-primary-30: var(--color-primary-30);
+$color-primary-40: var(--color-primary-40);
+$color-primary-50: var(--color-primary-50);
+$color-primary-70: var(--color-primary-70);
+$color-primary-90: var(--color-primary-90);
+$background-color: var(--color-background);
+$surface-color: var(--color-surface);
+$accent-color: var(--color-accent);
+$color-dark: var(--color-dark);
+$color-medium: var(--color-medium);
+$color-light: var(--color-light);
+$color-white-90: var(--color-white-90);
+$color-white: var(--color-white);
+$color-black: var(--color-black);
+
+/* Fonts */
+$font-size-title: 7.5rem; /* 120px */
+$font-size-subtitle: 4.5rem; /* 72px */
+$font-size-h1: 4rem; /* 64px */
+$font-size-h2: 3.5rem; /* 56px */
+$font-size-h3: 3rem; /* 48px */
+$font-size-h4: 2rem; /* 32px */
+$font-size-h5: 1.5rem; /* 24px */
+$font-size-h6: 1.125rem; /* 18px */
+$font-size-normal: 1rem; /* 16px */
+$font-size-small: 0.875rem; /* 14px */
+$font-size-extra-small: 0.75rem; /* 12px */
+
+/* Border radius */
+$border-radius-xs: 0.25rem; /* 4px */
+$border-radius-sm: 0.5rem; /* 8px */
+$border-radius-md: 0.75rem; /* 12px */
+$border-radius-lg: 1.5rem; /* 24px */
+
+/* Box shadow */
+$box-shadow-sm: 0 4px 12px rgba(18, 25, 84, 0.07);
+$box-shadow-md: 0 6px 14px rgba(18, 25, 84, 0.07);
+$box-shadow-lg: 0 10px 16px rgba(18, 25, 84, 0.07);
+$box-shadow-xl: 0 16px 24px rgba(18, 25, 84, 0.07);

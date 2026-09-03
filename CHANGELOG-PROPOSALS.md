@@ -141,6 +141,453 @@ APPROVED - IMPLEMENTED (merged to staging via PR #25 on 2026-08-28, awaiting mai
 
 ---
 
+## PROPOSAL-2026-005: Vite Migration
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `refactor/vite-migration` |
+| **Spec** | SPEC-P2-02 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Migrate the build tool from Vue CLI (webpack) to Vite (ADR-002):
+- Add `vite` + `@vitejs/plugin-vue`, remove all `@vue/cli-*` / webpack / babel / jest deps
+- Add `vite.config.ts` (@ alias), `vitest.config.ts`, root `index.html`, `src/env.d.ts`
+- Migrate env vars `VUE_APP_*` → `VITE_*`; `process.env` → `import.meta.env`
+- Port the 8 Jest unit tests to Vitest (`@vue/test-utils` + jsdom)
+- Remove `vue.config.js`, `babel.config.js`, `jest.config.js`
+- Rename `.eslintrc.js` → `.eslintrc.cjs` for ES module project
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #27 on 2026-08-31, awaiting main release + tag)
+
+### Approval
+- **Jör Approved:** 2026-08-31, via PR review + merge (#27)
+
+---
+
+## PROPOSAL-2026-006: Split ImageList.vue (SRP)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `refactor/split-image-list` |
+| **Spec** | SPEC-P3-01 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Decompose the `ImageList.vue` God Component into single-responsibility sub-components (EST-M04), single topic — component decomposition only:
+- `src/components/search/SearchBar.vue` — the search form, emits `search(term)`
+- `src/components/seller/SellerCard.vue` — one 3D seller card + its scoped SCSS (moved out of the view); emits `vote(seller)`
+- `src/components/seller/SellerGrid.vue` — responsive column grid of `SellerCard`s; re-emits `vote(seller)`
+- Slim `ImageList.vue` down to orchestration only (store reads, mapping, handlers, state branching, WinnerModal)
+- Behavior identical: search, vote +3, winner modal. No composables (EST-M05) or SCSS 7-1 (EST-M06) in this PR.
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #28 on 2026-08-31, awaiting main release + tag)
+
+### Approval
+- **Jör Approved:** 2026-08-31, via PR review + merge (#28)
+
+---
+
+## PROPOSAL-2026-007: Extract Composables
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `refactor/extract-composables` |
+| **Spec** | SPEC-P3-02 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Move business logic + Pinia store usage out of components/views and into reusable composables (EST-M05), single topic — composable extraction only:
+- Add `src/composables/`: `useLoading`, `useError`, `useImages`, `useSellers`, `useInvoices`, `useContest`
+- Add the missing `getLoading`/`getError` getters to the invoices store so all stores share the same shape
+- Rewire `App.vue`, `ImageList.vue`, `InvoiceForm.vue`, `LandingPage.vue` to consume composables — no direct store calls in `.vue` files
+- Add unit tests for each composable
+- Behavior identical: search, vote +3, winner modal, invoice submit. Note: an invalid invoice form now keeps `loading` untouched (previously a brief flicker) — visible behavior unchanged.
+- Also encodes GOVERNANCE RULE 1B (plain-language specs) in the contract and refreshes the README per Jör's direction, grouped into this branch.
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #29 on 2026-08-31, awaiting main release + tag)
+
+### Approval
+- **Jör Approved:** 2026-08-31, via PR review + merge (#29)
+
+---
+
+## PROPOSAL-2026-008: SCSS 7-1 Architecture
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `feature/scss-7-1-architecture` |
+| **Spec** | SPEC-P3-03 |
+| **Estimate** | 16h |
+| **Submitted By** | Broker |
+
+### Description
+Reorganize the global styles into the classic SCSS 7-1 architecture (EST-M06), single topic — styles organization only:
+- Create `src/styles/` subfolders: `abstracts/`, `base/`, `components/`, `layout/`, `pages/`, `utilities/`, `vendors/`
+- Split the monolith `index.scss` + `_styles.scss` + `_mixin.scss` + `_variables.scss` into single-purpose files per folder
+- Remove dependency on bare element selectors for layout (`nav`, `footer`, `input`, `button`, `ul`) where templates actually use classes — restyle to the real root classes (`.alegra-navbar`, `.footer`, etc.) so components keep their look without global element overrides
+- Move the `.app` shell height rule out of App.vue's scoped block into `layout/_app.scss` (mobile-first)
+- Deduplicate: remove the double `.alegra-color-white`/`.alegra-bg-white` pair present in the old file
+- Single entry `main.scss` imported by `main.ts`; update the two component `@import` paths and drop the empty/vestigial style block in `CarouselFile.vue`
+- Behavior identical. CSS output slightly smaller (~35.74kB → 35.56kB) thanks to the dedup.
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #30 on 2026-08-31, awaiting main release + tag)
+
+### Approval
+- **Jör Approved:** 2026-08-31, via PR review + merge (#30)
+
+---
+
+## PROPOSAL-2026-009: Lazy Loading & Payload Reduction
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-08-31 |
+| **Branch** | `feature/lazy-loading` |
+| **Spec** | SPEC-P3-04 |
+| **Estimate** | 3.5h |
+| **Submitted By** | Broker |
+
+### Description
+Reduce initial load time and wasted bandwidth — single topic: performance / load time (ADS 8.1/8.3):
+- **EST-L03 Route lazy loading:** `src/routes/index.ts` uses dynamic imports, so each screen (Landing, ImageList, InvoiceForm, ErrorFile) compiles into its own chunk loaded on demand → main entry dropped from 189 kB to ~17 kB, with per-route chunks
+- **EST-L04 Image lazy loading:** `SellerCard.vue` card `<img>` gets native `loading="lazy"` so below-the-fold card images are fetched as the user scrolls
+- **EST-L05 Smaller image URLs:** `src/composables/useContest.ts` maps each card to `image.urls.small` instead of `urls.full` (2000+px originals), plus test update
+- Behavior identical. Verified: build splits into per-route chunks, lint clean, 23/23 tests.
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #31 on 2026-08-31)
+
+### Approval
+- **Jör Approved:** 2026-08-31, via PR review + merge (#31)
+
+---
+
+## PROPOSAL-2026-011: Fix Heading Hierarchy (EST-L09)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-01 |
+| **Branch** | `fix/heading-hierarchy` |
+| **Spec** | SPEC-P0-02 |
+| **Estimate** | 0.5h |
+| **Submitted By** | Broker |
+
+### Description
+Fix the page outline so every view has exactly one `<h1>` and headings read h1 → h2 → h3 with no skips (ADS 2.4.6):
+- **Page titles:** LandingPage `h3` → `h1`, ImageList `h5` → `h1`, InvoiceForm `h5` → `h1` — each keeps its current visual size via `.h3`/`.h5` utility classes
+- **Card titles:** SellerCard `h4` → `h2` (now correctly nested under the ImageList `h1`)
+- **Status messages:** LoadingFile and ErrorFile `h4` → `<p>` (they are status text, not headings, and previously left pages heading-less)
+- WinnerModal stays `h2` (correct level for a dialog over the ImageList `h1`)
+- Behavior and appearance identical. Verified: build green, lint clean, 23/23 tests.
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #33 on 2026-09-01)
+
+### Approval
+- **Jör Approved:** 2026-09-01, via PR review + merge (#33)
+
+---
+
+## PROPOSAL-2026-012: Upgrade TypeScript to 5.x (EST-L10)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-01 |
+| **Branch** | `feature/upgrade-typescript` |
+| **Spec** | SPEC-P3-06 |
+| **Estimate** | 4h |
+| **Submitted By** | Broker |
+
+### Description
+Refresh the TypeScript compiler from `~4.5.5` (Vue CLI era, four majors behind) to `^5.9.3` — the last old tool now that Vite, Pinia, SCSS 7-1 and lazy-loading are done (ADS Phase-3 Quality & DX checklist):
+- `package.json` `typescript` devDependency `~4.5.5` → `^5.9.3`, lockfile regenerated; the only installed package change
+- No source or config change: the app doesn't type-check at build (esbuild), lint is syntax-only (`@typescript-eslint` 5.62 without type-aware rules), `skipLibCheck` is on
+- Empirically verified: lint green, 23/23 tests, build green; `tsc --noEmit` adds zero new errors (the same 4 pre-existing test/config type errors remain — a separate concern)
+- Establishes the version baseline EST-L11 (ESLint + Prettier upgrade) needs for TS-5-compatible linting
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #34 on 2026-09-01)
+
+### Approval
+- **Jör Approved:** 2026-09-01, via PR review + merge (#34)
+
+---
+
+## PROPOSAL-2026-013: Upgrade ESLint + Prettier (EST-L11)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-01 |
+| **Branch** | `feature/upgrade-linting` |
+| **Spec** | SPEC-P3-07 |
+| **Estimate** | 4h |
+| **Submitted By** | Broker |
+
+### Description
+Rebuild the lint layer on the modern toolchain and turn on type-aware rules (ADS Phase-3 checklist):
+- **Toolchain swap:** ESLint 7.32 → `^9.39.5` (flat config), `@typescript-eslint/*` 5.62 → `typescript-eslint` `^8.69.0`, `eslint-plugin-vue` 8 → `^10.10.0`, `vue-eslint-parser` → 10.4.1, Prettier 2 → `^3.9.6`, `eslint-config-prettier` → 10, `eslint-plugin-prettier` → latest flat build, added `globals`; removed all 2021-era legacy packages
+- **Config:** `.eslintrc.cjs` → `eslint.config.js` (flat config, ESM); `.prettierrc.json` pins `trailingComma: "es5"` so Prettier 3's changed default doesn't reformat the repo; `lint` script now `eslint src tests` (ESLint 9 drops `--ext`)
+- **Type-aware rules ON:** `@typescript-eslint/strict-type-checked` for `.ts`/`.tsx` (chosen per the spec's empirical gate — `recommendedTypeChecked` passed clean, `strictTypeChecked` surfaced only 3 small real issues, all fixed: a void-return arrow shorthand in `useSellers.ts`, an unguarded `Authorization` template literal in `apiService.ts` (`?? ""`), and a `globalThis`-cast for the `ResizeObserver` polyfill guard in `tests/unit/setup.ts`); `.vue` SFCs keep non-type-aware `vue3-recommended` + prettier
+- **Real issues fixed (no suppressions, no `eslint-disable`):** typed API contracts (`getSellers(): Promise<Seller[]>`, `createInvoice(): Promise<InvoiceResponse>`), `getErrorMessage` reused in both services, `void router.push` for a floating promise, `vi.hoisted` mocks replacing unbound `vi.mocked(method)` passes, typed `globalThis.ResizeObserver`
+- Verified: `npm run lint` clean, 23/23 tests, build green (128 modules)
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #35 on 2026-09-01)
+
+### Approval
+- **Jör Approved:** 2026-09-01, via PR review + merge (#35)
+
+---
+
+## PROPOSAL-2026-014: Axios Interceptors & Timeout (EST-M07)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/axios-interceptors` |
+| **Spec** | SPEC-P4-01 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Centralize Alegra HTTP error handling and add a timeout. Establishes a shared Axios client with a 10s `timeout` and a response interceptor that normalizes every Alegra error and shows a single toast (EST-M07):
+- `src/services/axiosClient.ts` (new) — one Axios instance, `timeout: API.TIMEOUT_MS`, response interceptor rejects with a normalized `Error` + single toast
+- `src/services/apiService.ts` — consumes `axiosClient`, drops per-call toast/error duplication
+- `src/stores/sellersStore.ts` — removes its redundant toast, fixing the existing double-toast on sellers failures
+- `src/utils/getErrorMessage.ts` — friendly message for timeouts
+- `src/config/index.ts` — `API.TIMEOUT_MS = 10000` (removes magic number)
+- Unsplash flow intentionally untouched (unsplash-js is a separate HTTP stack, already resilient via `IMAGES.FALLBACK_URL`)
+
+### Status
+APPROVED - IMPLEMENTED (merged to staging via PR #37 on 2026-09-02)
+
+### Approval
+- **Jör Approved:** 2026-09-02, verbal + via PR merge (#37)
+- **Notes:** no spec existed before; SPEC-P4-01 created and approved.
+
+---
+
+## PROPOSAL-2026-015: Standardize Composition API (EST-M03)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/composition-api-standardization` |
+| **Spec** | SPEC-P4-02 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Rewrite the last four Options-API components to `<script setup lang="ts">` (EST-M03), removing the Options-API vs Composition-API split:
+- `NavbarFile.vue` — `methods.goHome()` → `useRouter()` (`this.$router` gone)
+- `WinnerModal.vue` — `methods.proceed()` → `defineEmits` + `defineProps` (`this.$emit` gone)
+- `LoadingFile.vue` — state-less `defineComponent` → empty `<script setup lang="ts">`
+- `FooterFile.vue` — state-less `defineComponent` → empty `<script setup lang="ts">`
+- Existing unit tests kept green (`navbar-file.spec.ts` `$router` mock verified)
+- Visual output identical; no markup/SCSS/copy changes
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
+## PROPOSAL-2026-016: GitHub Actions CI Pipeline (EST-L02)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/ci-pipeline` |
+| **Spec** | SPEC-P4-03 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Add a GitHub Actions CI pipeline that automatically runs the repo's own checks on every push/PR to `staging`/`main` (EST-L02):
+- `.github/workflows/ci.yml` — single `ci` job: `npm ci` → lint → type-check → unit tests → build
+- `package.json` — add `type-check` script (`tsc --noEmit`) so CI and devs share one command
+- Companion fix: `tests/unit/composables/useContest.spec.ts` had 2 pre-existing type errors that `vite build` (esbuild) did not surface; added a typed `makeImage()` fixture so the new `type-check` step starts green (CI would otherwise be red on day one)
+- No deploy/secret handling in this workflow (Netlify deploy stays separate)
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
+## PROPOSAL-2026-017: Remove Unused Dependencies (EST-M09)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/remove-unused-deps` |
+| **Spec** | SPEC-P4-04 |
+| **Estimate** | 0.5h |
+| **Submitted By** | Broker |
+
+### Description
+Remove Vue-CLI-era dependencies that are dead after the Vite + `<script setup>` migration (EST-M09):
+- `core-js` — Babel polyfill helper, unused under esbuild/Vite
+- `dotenv` — Vite reads env via `import.meta.env` natively; `dotenv` never referenced
+- `vue-class-component` — only used by Options-API class-style components, eliminated in EST-M03
+- Verified via grep across `src`, `tests`, and configs: zero import sites for all three
+- `node-sass` already absent from `package.json` (SCSS uses `sass` under Vite) — no action needed there
+- Behavior unchanged; all CI gates (lint, type-check, 23/23 tests, build) re-verified green after removal
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
+## PROPOSAL-2026-018: Complete `<script setup>` Conversion (EST-M03 follow-up)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/script-setup-complete` |
+| **Spec** | SPEC-P4-05 |
+| **Estimate** | 3h |
+| **Submitted By** | Broker |
+
+### Description
+Convert the last five `defineComponent` components to `<script setup lang="ts">`, finishing Composition-API uniformity started in EST-M03:
+- `CarouselFile.vue` — object-form `defineProps` keeps the custom `images` validator
+- `ErrorFile.vue` — type-only `defineProps<{ message: string }>()`
+- `search/SearchBar.vue` — `ref` + type-only props + emit
+- `seller/SellerCard.vue` — type-only props + emit
+- `seller/SellerGrid.vue` — type-only array props + emit
+- Existing `error-file.spec.ts` / `carousel-file.spec.ts` still pass unchanged — `<script setup>` exposes runtime `props` metadata (required/validator), so no test rewrites required
+- After this, all 9 components use `<script setup lang="ts">` (zero `defineComponent`); visual output identical
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
+## PROPOSAL-2026-019: Husky + lint-staged Pre-Commit Hooks (EST-L01)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/husky-lint-staged` |
+| **Spec** | SPEC-P4-06 |
+| **Estimate** | 2h |
+| **Submitted By** | Broker |
+
+### Description
+Add local pre-commit hooks that lint staged source files, complementing the remote CI (EST-L02):
+- Add `husky` (^9.1.7) + `lint-staged` (^17.4.1) as devDependencies
+- `package.json` — `prepare: "husky"` script (auto-installs hooks on `npm install`) + `lint-staged` config: `*.{ts,tsx,vue,js}` → `eslint --fix`
+- `.husky/pre-commit` hook (runs `npx lint-staged`); the husky-managed `_` internal dir is git-ignored
+- Verified manually: a staged `.ts` file with `any` blocks the commit (lint-staged errors + reverts staging); exit 1
+- All CI gates (lint, type-check, 23/23 tests, build) re-verified green
+
+### Status
+IMPLEMENTED (merged via PR #43)
+
+### Approval
+- **Jör Approved:** yes
+
+---
+
+## PROPOSAL-2026-020: Deliver the Open Graph / Twitter preview image (EST-L08)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/est-l08-open-graph` |
+| **Spec** | SPEC-P4-07 |
+| **Estimate** | 1.5h |
+| **Submitted By** | Broker |
+
+### Description
+The SEO metadata (SPEC-P3-05, merged) added all `og:*` / `twitter:*` tags to `index.html` — including `og:image`/`twitter:image` → `/og-image.png` (1200×630) — but the referenced asset **never existed** in `public/`, so social previews 404'd on the image. This was even flagged as a known risk in SPEC-P3-05 §8. EST-L08 is the missing piece:
+- Generated a real, valid branded `public/og-image.png` (1200×630, PNG signature verified, ~15.5 KB) — brand teal `#00b19d` with white "Imágenes del mundo" / "Concurso de vendedores · Vota por tu favorito"
+- Confirmed `vite build` copies it to `dist/og-image.png` (served at `/og-image.png`, matching the unchanged tags)
+- `og:image`/`twitter:image` values, `index.html`, and `og:image:width/height` left untouched
+- No code changed; gates re-verified (lint 0, type-check 0, tests green, build ✓)
+
+### Status
+IMPLEMENTED (merged via PR #44)
+
+### Approval
+- **Jör Approved:** yes
+
+---
+
+## PROPOSAL-2026-021: Fix heading hierarchy + sync L10/L11 status (EST-L09)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `fix/l09-heading-hierarchy` |
+| **Spec** | SPEC-P4-08 |
+| **Estimate** | 1h |
+| **Submitted By** | Broker |
+
+### Description
+Close the ADS 2.4.6 heading inconsistency and correct the EST backlog:
+- **EST-L09 heading hierarchy:** audit found the *semantic* outline already correct (one `<h1>` per view; nested `<h2>` in `WinnerModal`/`SellerCard`, no skips). The real inconsistency was **visual**: page-title `<h1>` used `h5` on `ImageList`/`InvoiceForm` but `h3` on `LandingPage`. Normalized all three to `h3` so the primary heading reads consistently across views. Semantic tags untouched.
+- **EST-L10 / EST-L11 already met:** toolchain runs TypeScript 5.9.3, ESLint 9 (flat config), Prettier 3.9.6 (via merged SPEC-P3-06/P3-07). Marked both as `MET` in `ESTIMATIONS-AND-RESOLUTIONS.md`; no upgrade code left to do.
+
+### Status
+IMPLEMENTED (merged via PR #45)
+
+### Approval
+- **Jör Approved:** yes
+
+---
+
+## PROPOSAL-2026-022: Phase-5 UI/UX Overhaul — theme, i18n, 404, responsive, polish (EST-F04)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/phase5-ui-ux` |
+| **Spec** | SPEC-P5-01 |
+| **Estimate** | 14h |
+| **Submitted By** | Broker |
+
+### Description
+Unified Phase-5 UI/UX pass covering:
+- **Theme (light/dark):** CSS custom properties forwarded through the existing SCSS palette tokens in `_variables.scss`; `useTheme()` composable (localStorage + `prefers-color-scheme`); `ThemeToggle.vue` in the navbar; `color-scheme` theming.
+- **i18n (ES/EN/DE):** `vue-i18n@9`, `src/i18n/{es,en,de}.json`, `LanguageSwitcher.vue`, all templated strings localized, reactive `lang`, locale persisted.
+- **404:** `NotFound.vue` + catch-all `/:pathMatch(.*)*` route.
+- **Navbar:** "go back" button hidden on the landing page (kept on other pages).
+- **Responsive:** fixed `grid-col-xs-11` gutters; results grid now xs12/sm6/md4/lg3; landing + results layout polished.
+- **Images:** carousel slides and seller-card images get border-radius + `object-fit` for system consistency.
+- **Results/vote:** replaced the 3D hover-gimmick seller card with a clean rounded card (visible title, points, vote).
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

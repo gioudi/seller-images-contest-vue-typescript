@@ -1,0 +1,38 @@
+/* ================================================================
+   SCSS 7-1 architecture — single entry file.
+   Order matters: abstracts first (tokens/mixins), then base,
+   components, layout, pages, utilities, vendors last.
+   ================================================================ */
+
+// 1. Abstracts — design tokens (colors, type, spacing) + recipes
+@import "./abstracts/variables";
+@import "./abstracts/functions";
+@import "./abstracts/mixins";
+
+// 2. Base — reset + defaults every page needs
+@import "./base/reset";
+@import "./base/typography";
+@import "./base/container";
+@import "./base/grid";
+@import "./base/elements";
+
+// 3. Components — the app's building blocks
+@import "./components/navbar";
+@import "./components/footer";
+@import "./components/panel";
+@import "./components/modal";
+@import "./components/loading";
+
+// 4. Layout — page/room layout
+@import "./layout/app";
+
+// 5. Pages — single-page overrides (currently minimal)
+@import "./pages/init";
+
+// 6. Utilities — one-purpose helpers
+@import "./utilities/flex";
+@import "./utilities/spacing";
+@import "./utilities/color";
+
+// 7. Vendors — third-party resources last
+@import "./vendors/fonts";

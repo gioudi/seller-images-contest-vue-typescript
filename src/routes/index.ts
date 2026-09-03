@@ -1,16 +1,30 @@
-import LandingPage from "@/views/LandingPage.vue";
-import ImageList from "@/views/ImageList.vue";
-import InvoiceForm from "@/views/InvoiceForm.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-  { path: "/", name: "LandingPage", component: LandingPage },
-  { path: "/ImageList", name: "ImageList", component: ImageList },
-  { path: "/InvoiceForm", name: "InvoiceForm", component: InvoiceForm },
+  {
+    path: "/",
+    name: "LandingPage",
+    component: () => import("@/views/LandingPage.vue"),
+  },
+  {
+    path: "/ImageList",
+    name: "ImageList",
+    component: () => import("@/views/ImageList.vue"),
+  },
+  {
+    path: "/InvoiceForm",
+    name: "InvoiceForm",
+    component: () => import("@/views/InvoiceForm.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("@/views/NotFound.vue"),
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 

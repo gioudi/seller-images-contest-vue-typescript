@@ -1,8 +1,9 @@
+/* Container — mobile-first: full width, then capped widths as the screen grows. */
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: .9375rem;
-  padding-right: .9375rem;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
   width: 100%;
 
   @media (min-width: 20.625rem) {
@@ -22,12 +23,10 @@
   }
 }
 
-
 .container-sm {
-  @extend .container ;
+  @extend .container;
   max-width: 40rem;
 }
-
 
 .container-md {
   @extend .container;

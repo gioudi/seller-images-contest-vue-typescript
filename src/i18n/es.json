@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "appName": "Imágenes del mundo",
+    "home": "Volver al inicio",
+    "back": "Volver",
+    "rightsReserved": "Todos los derechos reservados."
+  },
+  "common": {
+    "search": "Buscar",
+    "searchPlaceholder": "Buscar imágenes",
+    "vote": "Votar",
+    "voted": "Votado"
+  },
+  "landing": {
+    "title": "Descubre Imágenes que Inspiran",
+    "subtitle": "Busca y encuentra imágenes asombrosas para cualquier proyecto. Simplemente ingresa una palabra clave para comenzar.",
+    "label": "¿Qué estás buscando?",
+    "emptyQuery": "Ingrese una palabra en el input"
+  },
+  "results": {
+    "title": "Lista de Imágenes que Inspiran",
+    "label": "¿Quieres buscar algo nuevo?"
+  },
+  "contest": {
+    "points": "{n} puntos"
+  },
+  "invoice": {
+    "title": "Crear factura de venta!",
+    "date": "Fecha:",
+    "dueDate": "Fecha de venta:",
+    "clientId": "Id Cliente:",
+    "productId": "Id Producto:",
+    "total": "Total:",
+    "submit": "Crear factura",
+    "allFieldsRequired": "Todos los campos son necesarios!"
+  },
+  "winner": {
+    "title": "Felicitationes!",
+    "message": "El ganador es {name}!",
+    "continue": "Continuar"
+  },
+  "loading": {
+    "message": "Procesando su solicitud, por favor espere..."
+  },
+  "error": {
+    "title": "Error!",
+    "message": "No se pudo cargar la información."
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "message": "Lo sentimos, la página que buscas no existe.",
+    "goHome": "Volver al inicio"
+  },
+  "theme": {
+    "toLight": "Cambiar a modo claro",
+    "toDark": "Cambiar a modo oscuro"
+  }
+}

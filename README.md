@@ -1,102 +1,118 @@
-# Image test
+# Seller Images Contest
 
-Hi there!
+A Vue 3 application that lets users search inspiring images (Unsplash), vote for their favorite sellers in a points-based contest, and create a sales invoice via the Alegra API.
 
-I hope you are doing well. In this project, you can find a feature to consume an API and displays a list of sellers and images based on the customer's wish.
-
-For frontend, I used Vue and Vuex. As a developer always looking to improve the code quality, I have integrated TypeScript and ESLint as well.
-
-## Links
-- [Demo](https://imagenes-mundo.netlify.app/)
-
+This repo has been progressively hardened under a **governance-driven** workflow: Spec-Driven Development, small pull requests, state management on Pinia, and a build/test setup on Vite + Vitest. See [Governance](GOVERNANCE-CONTRACT.md) and [Architecture](ADS-DOCUMENT.md).
 
 ## Features
-- Image Search: Users can search for inspiring images using a search term.
-- Invoice Creation: Users can create invoices by filling out a form with required details.
-- Dynamic Data Fetching: Integrates with external APIs to fetch and display data.
 
-## Technologies 💻
+- **Image search** — search Unsplash by keyword ("¿Qué estás buscando?").
+- **Sales contest** — each seller is matched to an image; vote +3 points; when a seller reaches 20 points the contest ends and a winner is shown.
+- **Invoice creation** — fill a form to create a sales invoice through the Alegra API.
 
+## Demo
 
-- Vue 3
-- TypeScript
-- Vuex
-- SCSS
-- Vue Router
-- Axios
-- Vue3 Carousel
+- [Live demo](https://imagenes-mundo.netlify.app/)
 
-## Author
+## Technologies
 
-- **Sergio Penagos** 🔥
-  - [LinkedIn](https://www.linkedin.com/in/analyst-sergio-penagos)
-  - [GitHub](https://github.com/gioudi)
-  - [GitHub2](https://github.com/SergioVass)
-  - 
+| Area | Stack |
+|------|-------|
+| Framework | [Vue 3](https://vuejs.org/) (Composition API, `<script setup>` ready) |
+| Language | [TypeScript](https://www.typescriptlang.org/) |
+| State | [Pinia](https://pinia.vuejs.org/) |
+| Build & dev server | [Vite](https://vitejs.dev/) |
+| Testing | [Vitest](https://vitest.dev/) + [@vue/test-utils](https://test-utils.vuejs.org/) + jsdom |
+| Routing | [Vue Router](https://router.vuejs.org/) |
+| HTTP / APIs | [Axios](https://axios-http.com/) + [unsplash-js](https://github.com/unsplash/unsplash-js) |
+| Styling | SCSS (Sass) |
+| Linting | ESLint + Prettier |
+| Notifications | vue-toastification |
 
-## Installation
+## Getting Started
 
 ### Prerequisites
-- Node.js (version 14.x or higher recommended)
-- npm (version 6.x or higher)
 
-1. Clone the repository: `git clone https://github.com/gioudi/alegra-test-vue-typescript.git`
-2. Navigate to the project directory: `cd alegra-test-vue-typescript`
-3. Install dependencies:
-    `npm install`
-4. Build prod:
-    `npm run build`
-5. Lint and fix files
-    `npm run lint --fix`
+- Node.js **18+** (project runs on Node 22.x; Vite 8 requires a modern Node)
+- npm
+
+### Installation
+
+```bash
+# 1. Clone
+git clone https://github.com/gioudi/seller-images-contest-vue-typescript.git
+cd seller-images-contest-vue-typescript
+
+# 2. Install dependencies
+npm install
+
+# 3. Configure environment variables (see below)
+cp .env.example .env
+```
+
+### Environment Variables
+
+Create a `.env` file from `.env.example`. **Never commit `.env` with real keys.**
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_ALEGRA_API_KEY` | Alegra API key (Basic Auth header) |
+| `VITE_ALEGRA_BASE_URL` | Alegra base URL (defaults to `https://api.alegra.com/api/v1/`) |
+| `VITE_UNSPLASH_ACCESS_KEY` | Unsplash API access key |
+
+### Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` / `npm run serve` | Start the Vite dev server with hot reload |
+| `npm run build` | Build a production bundle into `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run test:unit` | Run the Vitest unit suite once |
+| `npm run test:watch` | Run Vitest in watch mode |
+| `npm run lint` | Lint `src` and `tests` (ESLint + Prettier) |
 
 ## Usage
 
-### Search for Images
+1. **Search images** — on the landing page, type a keyword and click **Buscar** to go to the image list.
+2. **Vote** — on the list, click **Votar** on a seller card to give +3 points. The contest ends when a seller reaches 20 points.
+3. **Create an invoice** — after a winner is chosen, click through to the invoice form and submit the required details.
 
-- Navigate to the search page.
-- Enter a search term in the input field.
-- Click the "Buscar" button to fetch images.
+## Project Structure
 
-### Select a winner
-- Navigate to list of images
-- Vote the best image
-- If a seller get 20 points, the game finish
+```
+seller-images-contest-vue-typescript/
+  src/
+    components/          # Reusable UI components (bylayer, e.g. search/, seller/)
+    composables/         # Reusable logic helpers (useImages, useSellers, useContest, ...)
+    config/              # App constants (contest rules, URLs)
+    routes/              # Vue Router routes
+    services/            # API clients (Alegra, Unsplash)
+    stores/              # Pinia stores + per-store types
+    styles/              # Global SCSS (variables, base, mixins)
+    utils/               # Shared utilities (toast, error messages)
+    views/               # Page components (LandingPage, ImageList, InvoiceForm)
+    App.vue              # Root component
+    main.ts              # App bootstrap
+  specs/                 # Governance specs per phase
+  tests/unit/            # Vitest unit tests
+  GOVERNANCE-CONTRACT.md # How the project is run
+  ADS-DOCUMENT.md        # Architecture Design Specification
+```
 
-### Create an invoice
-- Navigate to the invoice creation page.
-- Fill out the form with the required details.
-- Click the "Crear factura" button to submit the form.
+## Contributing
 
-## Strcuture
+This project follows the rules in [GOVERNANCE-CONTRACT.md](GOVERNANCE-CONTRACT.md):
 
-- seller-images-contest-vue-typescript/
-  - public/
-  - src/
-    - assets/
-    - components/
-      - CarouselFile.vue
-      - ErrorFile.vue
-      - LoadingFile.vue
-    - store/
-      - index.ts
-      - modules/
-        - images.ts
-        - invoices.ts
-    - views/
-      - LandingPage.vue
-      - ImageList.vue
-      - InvoiceForm.vue
-    - App.vue
-    - main.ts
-    - router/
-      - index.ts
-  - .gitignore
-  - package.json
-  - README.md
-  - tsconfig.json
+- Every change needs an approved spec (`specs/`) before code is written.
+- Work happens on a dedicated branch and lands via a small Pull Request into `staging`.
+- Only the project owner merges to `main` and tags releases.
 
+## Architecture & Decisions
+
+- [Architecture Design Specification (ADS)](ADS-DOCUMENT.md)
+- [Architecture Decision Records (DECISIONS)](DECISIONS.md)
+- [Estimations & Resolutions](ESTIMATIONS-AND-RESOLUTIONS.md)
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for more information.
 
-
+This project is licensed under the MIT License. See the `LICENSE` file for details.

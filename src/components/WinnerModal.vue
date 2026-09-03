@@ -1,34 +1,31 @@
 <!-- WinnerModal.vue -->
 <template>
-  <div v-if="show" class="alegra-modal">
+  <div
+    v-if="show"
+    class="alegra-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="winnerModalTitle"
+  >
     <div class="alegra-modal-content">
-      <h2>Felicitationes!</h2>
-      <p>El ganador es {{ winnerName }}!</p>
-      <button @click="proceed">Continuar</button>
+      <h2 id="winnerModalTitle">{{ $t("winner.title") }}</h2>
+      <p>{{ $t("winner.message", { name: winnerName }) }}</p>
+      <button class="btn btn-primary mt-3" @click="proceed">
+        {{ $t("winner.continue") }}
+      </button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+defineProps<{
+  show: boolean;
+  winnerName: string;
+}>();
 
-export default defineComponent({
-  name: "WinnerModal",
-  props: {
-    show: {
-      type: Boolean,
-      required: true,
-    },
-    winnerName: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: ["proceed"],
-  methods: {
-    proceed() {
-      this.$emit("proceed");
-    },
-  },
-});
+const emit = defineEmits<{
+  (e: "proceed"): void;
+}>();
+
+const proceed = () => emit("proceed");
 </script>

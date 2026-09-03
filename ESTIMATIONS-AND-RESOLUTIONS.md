@@ -425,6 +425,7 @@
 | **Complexity** | M |
 | **Estimated Time** | 4 hours |
 | **Branch** | `feature/upgrade-typescript` |
+| **Status** | **MET** — already satisfied: project on TypeScript ^5.9.3 (merged via SPEC-P3-06) |
 
 ### EST-L11: Upgrade ESLint + Prettier
 | Field | Value |
@@ -434,6 +435,7 @@
 | **Complexity** | M |
 | **Estimated Time** | 4 hours |
 | **Branch** | `feature/upgrade-linting` |
+| **Status** | **MET** — already satisfied: project on ESLint ^9 (flat config) + Prettier ^3 (merged via SPEC-P3-07) |
 
 ---
 
@@ -566,6 +568,34 @@
 
 ---
 
+### EST-F04: UI/UX Design Enhancement
+
+| Field | Value |
+|-------|-------|
+| **ADS Reference** | New Feature |
+| **Priority** | P3 MEDIUM |
+| **Complexity** | XL |
+| **Estimated Time** | 28 hours |
+| **Branch** | `feature/ui-ux-enhancement` |
+| **Summary** | Enhance the visual design and user experience across all screens — modernized landing, refined search/list card interactions, clearer contest/voting affordances, and a polished invoice flow. Goal is a more professional, marketable look for the live demo. |
+| **Dependencies** | Should be scheduled after Phase 4 (CI, EST-L02) and logically after the color/theme work lands so enhancements build on the token system (EST-F03). |
+
+#### Sub-tasks
+
+| # | Task | Time | Branch |
+|---|------|------|--------|
+| F04-a | Visual audit: capture current screens, list UX gaps and inconsistent styling | 3h | `feature/ui-ux-enhancement` |
+| F04-b | Design-token pass: ensure colors/spacing/typography use tokens; tighten contrast (AA) | 4h | (same branch) |
+| F04-c | Redesign landing view (hero, search CTA, empty/loading/error states) | 5h | (same branch) |
+| F04-d | Refine seller cards + voting interactions (hover, selected/voted feedback, transitions) | 5h | (same branch) |
+| F04-e | Polish the invoice form + confirmation/winner flows and their states | 4h | (same branch) |
+| F04-f | Component state polish: consistent buttons, focus styles, spacing rhythm across views | 4h | (same branch) |
+| F04-g | Cross-view QA: desktop/tablet/mobile, no regressions vs current behavior | 3h | `feature/ui-ux-qa` |
+
+**Out of scope:** new feature logic (i18n, theme toggle, a11y reader already tracked as EST-F01/F02/F03), backend changes, behavior changes to contest/invoice rules.
+
+---
+
 ## 8. Phase-by-Phase Execution Plan
 
 ### Phase 0: Emergency Fixes (Day 1)
@@ -635,14 +665,15 @@
 | **Phase Total** | | **15.2 hours** |
 
 ### Phase 5: New Features (Days 18-28)
-**Goal:** I18n, Accessibility, Theme Toggle.
+**Goal:** I18n, Accessibility, Theme Toggle, UI/UX Enhancement.
 
 | Est. | Task | Hours |
 |------|------|-------|
 | EST-F01 | I18n (3 languages) | 40.0 |
 | EST-F02 | Accessibility reader | 32.0 |
 | EST-F03 | Theme toggle | 24.0 |
-| **Phase Total** | | **96.0 hours** |
+| EST-F04 | UI/UX enhancement | 28.0 |
+| **Phase Total** | | **124.0 hours** |
 
 ### Phase 6: SEO & Polish (Days 29-31)
 **Goal:** Production-ready with SEO and documentation.
