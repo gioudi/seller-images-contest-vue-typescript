@@ -2,6 +2,11 @@
    Kept as deliberate base styling so forms keep their look without
    reach-in from components. */
 
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
 input {
   @include alegra-input();
 }

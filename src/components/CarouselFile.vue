@@ -34,3 +34,16 @@ defineProps({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+@import "../styles/abstracts/variables";
+
+.alegra-carousel__slide {
+  img {
+    width: 100%;
+    border-radius: $border-radius-md;
+    object-fit: cover;
+    box-shadow: $box-shadow-md;
+  }
+}
+</style>

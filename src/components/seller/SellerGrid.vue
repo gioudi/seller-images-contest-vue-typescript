@@ -3,7 +3,7 @@
     <div
       v-for="seller in sellers"
       :key="seller.id"
-      class="grid-col-xs-11 grid-col-sm-12 grid-col-md-4 grid-col-lg-4"
+      class="grid-col-xs-12 grid-col-sm-6 grid-col-md-4 grid-col-lg-3"
     >
       <SellerCard :seller="seller" @vote="emitVote" />
     </div>

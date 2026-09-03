@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <p>&copy; Sergio Penagos All rights reserved.</p>
+    <p>&copy; Sergio Penagos {{ $t("nav.rightsReserved") }}</p>
   </footer>
 </template>
 

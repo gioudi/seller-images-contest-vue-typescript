@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "appName": "Bilder der Welt",
+    "home": "Zurück zur Startseite",
+    "back": "Zurück",
+    "rightsReserved": "Alle Rechte vorbehalten."
+  },
+  "common": {
+    "search": "Suchen",
+    "searchPlaceholder": "Bilder suchen",
+    "vote": "Abstimmen",
+    "voted": "Abgestimmt"
+  },
+  "landing": {
+    "title": "Entdecke inspirierende Bilder",
+    "subtitle": "Suche und finde erstaunliche Bilder für jedes Projekt. Gib einfach ein Stichwort ein, um zu starten.",
+    "label": "Wonach suchst du?",
+    "emptyQuery": "Bitte gib ein Wort ein"
+  },
+  "results": {
+    "title": "Liste inspirierender Bilder",
+    "label": "Suchst du etwas Neues?"
+  },
+  "contest": {
+    "points": "{n} Punkte"
+  },
+  "invoice": {
+    "title": "Verkaufsrechnung erstellen!",
+    "date": "Datum:",
+    "dueDate": "Verkaufsdatum:",
+    "clientId": "Kunden-ID:",
+    "productId": "Produkt-ID:",
+    "total": "Gesamt:",
+    "submit": "Rechnung erstellen",
+    "allFieldsRequired": "Alle Felder sind erforderlich!"
+  },
+  "winner": {
+    "title": "Glückwunsch!",
+    "message": "Der Gewinner ist {name}!",
+    "continue": "Weiter"
+  },
+  "loading": {
+    "message": "Ihre Anfrage wird verarbeitet, bitte warten..."
+  },
+  "error": {
+    "title": "Fehler!",
+    "message": "Die Informationen konnten nicht geladen werden."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "message": "Entschuldigung, die gesuchte Seite existiert nicht.",
+    "goHome": "Zurück zur Startseite"
+  },
+  "theme": {
+    "toLight": "Zum hellen Modus wechseln",
+    "toDark": "Zum dunklen Modus wechseln"
+  }
+}

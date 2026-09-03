@@ -6,6 +6,7 @@ import Toast, { PluginOptions } from "vue-toastification";
 
 import "vue-toastification/dist/index.css";
 import router from "./routes";
+import i18n from "./i18n";
 import { TOAST } from "@/config";
 
 const options: PluginOptions = {
@@ -27,4 +28,5 @@ const pinia = createPinia();
 app.use(pinia);
 app.use(Toast, options);
 app.use(router);
+app.use(i18n);
 app.mount("#alegra-test");
