@@ -8,7 +8,11 @@
     </article>
     <article v-if="!loading && !error" class="grid-col-sm-12">
       <h1 class="h3 mb-4">{{ $t("results.title") }}</h1>
-      <SearchBar :initial-term="initialTerm" @search="handleGetNewImages" />
+      <SearchBar
+        :initial-term="initialTerm"
+        @search="handleGetNewImages"
+        @clear="handleClearSearch"
+      />
       <div v-if="noResults" class="no-results">
         {{ $t("results.noResults") }}
       </div>
@@ -48,6 +52,7 @@ onMounted(() => {
 });
 
 const handleGetNewImages = contest.searchNewImages;
+const handleClearSearch = contest.clearSearch;
 const handleUpdateSellerPoints = contest.vote;
 const handleContinue = contest.handleContinue;
 </script>
