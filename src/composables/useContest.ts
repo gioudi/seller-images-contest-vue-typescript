@@ -47,6 +47,12 @@ export function useContest() {
     });
   };
 
+  const clearSearch = async () => {
+    await fetchImages("");
+    resetClickable();
+    void router.replace({ name: "ImageList" });
+  };
+
   const handleContinue = () => {
     void router.push({
       name: "InvoiceForm",
@@ -64,6 +70,7 @@ export function useContest() {
     vote,
     fetchInitialImages,
     searchNewImages,
+    clearSearch,
     handleContinue,
   };
 }
