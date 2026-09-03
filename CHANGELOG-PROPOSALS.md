@@ -560,6 +560,34 @@ IMPLEMENTED (merged via PR #45)
 
 ---
 
+## PROPOSAL-2026-022: Phase-5 UI/UX Overhaul — theme, i18n, 404, responsive, polish (EST-F04)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `feature/phase5-ui-ux` |
+| **Spec** | SPEC-P5-01 |
+| **Estimate** | 14h |
+| **Submitted By** | Broker |
+
+### Description
+Unified Phase-5 UI/UX pass covering:
+- **Theme (light/dark):** CSS custom properties forwarded through the existing SCSS palette tokens in `_variables.scss`; `useTheme()` composable (localStorage + `prefers-color-scheme`); `ThemeToggle.vue` in the navbar; `color-scheme` theming.
+- **i18n (ES/EN/DE):** `vue-i18n@9`, `src/i18n/{es,en,de}.json`, `LanguageSwitcher.vue`, all templated strings localized, reactive `lang`, locale persisted.
+- **404:** `NotFound.vue` + catch-all `/:pathMatch(.*)*` route.
+- **Navbar:** "go back" button hidden on the landing page (kept on other pages).
+- **Responsive:** fixed `grid-col-xs-11` gutters; results grid now xs12/sm6/md4/lg3; landing + results layout polished.
+- **Images:** carousel slides and seller-card images get border-radius + `object-fit` for system consistency.
+- **Results/vote:** replaced the 3D hover-gimmick seller card with a clean rounded card (visible title, points, vote).
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

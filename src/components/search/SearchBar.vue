@@ -1,17 +1,21 @@
 <template>
-  <form @submit.prevent="submit">
-    <label for="searchTerm" class="d-flex mb-3"
-      >¿Quieres buscar algo nuevo?
+  <form class="searchbar" @submit.prevent="submit">
+    <label for="searchTerm" class="d-flex mb-3">
+      {{ $t("results.label") }}
     </label>
-    <input
-      id="searchTerm"
-      v-model="term"
-      type="text"
-      class="d-flex form-control"
-      placeholder="Buscar imágenes"
-      required
-    />
-    <button type="submit" class="btn btn-primary my-3">Buscar</button>
+    <div class="searchbar__row">
+      <input
+        id="searchTerm"
+        v-model="term"
+        type="text"
+        class="form-control"
+        :placeholder="$t('common.searchPlaceholder')"
+        required
+      />
+      <button type="submit" class="btn btn-primary">
+        {{ $t("common.search") }}
+      </button>
+    </div>
   </form>
 </template>
 
@@ -30,3 +34,23 @@ const term = ref(props.initialTerm ?? "");
 
 const submit = () => emit("search", term.value);
 </script>
+
+<style lang="scss" scoped>
+.searchbar {
+  margin-bottom: 1.5rem;
+
+  &__row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+
+    input {
+      flex: 1;
+    }
+
+    button {
+      flex: 0 0 auto;
+    }
+  }
+}
+</style>

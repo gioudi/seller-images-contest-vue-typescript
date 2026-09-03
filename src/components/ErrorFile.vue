@@ -2,7 +2,7 @@
   <article class="grid">
     <article class="grid-col-sm-12">
       <div class="error">
-        <p class="h4 alegra-color-dark mt-3 mb-4">Error!</p>
+        <p class="h4 alegra-color-dark mt-3 mb-4">{{ $t("error.title") }}</p>
         <p>{{ message }}</p>
       </div>
     </article>

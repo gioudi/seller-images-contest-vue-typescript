@@ -16,6 +16,11 @@ const routes = [
     name: "InvoiceForm",
     component: () => import("@/views/InvoiceForm.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("@/views/NotFound.vue"),
+  },
 ];
 
 const router = createRouter({

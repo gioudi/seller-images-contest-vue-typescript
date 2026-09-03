@@ -1,7 +1,7 @@
 <template>
   <section class="alegra-loading">
     <p class="h4 mt-3 alegra-color-dark">
-      Procesando su solicitud, por favor espere...
+      {{ $t("loading.message") }}
     </p>
     <article class="alegra-loading__item background-animation">
       <article class="container-circles">

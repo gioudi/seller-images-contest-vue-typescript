@@ -1,29 +1,34 @@
 <template>
-  <section class="alegra-card-container">
-    <div class="alegra-card p-1">
+  <section class="alegra-card">
+    <img
+      class="alegra-card__image"
+      :src="seller.image"
+      :alt="seller.alt_description"
+      loading="lazy"
+    />
+    <div class="alegra-card__body">
       <h2 class="alegra-card__title">
-        {{ seller.name }}-{{ seller.points ?? 0 }} puntos
+        {{ seller.name }}
       </h2>
-      <button
-        v-if="seller.clickable"
-        class="mt-3"
-        type="button"
-        @click="emitVote"
-      >
-        Votar
-      </button>
-      <p v-else>Votado</p>
-      <img
-        class="alegra-card__image"
-        :src="seller.image"
-        :alt="seller.alt_description"
-        loading="lazy"
-      />
+      <p class="alegra-card__points">
+        {{ t("contest.points", { n: seller.points ?? 0 }) }}
+      </p>
     </div>
+    <button
+      v-if="seller.clickable"
+      class="alegra-card__vote"
+      type="button"
+      @click="emitVote"
+    >
+      {{ t("common.vote") }}
+    </button>
+    <p v-else class="alegra-card__voted">{{ t("common.voted") }}</p>
   </section>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
 interface SellerCardData {
   name: string;
   points: number;
@@ -40,95 +45,57 @@ const emit = defineEmits<{
   (e: "vote", seller: SellerCardData): void;
 }>();
 
+const { t } = useI18n();
 const emitVote = () => emit("vote", props.seller);
 </script>
 
 <style lang="scss" scoped>
 @import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
 
-.alegra-card-container {
-  position: relative;
+.alegra-card {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 12rem;
-  height: 14.125rem;
+  flex-direction: column;
+  background: $surface-color;
   border-radius: $border-radius-md;
-  transform-style: preserve-3d;
+  box-shadow: $box-shadow-md;
+  overflow: hidden;
+  text-align: center;
+  height: 100%;
 
-  &:hover {
-    .alegra-card {
-      width: 8.75rem;
-      height: 12rem;
-      transition: 0.5s ease;
-      &::before {
-        background-size: 150% 100%;
-        clip-path: circle(70% at right 100%);
-      }
-    }
-    .alegra-card__title {
-      opacity: 1;
-      transition: 0.5s;
-      transform: translate3d(0, 0, 1.5625rem) rotate(-10deg);
-    }
-    .alegra-card__image {
-      max-height: 8.75rem;
-      transform: translate3d(10%, -50%, 15px);
-    }
+  &__image {
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 0;
   }
 
-  .alegra-card {
-    position: relative;
-    width: 8.75rem;
-    height: 12rem;
-    background: $color-dark;
-    border-radius: $border-radius-md;
-    transform-style: preserve-3d;
-    transition: 0.5s ease;
+  &__body {
+    padding: 0.75rem 1rem;
+  }
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        -45deg,
-        $color-primary-20 15%,
-        $color-primary-70 86%
-      );
-      background-size: 100% 150%;
-      clip-path: circle(55% at right 100%);
-      box-shadow: $box-shadow-md;
-      transform-style: preserve-3d;
-      transform: translate3d(0, 0, 0);
-      transition: 0.5s ease;
-    }
-    &__title {
-      position: absolute;
-      text-align: center;
-      top: 2.5625rem;
-      transform-style: preserve-3d;
-      transform: translate3d(0, 0, 50px) rotate(0deg);
-      font-size: $font-size-h6;
-      font-weight: 900;
-      color: transparent;
-      -webkit-text-stroke: 1px $color-white;
-      font-style: italic;
-      opacity: 0;
-      transition: 0.25s ease;
-    }
-    &__image {
-      position: absolute;
-      top: 48%;
-      left: 50%;
-      max-height: 6.25rem;
-      z-index: 11;
-      transform-style: preserve-3d;
-      transform: translate3d(-25%, -50%, 50px) rotate(0deg);
-      transition: 0.5s;
-    }
+  &__title {
+    font-size: $font-size-h6;
+    font-weight: 700;
+    color: $color-dark;
+    margin-bottom: 0.25rem;
+  }
+
+  &__points {
+    font-size: $font-size-small;
+    color: $color-medium;
+  }
+
+  &__vote {
+    margin: 0 1rem 1rem;
+    @include alegra-button();
+  }
+
+  &__voted {
+    margin: 0 1rem 1rem;
+    font-size: $font-size-small;
+    color: $accent-color;
+    font-weight: 600;
   }
 }
 </style>
