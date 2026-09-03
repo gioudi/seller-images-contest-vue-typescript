@@ -11,9 +11,17 @@ export interface SellerWithImage extends Seller {
 }
 
 export function useContest() {
-  const { images, loading, error, fetchImages } = useImages();
+  const { images, loading, error, hasSearched, fetchImages } = useImages();
   const { sellers, contestEnded, winner, vote, resetClickable } = useSellers();
   const router = useRouter();
+
+  const noResults = computed(
+    () =>
+      hasSearched.value &&
+      !loading.value &&
+      !error.value &&
+      images.value.length === 0
+  );
 
   const sellerWithImages = computed<SellerWithImage[]>(() => {
     const totalImages = images.value.length;
@@ -33,6 +41,10 @@ export function useContest() {
   const searchNewImages = async (term: string) => {
     await fetchImages(term);
     resetClickable();
+    void router.replace({
+      name: "ImageList",
+      query: { q: term },
+    });
   };
 
   const handleContinue = () => {
@@ -45,6 +57,7 @@ export function useContest() {
   return {
     loading,
     error,
+    noResults,
     sellerWithImages,
     contestEnded,
     winner,

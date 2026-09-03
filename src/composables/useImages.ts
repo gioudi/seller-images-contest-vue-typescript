@@ -9,8 +9,9 @@ export function useImages() {
   const images = computed(() => store.getImages);
   const loading = useLoading(store);
   const error = useError(store);
+  const hasSearched = computed(() => store.getHasSearched);
 
   const fetchImages = (term: string) => store.fetchImagesList(term);
 
-  return { images, loading, error, fetchImages };
+  return { images, loading, error, hasSearched, fetchImages };
 }

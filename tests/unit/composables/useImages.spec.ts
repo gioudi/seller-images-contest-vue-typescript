@@ -41,4 +41,17 @@ describe("useImages", () => {
     expect(imageServiceMock.getImagesList).toHaveBeenCalledWith("cute");
     expect(images.value).toEqual(results);
   });
+
+  it("tracks that a search has been performed once it completes", async () => {
+    imageServiceMock.getImagesList.mockResolvedValue({
+      response: { results: [] },
+    });
+
+    const { fetchImages, hasSearched } = useImages();
+    expect(hasSearched.value).toBe(false);
+
+    await fetchImages("cute");
+
+    expect(hasSearched.value).toBe(true);
+  });
 });

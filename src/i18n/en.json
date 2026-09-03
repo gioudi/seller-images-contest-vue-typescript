@@ -19,7 +19,8 @@
   },
   "results": {
     "title": "Inspiring Images List",
-    "label": "Looking for something new?"
+    "label": "Looking for something new?",
+    "noResults": "No images were found for your search. Try a different term."
   },
   "contest": {
     "points": "{n} points"
