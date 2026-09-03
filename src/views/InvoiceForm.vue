@@ -1,7 +1,7 @@
 <template>
   <article class="grid invoice-form">
     <article class="grid-col-xs-12 grid-col-md-6 form-wrapper">
-      <h1 class="h5 mb-4 mt-3">Crear factura de venta!</h1>
+      <h1 class="h3 mb-4 mt-3">Crear factura de venta!</h1>
       <form class="form-container" @submit.prevent="handleSubmitFormData">
         <div class="mb-3 form-field">
           <label for="date" class="normal mb-1">Fecha:</label>

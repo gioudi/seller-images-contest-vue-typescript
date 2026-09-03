@@ -537,6 +537,29 @@ IMPLEMENTED (merged via PR #44)
 
 ---
 
+## PROPOSAL-2026-021: Fix heading hierarchy + sync L10/L11 status (EST-L09)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-02 |
+| **Branch** | `fix/l09-heading-hierarchy` |
+| **Spec** | SPEC-P4-08 |
+| **Estimate** | 1h |
+| **Submitted By** | Broker |
+
+### Description
+Close the ADS 2.4.6 heading inconsistency and correct the EST backlog:
+- **EST-L09 heading hierarchy:** audit found the *semantic* outline already correct (one `<h1>` per view; nested `<h2>` in `WinnerModal`/`SellerCard`, no skips). The real inconsistency was **visual**: page-title `<h1>` used `h5` on `ImageList`/`InvoiceForm` but `h3` on `LandingPage`. Normalized all three to `h3` so the primary heading reads consistently across views. Semantic tags untouched.
+- **EST-L10 / EST-L11 already met:** toolchain runs TypeScript 5.9.3, ESLint 9 (flat config), Prettier 3.9.6 (via merged SPEC-P3-06/P3-07). Marked both as `MET` in `ESTIMATIONS-AND-RESOLUTIONS.md`; no upgrade code left to do.
+
+### Status
+PENDING (awaiting Jör approval via PR)
+
+### Approval
+- **Jör Approved:** (pending)
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

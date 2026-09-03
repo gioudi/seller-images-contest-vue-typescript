@@ -425,6 +425,7 @@
 | **Complexity** | M |
 | **Estimated Time** | 4 hours |
 | **Branch** | `feature/upgrade-typescript` |
+| **Status** | **MET** — already satisfied: project on TypeScript ^5.9.3 (merged via SPEC-P3-06) |
 
 ### EST-L11: Upgrade ESLint + Prettier
 | Field | Value |
@@ -434,6 +435,7 @@
 | **Complexity** | M |
 | **Estimated Time** | 4 hours |
 | **Branch** | `feature/upgrade-linting` |
+| **Status** | **MET** — already satisfied: project on ESLint ^9 (flat config) + Prettier ^3 (merged via SPEC-P3-07) |
 
 ---
 
