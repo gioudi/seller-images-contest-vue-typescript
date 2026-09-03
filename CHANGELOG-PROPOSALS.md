@@ -553,10 +553,10 @@ Close the ADS 2.4.6 heading inconsistency and correct the EST backlog:
 - **EST-L10 / EST-L11 already met:** toolchain runs TypeScript 5.9.3, ESLint 9 (flat config), Prettier 3.9.6 (via merged SPEC-P3-06/P3-07). Marked both as `MET` in `ESTIMATIONS-AND-RESOLUTIONS.md`; no upgrade code left to do.
 
 ### Status
-PENDING (awaiting Jör approval via PR)
+IMPLEMENTED (merged via PR #45)
 
 ### Approval
-- **Jör Approved:** (pending)
+- **Jör Approved:** yes
 
 ---
 

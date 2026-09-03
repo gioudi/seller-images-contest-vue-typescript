@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | DRAFT (awaiting PR review) |
+| **Status** | IMPLEMENTED (merged via PR #45) |
 | **Topic** | Fix the heading-hierarchy inconsistency flagged by the ADS (2.4.6) and synchronize the EST backlog: normalize page-title visual levels (EST-L09) and mark EST-L10/L11 as MET (already satisfied by the current toolchain). |
 | **Estimate** | 1h (L09: 0.33h, L10/L11 sync: 0.33h, docs: 0.33h) |
 | **Branch** | `fix/l09-heading-hierarchy` |
@@ -97,5 +97,5 @@ Why `h3` as the common level: it is the existing prominent title size already ch
 
 ## Approval
 
-- **Jör Approved:** (pending)
-- **Status:** DRAFT — await PR review on GitHub
+- **Jör Approved:** yes (merged via PR #45)
+- **Status:** IMPLEMENTED — merged to `staging`; page-title `<h1>` normalized to `h3`, EST-L10/L11 marked MET
