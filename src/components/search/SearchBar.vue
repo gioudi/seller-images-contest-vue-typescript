@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const props = defineProps<{
   initialTerm?: string;
@@ -31,6 +31,15 @@ const emit = defineEmits<{
 }>();
 
 const term = ref(props.initialTerm ?? "");
+
+watch(
+  () => props.initialTerm,
+  (value) => {
+    if (value !== undefined && value !== term.value) {
+      term.value = value;
+    }
+  }
+);
 
 const submit = () => emit("search", term.value);
 </script>

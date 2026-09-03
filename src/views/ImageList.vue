@@ -9,7 +9,11 @@
     <article v-if="!loading && !error" class="grid-col-sm-12">
       <h1 class="h3 mb-4">{{ $t("results.title") }}</h1>
       <SearchBar :initial-term="initialTerm" @search="handleGetNewImages" />
+      <div v-if="noResults" class="no-results">
+        {{ $t("results.noResults") }}
+      </div>
       <SellerGrid
+        v-else
         :sellers="sellerWithImages"
         @vote="handleUpdateSellerPoints"
       />
@@ -35,6 +39,8 @@ import ErrorFile from "../components/ErrorFile.vue";
 
 const route = useRoute();
 const contest = useContest();
+const { loading, error, noResults, sellerWithImages, contestEnded, winner } =
+  contest;
 const initialTerm = computed(() => (route.query.q as string) ?? "");
 
 onMounted(() => {
@@ -52,6 +58,13 @@ const handleContinue = contest.handleContinue;
 .image-list {
   & > .grid-col-sm-12 {
     padding: 0 1rem;
+  }
+
+  .no-results {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: $color-medium;
+    font-size: $font-size-normal;
   }
 }
 </style>

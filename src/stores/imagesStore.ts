@@ -9,11 +9,13 @@ export const useImagesStore = defineStore("images", {
     images: [] as Image[],
     loading: false,
     error: null as string | null,
+    hasSearched: false,
   }),
   getters: {
     getImages: (state) => state.images,
     getError: (state) => state.error,
     getLoading: (state) => state.loading,
+    getHasSearched: (state) => state.hasSearched,
   },
   actions: {
     setLoading(loading: boolean) {
@@ -35,6 +37,7 @@ export const useImagesStore = defineStore("images", {
         toastService.showError(errorMessage);
       } finally {
         this.loading = false;
+        this.hasSearched = true;
       }
     },
   },

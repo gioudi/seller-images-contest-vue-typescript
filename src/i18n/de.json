@@ -19,7 +19,8 @@
   },
   "results": {
     "title": "Liste inspirierender Bilder",
-    "label": "Suchst du etwas Neues?"
+    "label": "Suchst du etwas Neues?",
+    "noResults": "Für Ihre Suche wurden keine Bilder gefunden. Versuchen Sie einen anderen Begriff."
   },
   "contest": {
     "points": "{n} Punkte"

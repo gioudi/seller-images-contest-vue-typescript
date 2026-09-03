@@ -46,8 +46,9 @@ vi.mock("@/utils/toastService", () => ({
   default: { showError: vi.fn(), showWarn: vi.fn() },
 }));
 const push = vi.fn();
+const replace = vi.fn();
 vi.mock("vue-router", () => ({
-  useRouter: () => ({ push }),
+  useRouter: () => ({ push, replace }),
 }));
 
 import { useContest } from "@/composables/useContest";
@@ -60,6 +61,7 @@ describe("useContest", () => {
     serviceMocks.getImagesList.mockReset();
     serviceMocks.getSellers.mockReset();
     push.mockReset();
+    replace.mockReset();
   });
 
   it("matches each seller to an image", () => {
@@ -111,7 +113,7 @@ describe("useContest", () => {
     });
   });
 
-  it("searchNewImages fetches images and makes sellers clickable again", async () => {
+  it("searchNewImages fetches images, makes sellers clickable again and syncs the query", async () => {
     const sellersStore = useSellersStore();
     sellersStore.sellers = [{ id: 1, name: "A", points: 3, clickable: false }];
 
@@ -124,5 +126,29 @@ describe("useContest", () => {
     await searchNewImages("tech");
 
     expect(sellersStore.sellers[0].clickable).toBe(true);
+    expect(replace).toHaveBeenCalledWith({
+      name: "ImageList",
+      query: { q: "tech" },
+    });
+  });
+
+  it("noResults is true once a search completes with an empty image list", async () => {
+    serviceMocks.getImagesList.mockResolvedValue({ response: { results: [] } });
+
+    const { searchNewImages, noResults } = useContest();
+    await searchNewImages("xyznothing");
+
+    expect(noResults.value).toBe(true);
+  });
+
+  it("noResults is false while there are images from the last search", async () => {
+    serviceMocks.getImagesList.mockResolvedValue({
+      response: { results: [{ id: "1", urls: { small: "u" } }] },
+    });
+
+    const { searchNewImages, noResults } = useContest();
+    await searchNewImages("cute");
+
+    expect(noResults.value).toBe(false);
   });
 });

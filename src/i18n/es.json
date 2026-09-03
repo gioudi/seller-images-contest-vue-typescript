@@ -19,7 +19,8 @@
   },
   "results": {
     "title": "Lista de Imágenes que Inspiran",
-    "label": "¿Quieres buscar algo nuevo?"
+    "label": "¿Quieres buscar algo nuevo?",
+    "noResults": "No se encontraron imágenes para tu búsqueda. Prueba con otro término."
   },
   "contest": {
     "points": "{n} puntos"
