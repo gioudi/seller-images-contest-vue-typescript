@@ -8,6 +8,7 @@
   "common": {
     "search": "Search",
     "searchPlaceholder": "Search images",
+    "clearSearch": "Clear search",
     "vote": "Vote",
     "voted": "Voted"
   },
