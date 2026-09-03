@@ -7,7 +7,7 @@
       <ErrorFile :message="error"></ErrorFile>
     </article>
     <article v-if="!loading && !error" class="grid-col-sm-12">
-      <h1 class="h5 mb-4 mt-3">Lista de Imágenes que Inspiran</h1>
+      <h1 class="h3 mb-4 mt-3">Lista de Imágenes que Inspiran</h1>
       <SearchBar :initial-term="initialTerm" @search="handleGetNewImages" />
       <SellerGrid
         :sellers="sellerWithImages"
