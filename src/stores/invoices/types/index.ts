@@ -15,4 +15,5 @@ export interface InvoicePayload {
 
 export interface InvoiceResponse {
   id: number;
+  number: string;
 }

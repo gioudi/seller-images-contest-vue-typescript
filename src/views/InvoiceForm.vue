@@ -36,20 +36,32 @@
         </button>
       </form>
     </article>
+    <InvoiceSuccessModal
+      :show="showSuccessModal"
+      :invoice-number="invoiceResult?.number ?? ''"
+      :date="formData.date"
+      :total="formData.total"
+      @proceed="handleSuccessContinue"
+    />
   </article>
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
-import { useRoute } from "vue-router";
+import { reactive, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { InvoicePayload } from "@/stores/invoices/types";
+import { InvoicePayload, InvoiceResponse } from "@/stores/invoices/types";
 import toastService from "@/utils/toastService";
 import { useInvoices } from "@/composables/useInvoices";
+import InvoiceSuccessModal from "@/components/InvoiceSuccessModal.vue";
 
 const { t } = useI18n();
 const route = useRoute();
+const router = useRouter();
 const { submit } = useInvoices();
+
+const showSuccessModal = ref(false);
+const invoiceResult = ref<InvoiceResponse | null>(null);
 
 const formData: InvoicePayload = reactive({
   date: "",
@@ -74,10 +86,19 @@ const validateFormData = () => {
 
 const handleSubmitFormData = async () => {
   if (validateFormData()) {
-    await submit(formData);
+    const result = await submit(formData);
+    if (result) {
+      invoiceResult.value = result;
+      showSuccessModal.value = true;
+    }
   } else {
     toastService.showWarn(t("invoice.allFieldsRequired"));
   }
+};
+
+const handleSuccessContinue = () => {
+  showSuccessModal.value = false;
+  router.push({ name: "LandingPage" });
 };
 </script>
 

@@ -588,6 +588,36 @@ PENDING (awaiting Jör approval via PR)
 
 ---
 
+## PROPOSAL-2026-023: Mock Alegra Invoice Creation (Free-Plan Workaround)
+
+| Field | Value |
+|-------|-------|
+| **Date** | 2026-09-04 |
+| **Branch** | `fix/mock-invoice-creation` |
+| **Spec** | SPEC-P4-09 |
+| **Estimate** | 2h |
+| **Submitted By** | Broker |
+
+### Description
+The Alegra account behind this project is a free/trial plan with no access to `POST /invoices`, so every invoice submission at the end of the contest flow failed with an auth/plan error and the flow dead-ended (no success handling existed either way — a pre-existing ADS gap). Jör confirmed the plan will never be upgraded (portfolio/practice project), so the fix is to stop calling that endpoint and simulate success client-side:
+- `src/utils/generateMockInvoice.ts` (new) — pure function building a fake `InvoiceResponse` (id + human-readable invoice number) from the form payload
+- `src/services/apiService.ts` — `createInvoice()` returns the mock invoice instead of calling `axiosClient`, gated by `VITE_ALEGRA_MOCK_INVOICES` (default `true`); `GET /sellers` untouched
+- `src/components/InvoiceSuccessModal.vue` (new) — confirmation popup (number, date, total, "back to home"), mirrors `WinnerModal.vue`'s existing modal pattern
+- `src/composables/useInvoices.ts` — `submit()` now returns the created invoice so the view can display it
+- `src/stores/invoices/types/index.ts` — `InvoiceResponse` gains `number: string`
+- `.env.example` / `.env` — documented `VITE_ALEGRA_MOCK_INVOICES` flag (flip to `false` if the plan is ever upgraded)
+- `src/i18n/{es,en,de}.json` — new `invoice.success*` strings
+- No mock invoice is persisted anywhere (no localStorage, no backend) — by Jör's explicit decision
+- New unit tests: `generateMockInvoice.spec.ts`, `apiService.spec.ts`
+
+### Status
+IMPLEMENTED locally on `fix/mock-invoice-creation` — `npm run lint` and `npm run type-check` verified green in this session; `npm run test:unit` and `npm run build` could not be run in this session (sandboxed device shell blocked `@rolldown/binding-linux-x64-gnu` with a 403 at the network layer — unrelated to this change, reproducible on `staging` before any of these edits). **Awaiting Jör to run `npm run test:unit` and `npm run build` locally to confirm**, then push/PR.
+
+### Approval
+- **Jör Approved:** 2026-09-04, in chat ("do it")
+
+---
+
 <!--
 Template for new proposals - to be copied when Broker submits:
 

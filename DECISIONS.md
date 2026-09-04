@@ -149,6 +149,35 @@ W2 contains two platform migrations approved separately: ADR-001 (Vuex → Pinia
 - Two sequential reviews instead of one big one (slower wall-clock, better review quality).
 - On the Pinia PR, `jest.config.js` and build tooling must NOT be touched (enforced by SPEC-P2-01 out-of-scope).
 
+---
+
+### ADR-004: Mock Alegra invoice creation instead of calling the real endpoint
+
+**Status:** ACCEPTED
+
+### Context
+The Alegra account behind this project is a free/trial plan. `POST /invoices` is not available on that plan, so every invoice submission at the end of the contest flow fails with an auth/plan error, and the flow dead-ends (there was also no success UI even in a hypothetical working case — a separate pre-existing gap). Jör confirmed this project will remain on the free plan indefinitely (portfolio/practice use, not a paying account), so the endpoint will never succeed as-is.
+
+### Decision
+Stop calling `POST /invoices`. `apiService.createInvoice()` generates a realistic-looking fake invoice (id + formatted number) client-side and returns it in the same shape as a real response. A new `InvoiceSuccessModal.vue` confirms it to the user. The behavior is gated by `VITE_ALEGRA_MOCK_INVOICES` (default `true`) so the real call is one env-var flip away if the plan is ever upgraded. No mock invoice is persisted anywhere.
+
+### Options Considered
+1. **Hard mock, no toggle** - Simplest; always fabricate success. No path back to the real endpoint without a code change.
+2. **Env-gated mock** (CHOSEN) - Same UX today; flipping `VITE_ALEGRA_MOCK_INVOICES=false` restores the real call with no other code change, at effectively zero extra cost.
+3. **Honest fallback (no mock)** - Catch the plan error and tell the user invoicing isn't available on this plan, without implying success. Most transparent, but doesn't give the "it works" feeling Jör wants for a portfolio demo.
+4. **Upgrade the Alegra plan** - Removes the problem at the root, but is a recurring cost Jör has ruled out; not a code decision.
+
+### Rationale
+Jör chose the mock approach (option 2, effectively option 1 with a free toggle added) explicitly because this project will never be a paying Alegra account: "I won't ever pay [for the] pro plan, it's just for my portfolio and practicing." The env flag costs nothing extra to add and keeps a clean exit path if that ever changes.
+
+### Consequences
+- A real client would see a "success" confirmation for an invoice that does not exist in Alegra. Accepted: this is a demo/practice app, not a live billing system, and Jör was told this trade-off directly before approving.
+- `GET /sellers` is unaffected — that endpoint already works on the free plan.
+- Any future work that needs a *real* invoice again only requires flipping the existing env flag — no re-implementation.
+
+### Decided By
+Jör, 2026-09-04 (approved in chat: "do it")
+
 <!--
 Template for new ADRs - to be copied by Broker:
 

@@ -16,3 +16,7 @@ export const API = {
 export const IMAGES = {
   FALLBACK_URL: "https://via.placeholder.com/400x400?text=Sin+imagen",
 } as const;
+
+export const ALEGRA = {
+  MOCK_INVOICE_PREFIX: "INV",
+} as const;
