@@ -34,7 +34,13 @@
     "productId": "Product Id:",
     "total": "Total:",
     "submit": "Create invoice",
-    "allFieldsRequired": "All fields are required!"
+    "allFieldsRequired": "All fields are required!",
+    "successTitle": "Invoice created!",
+    "successMessage": "Your invoice {number} has been generated.",
+    "successNumber": "Invoice number:",
+    "successDate": "Date:",
+    "successTotal": "Total:",
+    "successContinue": "Back to home"
   },
   "winner": {
     "title": "Congratulations!",

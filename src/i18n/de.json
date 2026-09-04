@@ -34,7 +34,13 @@
     "productId": "Produkt-ID:",
     "total": "Gesamt:",
     "submit": "Rechnung erstellen",
-    "allFieldsRequired": "Alle Felder sind erforderlich!"
+    "allFieldsRequired": "Alle Felder sind erforderlich!",
+    "successTitle": "Rechnung erstellt!",
+    "successMessage": "Ihre Rechnung {number} wurde erstellt.",
+    "successNumber": "Rechnungsnummer:",
+    "successDate": "Datum:",
+    "successTotal": "Gesamt:",
+    "successContinue": "Zurück zur Startseite"
   },
   "winner": {
     "title": "Glückwunsch!",
