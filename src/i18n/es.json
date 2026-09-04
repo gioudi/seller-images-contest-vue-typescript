@@ -34,7 +34,13 @@
     "productId": "Id Producto:",
     "total": "Total:",
     "submit": "Crear factura",
-    "allFieldsRequired": "Todos los campos son necesarios!"
+    "allFieldsRequired": "Todos los campos son necesarios!",
+    "successTitle": "¡Factura creada!",
+    "successMessage": "Tu factura {number} ha sido generada.",
+    "successNumber": "Número de factura:",
+    "successDate": "Fecha:",
+    "successTotal": "Total:",
+    "successContinue": "Volver al inicio"
   },
   "winner": {
     "title": "Felicitationes!",
